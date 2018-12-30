@@ -1,0 +1,54 @@
+enum Permission {
+	ADMIN
+	USER
+	PETCREATE
+	PETUPDATE
+	PETDELETE
+	PERMISSIONUPDATE
+}
+
+type User {
+	id: ID! @unique
+	name: String!
+	email: String! @unique
+	password: String
+	permissions: [Permission]
+	myPoliticians: [Politician] @relation(name: "UserFollowPolitician")
+	myBills: [Bill] @relation(name: "UserFollowBill")
+}
+
+type Politician {
+	id: ID! @unique
+	party: String
+	name: String!
+	title: String
+	chamber: String
+	state: String
+	district: Int
+	nthCongress: String
+	phone: String
+	gender: String
+	image: String
+	largeImage: String
+	website: String
+	govUrl: String
+	createdAt: DateTime!
+	updatedAt: DateTime!
+	followedBy: User @relation(name: "UserFollowPolitician")
+	bills: [Bill] @relation(name: "BillSponsorPolitician")
+	coBills: [Bill] @relation(name: "BillCoSponsorPolitician")
+}
+
+type Bill {
+	id: ID! @unique
+	number: Int
+	title: String
+	summary: String
+	congressNumber: String
+	chamber: String
+	committees: String
+	link: String
+	sponsor: Politician @relation(name: "BillSponsorPolitician")
+	coSponsors: [Politician] @relation(name: "BillCoSponsorPolitician")
+	followedBy: [User] @relation(name: "UserFollowBill")
+}

@@ -1,0 +1,10 @@
+node_modules/
+frontend/node_modules
+backend/node_modules
+backend/generated
+.DS_Store
+*.log
+haters/
+frontend/.next
+.build/
+layout.md
