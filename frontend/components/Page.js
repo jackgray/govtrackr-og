@@ -4,12 +4,13 @@ import Meta from '../components/Meta';
 import styled, { ThemeProvider, injectGlobal } from 'styled-components';
 
 const theme = {
-	primary: 'red',
-	secondary: 'blue',
+	primary: '#f44242', // soft red
+	secondary: '#2589cc', // twitter blue
 	red: '#38a8ff',
 	black: '#393939',
-	grey: '#3A3A3A',
-	lightgrey: '#E1E1E1',
+	darkGrey: '#3A3A3A',
+	grey2: '#dde1e2',
+	lightGrey: '#E1E1E1',
 	lightblue: '#54dfff',
 	torquiose: '#3dfff2',
 	lightRed: '#ff4635',

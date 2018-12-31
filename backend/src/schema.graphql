@@ -22,6 +22,10 @@ type Mutation {
 		name: String
 		state: String
 		district: Int
+		title: String
+		chamber: String
+		govUrl: String
+		nthCongress: String
 		gender: String
 		image: String
 		largeImage: String

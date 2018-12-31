@@ -1,6 +1,7 @@
 const About = (props) => (
 	<div>
-		<p>Keep track of what those in power are doing.</p>
+		<p>There is no arrangement of facts that is unbiased.</p>
+		<p>Arrange your own facts.</p>
 		<p>{props.children}</p>
 	</div>
 );

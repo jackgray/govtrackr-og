@@ -30,12 +30,21 @@ const SINGLE_POLITICIAN_QUERY = gql`
 	query SINGLE_POLITICIAN_QUERY($id: ID!) {
 		politician(where: { id: $id }) {
 			id
-			name
-			phone
 			party
+			name
+			title
+			chamber
 			state
 			district
+			nthCongress
+			phone
+			gender
+			image
 			largeImage
+			website
+			govUrl
+			createdAt
+			updatedAt
 		}
 	}
 `;

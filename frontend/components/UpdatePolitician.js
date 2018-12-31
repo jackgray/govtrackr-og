@@ -4,26 +4,13 @@ import { Mutation, Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
-
-const SINGLE_POLITICIAN_QUERY = gql`
-	query SINGLE_POLITICIAN_QUERY($id: ID!) {
-		politician(where: { id: $id }) {
-			id
-			name
-			party
-			state
-			image
-			largeImage
-			district
-			website
-		}
-	}
-`;
+import { SINGLE_POLITICIAN_QUERY } from './SinglePolitician';
 
 const UPDATE_POLITICIAN_MUTATION = gql`
 	mutation UPDATE_POLITICIAN_MUTATION(
+		$id: ID!
 		$party: String
-		$name: String!
+		$name: String
 		$title: String
 		$chamber: String
 		$state: String
@@ -103,7 +90,7 @@ class UpdatePolitician extends Component {
 		data.append('upload_preset', 'default');
 
 		const res = await fetch(
-			'https://api.cloudinary.com/v1_1/politicious/image/upload',
+			'https://api.cloudinary.com/v1_1/govtrackr/image/upload',
 			{
 				method: 'POST',
 				body: data
@@ -129,7 +116,7 @@ class UpdatePolitician extends Component {
 					if (!data.politician)
 						return (
 							<p>
-								No politician found in database for{' '}
+								No politician found in database for ID
 								{this.props.id}
 							</p>
 						);
@@ -158,7 +145,7 @@ class UpdatePolitician extends Component {
 												id="file"
 												name="file"
 												placeholder="Upload an image"
-												deaultValue={
+												defaultValue={
 													data.politician.image
 												}
 												onChange={this.uploadFile}
@@ -178,8 +165,70 @@ class UpdatePolitician extends Component {
 												id="name"
 												name="name"
 												placeholder="Name"
+												defaultValue={this.state.name}
+												onChange={this.handleChange}
+											/>
+										</label>
+
+										<label htmlFor="district">
+											District
+											<input
+												type="number"
+												id="district"
+												name="district"
+												placeholder=""
 												defaultValue={
-													data.politician.name
+													this.state.district
+												}
+												onChange={this.handleChange}
+											/>
+										</label>
+
+										<label htmlFor="state">
+											State
+											<input
+												type="text"
+												id="state"
+												name="state"
+												placeholder="State"
+												defaultValue={this.state.state}
+												onChange={this.handleChange}
+											/>
+										</label>
+										<label htmlFor="website">
+											Website
+											<input
+												type="text"
+												id="website"
+												name="website"
+												placeholder="Website"
+												defaultValue={
+													this.state.website
+												}
+												onChange={this.handleChange}
+											/>
+										</label>
+
+										<label htmlFor="title">
+											Title
+											<input
+												type="text"
+												id="title"
+												name="title"
+												placeholder="Title"
+												defaultValue={this.state.title}
+												onChange={this.handleChange}
+											/>
+										</label>
+										<label htmlFor="chamber">
+											Chamber of Congress
+											<input
+												type="text"
+												id="chamber"
+												name="chamber"
+												placeholder="Chamber"
+												defaultValue={
+													this.state.chamber
 												}
 												onChange={this.handleChange}
 											/>
@@ -188,39 +237,48 @@ class UpdatePolitician extends Component {
 										<label htmlFor="party">
 											Party
 											<input
-												type="number"
+												type="text"
 												id="party"
 												name="party"
-												placeholder="Age"
+												placeholder="Party"
+												defaultValue={this.state.party}
+												onChange={this.handleChange}
+											/>
+										</label>
+
+										<label htmlFor="nthCongress">
+											nth Congress
+											<input
+												type="text"
+												id="nthCongress"
+												name="nthCongress"
+												placeholder="nth Congress"
 												defaultValue={
-													data.politician.party
+													this.state.nthCongress
 												}
 												onChange={this.handleChange}
 											/>
 										</label>
-										<label htmlFor="state">
-											State
+										<label htmlFor="phone">
+											Phone
 											<input
 												type="text"
-												id="state"
-												name="state"
-												placeholder="Breed"
-												defaultValue={
-													data.politician.state
-												}
+												id="phone"
+												name="phone"
+												placeholder="Phone"
+												defaultValue={this.state.phone}
 												onChange={this.handleChange}
 											/>
 										</label>
-										<label htmlFor="district">
-											District
+
+										<label htmlFor="govUrl">
+											Congress URL
 											<input
 												type="text"
-												id="district"
-												name="district"
-												placeholder="Location"
-												defaultValue={
-													data.politician.district
-												}
+												id="govUrl"
+												name="govUrl"
+												placeholder="congress.gov url"
+												defaultValue={this.state.govUrl}
 												onChange={this.handleChange}
 											/>
 										</label>

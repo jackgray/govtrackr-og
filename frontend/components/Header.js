@@ -19,9 +19,7 @@ Router.onRouteChangeError = () => {
 	NProgress.done();
 };
 
-const spanStyle = {
-	color: 'red'
-};
+const spanStyle = styled.span`color: ${(props) => props.theme.primary};`;
 
 const Header = (props) => {
 	return (
@@ -30,7 +28,7 @@ const Header = (props) => {
 				<Logo>
 					<Link href="/">
 						<a>
-							Gov<span style={spanStyle}>Track</span>r
+							Gov<span>Track</span>r
 						</a>
 					</Link>
 					<p>Modern Political Tracking</p>

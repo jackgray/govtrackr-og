@@ -4,19 +4,21 @@ const Card = styled.div`
 	* {
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
-		@import url('https://fonts.googleapis.com/css?family=Major+Mono+Display'),
-			font-size: 1rem;
-		font-family: 'Major Mono Display';
 		box-sizing: border-box;
-	}
-	body {
-		background-color: #ecf0f1;
+		@import url('https://fonts.googleapis.com/css?family=Inconsolata'),
+			font-size: 1rem;
+		font-family: 'Inconsolata', monospace;
 	}
 
 	img {
-		width: 100%;
 		height: 250px;
+		width: 100%;
 		object-fit: cover;
+		object-position: 0 0;
+	}
+
+	body {
+		background-color: #ecf0f1;
 	}
 
 	header {
@@ -33,7 +35,7 @@ const Card = styled.div`
 	}
 
 	.container {
-		width: 320px;
+		width: 260px;
 		margin: 3em auto 1em auto;
 		-webkit-border-radius: 8px;
 		-moz-border-radius: 8px;
@@ -41,14 +43,14 @@ const Card = styled.div`
 		-o-border-radius: 8px;
 		border-radius: 8px;
 		padding-bottom: 1.5em;
-		background-color: #dde1e2;
+		background-color: ${(props) => props.theme.grey2};
 		-webkit-box-shadow: #bdc3c7 0 5px 5px;
 		-moz-box-shadow: #bdc3c7 0 5px 5px;
 		box-shadow: #bdc3c7 0 5px 5px;
 	}
 
 	.bg {
-		border-bottom: 8px solid #5cc0ff;
+		border-bottom: 8px solid ${(props) => props.theme.secondary};
 	}
 
 	.bio:hover > .desc {
@@ -60,7 +62,7 @@ const Card = styled.div`
 		position: absolute;
 		bottom: 0;
 		right: 0;
-		left: 25px;
+		left: 0;
 		margin: auto;
 		width: 70px;
 		height: 70px;
@@ -128,29 +130,24 @@ const Card = styled.div`
 		margin-top: .6em;
 		color: #81878b;
 	}
-	.data h3 {
-		margin-top: .6em;
-		text-align: center;
-	}
 	.data li {
 		width: 32%;
 		text-align: center;
 		display: inline-block;
 		font-size: 1.5em;
 		font-family: 'Lato';
-		/* border-right: solid 1px #bdc3c7; */
+		border-right: solid 1px #bdc3c7;
 	}
 	.data li:last-child {
 		border: none;
 	}
 	.data li span {
-		display: row;
+		display: block;
 		/*text-transform: uppercase;*/
 		font-family: 'Quicksand';
 		font-size: .5em;
 		margin-top: .6em;
 		font-weight: 700;
-		border-right: solid 1px #bdc3c7;
 	}
 
 	.desc {
@@ -189,7 +186,7 @@ const Card = styled.div`
 
 	.follow {
 		margin: 1.5em auto 0 auto;
-		background-color: #2589cc;
+		background-color: ${(props) => props.theme.secondary} /*#2589cc;*/
 		width: 150px;
 		color: white;
 		font-family: "Lato";

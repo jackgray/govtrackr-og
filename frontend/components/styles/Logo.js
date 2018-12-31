@@ -8,6 +8,9 @@ const Logo = styled.h1`
 	position: relative;
 	z-index: 2;
 	transform: 0;
+	span {
+		color: ${(props) => props.theme.primary};
+	}
 	a {
 		padding: 0rem 1rem;
 		background: ${(props) => props.theme.white};

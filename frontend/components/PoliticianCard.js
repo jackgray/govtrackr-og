@@ -6,6 +6,7 @@ import PoliticianStyles from './styles/PoliticianStyles';
 import DeletePolitician from './DeletePolitician';
 import FollowPolitician from './FollowPolitician';
 import UnfollowPolitician from './UnfollowPolitician';
+import UpdatePolitician from './UpdatePolitician';
 // Styles
 import Card from './styles/Card';
 
@@ -22,25 +23,6 @@ class PoliticianCard extends Component {
 							<div className="desc">
 								<h3>{politician.name}</h3>
 								<p>{politician.name}</p>
-							</div>
-						</div>
-						<div className="avatarcontainer">
-							<Link
-								href={{
-									pathname: '/politician',
-									query: { id: politician.id }
-								}}
-							>
-								<a className="avatar">
-									<img
-										src={politician.image}
-										alt={politician.name}
-									/>
-								</a>
-							</Link>
-
-							<div className="hover">
-								<div className="icon-twitter" />
 							</div>
 						</div>
 					</header>
@@ -60,7 +42,19 @@ class PoliticianCard extends Component {
 							</ul>
 						</div>
 						<div className="follow">
-							<div className="icon-twitter" />Follow
+							<FollowPolitician id={politician.id}>
+								Follow
+							</FollowPolitician>
+						</div>
+						<div className="follow">
+							<Link
+								href={{
+									pathname: '/update',
+									query: { id: politician.id }
+								}}
+							>
+								<a>Edit</a>
+							</Link>
 						</div>
 					</div>
 				</div>
