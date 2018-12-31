@@ -33,7 +33,7 @@ const Header = (props) => {
 							Gov<span style={spanStyle}>Track</span>r
 						</a>
 					</Link>
-					<p>Political Tracking</p>
+					<p>Modern Political Tracking</p>
 				</Logo>
 				<Nav />
 			</div>

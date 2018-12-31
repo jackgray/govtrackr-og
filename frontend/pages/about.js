@@ -1,6 +1,6 @@
 const About = (props) => (
 	<div>
-		<p>This is the about page</p>
+		<p>Keep track of what those in power are doing.</p>
 		<p>{props.children}</p>
 	</div>
 );

@@ -186,7 +186,7 @@ class UpdatePolitician extends Component {
 										</label>
 
 										<label htmlFor="party">
-											Age
+											Party
 											<input
 												type="number"
 												id="party"
@@ -199,7 +199,7 @@ class UpdatePolitician extends Component {
 											/>
 										</label>
 										<label htmlFor="state">
-											Breed(s)
+											State
 											<input
 												type="text"
 												id="state"
@@ -212,7 +212,7 @@ class UpdatePolitician extends Component {
 											/>
 										</label>
 										<label htmlFor="district">
-											Location
+											District
 											<input
 												type="text"
 												id="district"

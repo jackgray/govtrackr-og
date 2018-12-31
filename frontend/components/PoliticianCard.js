@@ -6,64 +6,94 @@ import PoliticianStyles from './styles/PoliticianStyles';
 import DeletePolitician from './DeletePolitician';
 import FollowPolitician from './FollowPolitician';
 import UnfollowPolitician from './UnfollowPolitician';
+// Styles
+import Card from './styles/Card';
 
 class PoliticianCard extends Component {
 	render() {
 		const { politician } = this.props;
 		return (
-			<PoliticianStyles>
-				<Link
-					href={{
-						pathname: '/politician',
-						query: { id: politician.id }
-					}}
-				>
-					<a href="">
-						{politician.image && (
-							<img src={politician.image} alt={politician.name} />
-						)}
-					</a>
-				</Link>
+			<Card>
+				<div className="container">
+					<header>
+						<div className="bio">
+							<img src={politician.image} className="bg" />
 
-				<Name>
-					<Link
-						href={{
-							pathname: '/politician',
-							query: { id: politician.id }
-						}}
-					>
-						<a href="">{politician.name}</a>
-					</Link>
-				</Name>
-				<div className="infoList">
-					<p>{politician.party}</p>
-					<p>{politician.chamber}</p>
-					<p>{politician.district}th District</p>
-					<p>{politician.state}</p>
-					<a href={politician.website}>{politician.website}</a>
-				</div>
+							<div className="desc">
+								<h3>{politician.name}</h3>
+								<p>{politician.name}</p>
+							</div>
+						</div>
+						<div className="avatarcontainer">
+							<Link
+								href={{
+									pathname: '/politician',
+									query: { id: politician.id }
+								}}
+							>
+								<a className="avatar">
+									<img
+										src={politician.image}
+										alt={politician.name}
+									/>
+								</a>
+							</Link>
 
-				<div className="buttonList">
-					<Link
-						href={{
-							pathname: '/update',
-							query: { id: politician.id }
-						}}
-					>
-						<p>✏️</p>
-					</Link>
-					<FollowPolitician id={politician.id}>❤️</FollowPolitician>
-					<UnfollowPolitician id={politician.id}>
-						💔
-					</UnfollowPolitician>
-					<DeletePolitician id={politician.id}>✖️</DeletePolitician>
+							<div className="hover">
+								<div className="icon-twitter" />
+							</div>
+						</div>
+					</header>
+					<div className="content">
+						<div className="data">
+							<h3>{politician.name}</h3>
+							<ul>
+								<li>
+									<span>{politician.party}</span>
+								</li>
+								<li>
+									<span>{politician.state}</span>
+								</li>
+								<li>
+									<span>District: {politician.district}</span>
+								</li>
+							</ul>
+						</div>
+						<div className="follow">
+							<div className="icon-twitter" />Follow
+						</div>
+					</div>
 				</div>
-			</PoliticianStyles>
+			</Card>
 		);
 	}
 }
 
 export default PoliticianCard;
+
+/*
+        <div class="content">
+            <div class="data">
+                <ul>
+                    <li>
+                        2,934
+                        <span>Tweets</span>
+                    </li>
+                    <li>
+                        1,119
+                        <span>Followers</span>
+                    </li>
+                    <li>
+                        530
+                        <span>Following</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="follow"> <div class="icon-twitter"></div> Follow</div>
+        </div>
+
+    </div>
 
 /*
 

@@ -76,7 +76,7 @@ class CreatePolitician extends Component {
 		data.append('upload_preset', 'default');
 
 		const res = await fetch(
-			'https://api.cloudinary.com/v1_1/politicious/image/upload',
+			'https://api.cloudinary.com/v1_1/govtrackr/image/upload',
 			{
 				method: 'POST',
 				body: data
@@ -120,6 +120,24 @@ class CreatePolitician extends Component {
 					>
 						<Error error={error} />
 						<fieldset disabled={loading} aria-busy={loading}>
+							<label htmlFor="file">
+								Image
+								<input
+									type="file"
+									id="file"
+									name="file"
+									placeholder="Upload an image"
+									onChange={this.uploadFile}
+								/>
+								{this.state.image && (
+									<img
+										width="200"
+										src={this.state.image}
+										alt="Upload Preview"
+									/>
+								)}
+							</label>
+
 							<label htmlFor="name">
 								Name
 								<input

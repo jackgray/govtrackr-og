@@ -34,7 +34,7 @@ const Pagination = (props) => (
 				<PaginationStyles>
 					<Head>
 						<title>
-							Politicious | Page {page} of {pages}
+							GovTrackr | Page {page} of {pages}
 						</title>
 					</Head>
 					<Link
