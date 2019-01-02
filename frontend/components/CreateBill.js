@@ -6,18 +6,22 @@ import Form from './styles/Form';
 import Error from './ErrorMessage';
 import { ALL_BILLS_QUERY } from './Bills';
 
+// sponsor connection input type is (probably) BillCreateInput
+
 const CREATE_BILL_MUTATION = gql`
 	mutation CREATE_BILL_MUTATION(
-		$number: Int
+		$code: String
 		$title: String!
 		$summary: String
 		$committees: String
+		$sponsor: String
 	) {
 		createBill(
-			number: $number
+			code: $code
 			title: $title
 			summary: $summary
 			committees: $committees
+			sponsor: $sponsor
 		) {
 			id
 		}
@@ -26,10 +30,11 @@ const CREATE_BILL_MUTATION = gql`
 
 class CreateBill extends Component {
 	state = {
-		number: 0,
+		code: '',
 		title: '',
 		summary: '',
-		committees: ''
+		committees: '',
+		sponsor: ''
 	};
 	handleChange = (e) => {
 		const { name, type, value } = e.target;
@@ -90,15 +95,14 @@ class CreateBill extends Component {
 					>
 						<Error error={error} />
 						<fieldset disabled={loading} aria-busy={loading}>
-							<label htmlFor="number">
+							<label htmlFor="code">
 								Bill Number
 								<input
-									type="number"
-									id="number"
-									name="number"
+									type="text"
+									id="code"
+									name="code"
 									placeholder="Bill Number"
-									required
-									value={this.state.number}
+									value={this.state.code}
 									onChange={this.handleChange}
 								/>
 							</label>
@@ -110,7 +114,6 @@ class CreateBill extends Component {
 									id="title"
 									name="title"
 									placeholder="Title"
-									required
 									value={this.state.title}
 									onChange={this.handleChange}
 								/>
@@ -122,7 +125,6 @@ class CreateBill extends Component {
 									id="summary"
 									name="summary"
 									placeholder="State"
-									required
 									value={this.state.summary}
 									onChange={this.handleChange}
 								/>
@@ -134,8 +136,18 @@ class CreateBill extends Component {
 									id="committees"
 									name="committees"
 									placeholder="Committees"
-									required
 									value={this.state.committees}
+									onChange={this.handleChange}
+								/>
+							</label>
+							<label htmlFor="committees">
+								Sponsor
+								<input
+									type="text"
+									id="sponsor"
+									name="sponsor"
+									placeholder="Sponsored By"
+									value={this.state.sponsor}
 									onChange={this.handleChange}
 								/>
 							</label>

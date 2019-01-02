@@ -1,10 +1,10 @@
-import SinglePolitician from '../components/SinglePolitician';
+import SingleBill from '../components/SingleBill';
 
-const Politician = (props) => (
+const Bill = (props) => (
 	<div>
-		<p>This is the single politician page</p>
-		<SinglePolitician id={props.query.id} />
+		<p>This is the single bill page</p>
+		<SingleBill id={props.query.id} />
 	</div>
 );
 
-export default Politician;
+export default Bill;

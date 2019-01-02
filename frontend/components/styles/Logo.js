@@ -12,25 +12,32 @@ const Logo = styled.h1`
 		color: ${(props) => props.theme.primary};
 	}
 	a {
-		padding: 0rem 1rem;
 		background: ${(props) => props.theme.white};
 		color: ${(props) => props.theme.secondary};
 		text-transform: full-width;
 		text-decoration: none;
 		font-size: 7rem;
-		margin-bottom: 0;
+		margin-bottom: 0px;
+		padding: 0px;
+		line-height: 120px;
 	}
 	p {
-		padding: 0rem 1rem;
 		background: ${(props) => props.theme.offWhite};
 		color: ${(props) => props.theme.secondary};
 		text-transform: full-width;
 		text-decoration: none;
 		font-size: 2rem;
+		margin-top: 0px;
+		margin-bottom: 40px;
+		padding: 0px;
+		line-height: 0px;
 	}
 	@media (max-width: 1300px) {
 		margin: 0;
 		text-align: center;
+	}
+	h1 {
+		heigth: 100px;
 	}
 `;
 

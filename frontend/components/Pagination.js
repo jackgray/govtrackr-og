@@ -45,7 +45,7 @@ const Pagination = (props) => (
 						}}
 					>
 						<a className="prev" aria-disabled={page <= 1}>
-							👈
+							Prev
 						</a>
 					</Link>
 					<p>
@@ -61,7 +61,7 @@ const Pagination = (props) => (
 						}}
 					>
 						<a className="next" aria-disabled={page >= pages}>
-							👉
+							Next
 						</a>
 					</Link>
 				</PaginationStyles>

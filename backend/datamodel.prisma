@@ -15,12 +15,14 @@ type User {
 	permissions: [Permission]
 	myPoliticians: [Politician] @relation(name: "UserFollowPolitician")
 	myBills: [Bill] @relation(name: "UserFollowBill")
+	upvotedBills: [Bill] @relation(name: "UpvoteBill")
+	downvotedBills: [Bill] @relation(name: "DownvoteBill")
 }
 
 type Politician {
 	id: ID! @unique
 	party: String
-	name: String!
+	name: String! @unique
 	title: String
 	chamber: String
 	state: String
@@ -41,14 +43,16 @@ type Politician {
 
 type Bill {
 	id: ID! @unique
-	number: Int
+	code: String
 	title: String
 	summary: String
 	congressNumber: String
 	chamber: String
 	committees: String
 	link: String
-	sponsor: Politician @relation(name: "BillSponsorPolitician")
+	sponsor: String
 	coSponsors: [Politician] @relation(name: "BillCoSponsorPolitician")
 	followedBy: [User] @relation(name: "UserFollowBill")
+	upvotes: [User] @relation(name: "UpvoteBill") @default(value: 0)
+	downvotes: [User] @relation(name: "DownvoteBill") @default(value: 0)
 }

@@ -161,18 +161,7 @@ class CreatePolitician extends Component {
 									onChange={this.handleChange}
 								/>
 							</label>
-							{/* <label className="switch" htmlFor="state">
-								Gender
-								<input
-									type="checkbox"
-									id="gender"
-									name="gender"
 
-									value={this.state.gender}
-									onChange={this.handleChange}
-								/>
-								<span class="slider round" />
-							</label> */}
 							<label htmlFor="state">
 								State
 								<input

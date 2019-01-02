@@ -18,13 +18,13 @@ const Mutations = {
 		);
 		return politician;
 	},
-	updatePolitician(parent, args, ctx, info) {
+	async updatePolitician(parent, args, ctx, info) {
 		// make a copy of new fields
 		const updates = { ...args };
 		// remove ID from the updates (don't update ID)
 		delete updates.id;
 		// run update method
-		return ctx.db.mutation.updatePolitician({
+		return await ctx.db.mutation.updatePolitician({
 			data: updates,
 			where: {
 				id: args.id
@@ -32,6 +32,7 @@ const Mutations = {
 			info
 		});
 	},
+
 	async deletePolitician(parent, args, ctx, info) {
 		const where = { id: args.id };
 		//1. find the item
@@ -137,7 +138,11 @@ const Mutations = {
 		const bill = await ctx.db.mutation.createBill(
 			{
 				data: {
-					...args
+					code: args.code,
+					title: args.title,
+					summary: args.summary,
+					committees: args.summary,
+					sponsor: args.sponsor
 				}
 			},
 			info
@@ -214,6 +219,85 @@ const Mutations = {
 		});
 
 		return disconnect;
+	},
+
+	async upvoteBill(parent, args, ctx, info) {
+		const { userId } = ctx.request;
+		console.log(userId);
+		const exists = await ctx.db.query.bills({
+			data: {
+				upvotes: {
+					where: { id: userId }
+				}
+			}
+		});
+
+		console.log(exists);
+		if (!userId) {
+			throw new Error('You must be signed in');
+		}
+
+		upvote = await ctx.db.mutation.updateBill({
+			data: {
+				upvotes: {
+					connect: {
+						id: userId
+					}
+				},
+				downvotes: {
+					disconnect: {
+						id: userId
+					}
+				}
+			},
+			where: {
+				id: args.id
+			}
+		});
+		console.log(connect);
+		disconnect = await ctx.db.mutation.updateBill(
+			{
+				data: {
+					downvotes: {
+						disconnect: {
+							id: userId
+						}
+					}
+				},
+				where: {
+					id: args.id
+				}
+			},
+			info
+		);
+		return upvote;
+	},
+
+	async downvoteBill(parent, args, ctx, info) {
+		const { userId } = ctx.request;
+		if (!userId) {
+			throw new Error('You must be signed in');
+		}
+
+		downvote = await ctx.db.mutation.updateBill({
+			data: {
+				upvotes: {
+					disconnect: {
+						id: userId
+					}
+				},
+				downvotes: {
+					connect: {
+						id: userId
+					}
+				}
+			},
+			where: {
+				id: args.id
+			}
+		});
+
+		return downvote;
 	},
 
 	async scrapeBill(parent, { number, title }, ctx, info) {

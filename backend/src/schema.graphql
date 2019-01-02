@@ -15,6 +15,7 @@ type Mutation {
 		largeImage: String
 		phone: String
 		website: String
+		bills: [String]
 	): Politician!
 	updatePolitician(
 		id: ID
@@ -37,16 +38,17 @@ type Mutation {
 	unfollowPolitician(id: ID): User
 	toggleFollowPolitician(id: ID): User
 	createBill(
-		number: Int
+		code: String
 		title: String
 		summary: String
 		congress: String
 		billType: String
 		committees: String
 		link: String
+		sponsor: String
 	): Bill
 	updateBill(
-		number: Int
+		code: String
 		title: String
 		summary: String
 		congress: String
@@ -57,7 +59,9 @@ type Mutation {
 	deleteBill(id: ID): Bill
 	followBill(id: ID): User
 	unfollowBill(id: ID): User
-	scrapeBill(number: String): Bill
+	upvoteBill(id: ID): User
+	downvoteBill(id: ID): User
+	scrapeBill(code: String): Bill
 	signup(name: String!, email: String!, password: String!): User!
 	signin(email: String!, password: String!): User!
 	updatePermissions(permissions: [Permission], userId: ID!): User
@@ -97,4 +101,6 @@ type User {
 	listings: [Politician]
 	myPoliticians: [Politician]
 	myBills: [Bill]
+	yesVotes: [Bill]
+	noVotes: [Bill]
 }

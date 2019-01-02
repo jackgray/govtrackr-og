@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/jack-gray/politicious/dev
-# timestamp: Sun Dec 30 2018 10:38:22 GMT-0500 (Eastern Standard Time)
+# timestamp: Wed Jan 02 2019 10:02:42 GMT-0500 (Eastern Standard Time)
 
 type AggregateBill {
   count: Int!
@@ -20,16 +20,18 @@ type BatchPayload {
 
 type Bill implements Node {
   id: ID!
-  number: Int
+  code: String
   title: String
   summary: String
   congressNumber: String
   chamber: String
   committees: String
   link: String
-  sponsor: Politician
+  sponsor: String
   coSponsors(where: PoliticianWhereInput, orderBy: PoliticianOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Politician!]
   followedBy(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  upvotes(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  downvotes(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
 }
 
 """A connection to a list of items."""
@@ -43,20 +45,32 @@ type BillConnection {
 }
 
 input BillCreateInput {
-  number: Int
+  code: String
   title: String
   summary: String
   congressNumber: String
   chamber: String
   committees: String
   link: String
-  sponsor: PoliticianCreateOneWithoutBillsInput
+  sponsor: String
   coSponsors: PoliticianCreateManyWithoutCoBillsInput
   followedBy: UserCreateManyWithoutMyBillsInput
+  upvotes: UserCreateManyWithoutUpvotedBillsInput
+  downvotes: UserCreateManyWithoutDownvotedBillsInput
+}
+
+input BillCreateManyInput {
+  create: [BillCreateInput!]
+  connect: [BillWhereUniqueInput!]
 }
 
 input BillCreateManyWithoutCoSponsorsInput {
   create: [BillCreateWithoutCoSponsorsInput!]
+  connect: [BillWhereUniqueInput!]
+}
+
+input BillCreateManyWithoutDownvotesInput {
+  create: [BillCreateWithoutDownvotesInput!]
   connect: [BillWhereUniqueInput!]
 }
 
@@ -65,45 +79,65 @@ input BillCreateManyWithoutFollowedByInput {
   connect: [BillWhereUniqueInput!]
 }
 
-input BillCreateManyWithoutSponsorInput {
-  create: [BillCreateWithoutSponsorInput!]
+input BillCreateManyWithoutUpvotesInput {
+  create: [BillCreateWithoutUpvotesInput!]
   connect: [BillWhereUniqueInput!]
 }
 
 input BillCreateWithoutCoSponsorsInput {
-  number: Int
+  code: String
   title: String
   summary: String
   congressNumber: String
   chamber: String
   committees: String
   link: String
-  sponsor: PoliticianCreateOneWithoutBillsInput
+  sponsor: String
   followedBy: UserCreateManyWithoutMyBillsInput
+  upvotes: UserCreateManyWithoutUpvotedBillsInput
+  downvotes: UserCreateManyWithoutDownvotedBillsInput
+}
+
+input BillCreateWithoutDownvotesInput {
+  code: String
+  title: String
+  summary: String
+  congressNumber: String
+  chamber: String
+  committees: String
+  link: String
+  sponsor: String
+  coSponsors: PoliticianCreateManyWithoutCoBillsInput
+  followedBy: UserCreateManyWithoutMyBillsInput
+  upvotes: UserCreateManyWithoutUpvotedBillsInput
 }
 
 input BillCreateWithoutFollowedByInput {
-  number: Int
+  code: String
   title: String
   summary: String
   congressNumber: String
   chamber: String
   committees: String
   link: String
-  sponsor: PoliticianCreateOneWithoutBillsInput
+  sponsor: String
   coSponsors: PoliticianCreateManyWithoutCoBillsInput
+  upvotes: UserCreateManyWithoutUpvotedBillsInput
+  downvotes: UserCreateManyWithoutDownvotedBillsInput
 }
 
-input BillCreateWithoutSponsorInput {
-  number: Int
+input BillCreateWithoutUpvotesInput {
+  code: String
   title: String
   summary: String
   congressNumber: String
   chamber: String
   committees: String
   link: String
+  sponsor: String
   coSponsors: PoliticianCreateManyWithoutCoBillsInput
   followedBy: UserCreateManyWithoutMyBillsInput
+  downvotes: UserCreateManyWithoutDownvotedBillsInput
 }
 
 """An edge in a connection."""
@@ -118,8 +152,8 @@ type BillEdge {
 enum BillOrderByInput {
   id_ASC
   id_DESC
-  number_ASC
-  number_DESC
+  code_ASC
+  code_DESC
   title_ASC
   title_DESC
   summary_ASC
@@ -132,6 +166,8 @@ enum BillOrderByInput {
   committees_DESC
   link_ASC
   link_DESC
+  sponsor_ASC
+  sponsor_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -140,13 +176,14 @@ enum BillOrderByInput {
 
 type BillPreviousValues {
   id: ID!
-  number: Int
+  code: String
   title: String
   summary: String
   congressNumber: String
   chamber: String
   committees: String
   link: String
+  sponsor: String
 }
 
 input BillScalarWhereInput {
@@ -198,28 +235,46 @@ input BillScalarWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  number: Int
+  code: String
 
   """All values that are not equal to given value."""
-  number_not: Int
+  code_not: String
 
   """All values that are contained in given list."""
-  number_in: [Int!]
+  code_in: [String!]
 
   """All values that are not contained in given list."""
-  number_not_in: [Int!]
+  code_not_in: [String!]
 
   """All values less than the given value."""
-  number_lt: Int
+  code_lt: String
 
   """All values less than or equal the given value."""
-  number_lte: Int
+  code_lte: String
 
   """All values greater than the given value."""
-  number_gt: Int
+  code_gt: String
 
   """All values greater than or equal the given value."""
-  number_gte: Int
+  code_gte: String
+
+  """All values containing the given string."""
+  code_contains: String
+
+  """All values not containing the given string."""
+  code_not_contains: String
+
+  """All values starting with the given string."""
+  code_starts_with: String
+
+  """All values not starting with the given string."""
+  code_not_starts_with: String
+
+  """All values ending with the given string."""
+  code_ends_with: String
+
+  """All values not ending with the given string."""
+  code_not_ends_with: String
   title: String
 
   """All values that are not equal to given value."""
@@ -460,6 +515,46 @@ input BillScalarWhereInput {
 
   """All values not ending with the given string."""
   link_not_ends_with: String
+  sponsor: String
+
+  """All values that are not equal to given value."""
+  sponsor_not: String
+
+  """All values that are contained in given list."""
+  sponsor_in: [String!]
+
+  """All values that are not contained in given list."""
+  sponsor_not_in: [String!]
+
+  """All values less than the given value."""
+  sponsor_lt: String
+
+  """All values less than or equal the given value."""
+  sponsor_lte: String
+
+  """All values greater than the given value."""
+  sponsor_gt: String
+
+  """All values greater than or equal the given value."""
+  sponsor_gte: String
+
+  """All values containing the given string."""
+  sponsor_contains: String
+
+  """All values not containing the given string."""
+  sponsor_not_contains: String
+
+  """All values starting with the given string."""
+  sponsor_starts_with: String
+
+  """All values not starting with the given string."""
+  sponsor_not_starts_with: String
+
+  """All values ending with the given string."""
+  sponsor_ends_with: String
+
+  """All values not ending with the given string."""
+  sponsor_not_ends_with: String
 }
 
 type BillSubscriptionPayload {
@@ -501,37 +596,67 @@ input BillSubscriptionWhereInput {
   node: BillWhereInput
 }
 
-input BillUpdateInput {
-  number: Int
+input BillUpdateDataInput {
+  code: String
   title: String
   summary: String
   congressNumber: String
   chamber: String
   committees: String
   link: String
-  sponsor: PoliticianUpdateOneWithoutBillsInput
+  sponsor: String
   coSponsors: PoliticianUpdateManyWithoutCoBillsInput
   followedBy: UserUpdateManyWithoutMyBillsInput
+  upvotes: UserUpdateManyWithoutUpvotedBillsInput
+  downvotes: UserUpdateManyWithoutDownvotedBillsInput
+}
+
+input BillUpdateInput {
+  code: String
+  title: String
+  summary: String
+  congressNumber: String
+  chamber: String
+  committees: String
+  link: String
+  sponsor: String
+  coSponsors: PoliticianUpdateManyWithoutCoBillsInput
+  followedBy: UserUpdateManyWithoutMyBillsInput
+  upvotes: UserUpdateManyWithoutUpvotedBillsInput
+  downvotes: UserUpdateManyWithoutDownvotedBillsInput
 }
 
 input BillUpdateManyDataInput {
-  number: Int
+  code: String
   title: String
   summary: String
   congressNumber: String
   chamber: String
   committees: String
   link: String
+  sponsor: String
+}
+
+input BillUpdateManyInput {
+  create: [BillCreateInput!]
+  connect: [BillWhereUniqueInput!]
+  disconnect: [BillWhereUniqueInput!]
+  delete: [BillWhereUniqueInput!]
+  update: [BillUpdateWithWhereUniqueNestedInput!]
+  updateMany: [BillUpdateManyWithWhereNestedInput!]
+  deleteMany: [BillScalarWhereInput!]
+  upsert: [BillUpsertWithWhereUniqueNestedInput!]
 }
 
 input BillUpdateManyMutationInput {
-  number: Int
+  code: String
   title: String
   summary: String
   congressNumber: String
   chamber: String
   committees: String
   link: String
+  sponsor: String
 }
 
 input BillUpdateManyWithoutCoSponsorsInput {
@@ -545,6 +670,17 @@ input BillUpdateManyWithoutCoSponsorsInput {
   upsert: [BillUpsertWithWhereUniqueWithoutCoSponsorsInput!]
 }
 
+input BillUpdateManyWithoutDownvotesInput {
+  create: [BillCreateWithoutDownvotesInput!]
+  connect: [BillWhereUniqueInput!]
+  disconnect: [BillWhereUniqueInput!]
+  delete: [BillWhereUniqueInput!]
+  update: [BillUpdateWithWhereUniqueWithoutDownvotesInput!]
+  updateMany: [BillUpdateManyWithWhereNestedInput!]
+  deleteMany: [BillScalarWhereInput!]
+  upsert: [BillUpsertWithWhereUniqueWithoutDownvotesInput!]
+}
+
 input BillUpdateManyWithoutFollowedByInput {
   create: [BillCreateWithoutFollowedByInput!]
   connect: [BillWhereUniqueInput!]
@@ -556,15 +692,15 @@ input BillUpdateManyWithoutFollowedByInput {
   upsert: [BillUpsertWithWhereUniqueWithoutFollowedByInput!]
 }
 
-input BillUpdateManyWithoutSponsorInput {
-  create: [BillCreateWithoutSponsorInput!]
+input BillUpdateManyWithoutUpvotesInput {
+  create: [BillCreateWithoutUpvotesInput!]
   connect: [BillWhereUniqueInput!]
   disconnect: [BillWhereUniqueInput!]
   delete: [BillWhereUniqueInput!]
-  update: [BillUpdateWithWhereUniqueWithoutSponsorInput!]
+  update: [BillUpdateWithWhereUniqueWithoutUpvotesInput!]
   updateMany: [BillUpdateManyWithWhereNestedInput!]
   deleteMany: [BillScalarWhereInput!]
-  upsert: [BillUpsertWithWhereUniqueWithoutSponsorInput!]
+  upsert: [BillUpsertWithWhereUniqueWithoutUpvotesInput!]
 }
 
 input BillUpdateManyWithWhereNestedInput {
@@ -573,39 +709,64 @@ input BillUpdateManyWithWhereNestedInput {
 }
 
 input BillUpdateWithoutCoSponsorsDataInput {
-  number: Int
+  code: String
   title: String
   summary: String
   congressNumber: String
   chamber: String
   committees: String
   link: String
-  sponsor: PoliticianUpdateOneWithoutBillsInput
+  sponsor: String
   followedBy: UserUpdateManyWithoutMyBillsInput
+  upvotes: UserUpdateManyWithoutUpvotedBillsInput
+  downvotes: UserUpdateManyWithoutDownvotedBillsInput
+}
+
+input BillUpdateWithoutDownvotesDataInput {
+  code: String
+  title: String
+  summary: String
+  congressNumber: String
+  chamber: String
+  committees: String
+  link: String
+  sponsor: String
+  coSponsors: PoliticianUpdateManyWithoutCoBillsInput
+  followedBy: UserUpdateManyWithoutMyBillsInput
+  upvotes: UserUpdateManyWithoutUpvotedBillsInput
 }
 
 input BillUpdateWithoutFollowedByDataInput {
-  number: Int
+  code: String
   title: String
   summary: String
   congressNumber: String
   chamber: String
   committees: String
   link: String
-  sponsor: PoliticianUpdateOneWithoutBillsInput
+  sponsor: String
   coSponsors: PoliticianUpdateManyWithoutCoBillsInput
+  upvotes: UserUpdateManyWithoutUpvotedBillsInput
+  downvotes: UserUpdateManyWithoutDownvotedBillsInput
 }
 
-input BillUpdateWithoutSponsorDataInput {
-  number: Int
+input BillUpdateWithoutUpvotesDataInput {
+  code: String
   title: String
   summary: String
   congressNumber: String
   chamber: String
   committees: String
   link: String
+  sponsor: String
   coSponsors: PoliticianUpdateManyWithoutCoBillsInput
   followedBy: UserUpdateManyWithoutMyBillsInput
+  downvotes: UserUpdateManyWithoutDownvotedBillsInput
+}
+
+input BillUpdateWithWhereUniqueNestedInput {
+  where: BillWhereUniqueInput!
+  data: BillUpdateDataInput!
 }
 
 input BillUpdateWithWhereUniqueWithoutCoSponsorsInput {
@@ -613,14 +774,25 @@ input BillUpdateWithWhereUniqueWithoutCoSponsorsInput {
   data: BillUpdateWithoutCoSponsorsDataInput!
 }
 
+input BillUpdateWithWhereUniqueWithoutDownvotesInput {
+  where: BillWhereUniqueInput!
+  data: BillUpdateWithoutDownvotesDataInput!
+}
+
 input BillUpdateWithWhereUniqueWithoutFollowedByInput {
   where: BillWhereUniqueInput!
   data: BillUpdateWithoutFollowedByDataInput!
 }
 
-input BillUpdateWithWhereUniqueWithoutSponsorInput {
+input BillUpdateWithWhereUniqueWithoutUpvotesInput {
   where: BillWhereUniqueInput!
-  data: BillUpdateWithoutSponsorDataInput!
+  data: BillUpdateWithoutUpvotesDataInput!
+}
+
+input BillUpsertWithWhereUniqueNestedInput {
+  where: BillWhereUniqueInput!
+  update: BillUpdateDataInput!
+  create: BillCreateInput!
 }
 
 input BillUpsertWithWhereUniqueWithoutCoSponsorsInput {
@@ -629,16 +801,22 @@ input BillUpsertWithWhereUniqueWithoutCoSponsorsInput {
   create: BillCreateWithoutCoSponsorsInput!
 }
 
+input BillUpsertWithWhereUniqueWithoutDownvotesInput {
+  where: BillWhereUniqueInput!
+  update: BillUpdateWithoutDownvotesDataInput!
+  create: BillCreateWithoutDownvotesInput!
+}
+
 input BillUpsertWithWhereUniqueWithoutFollowedByInput {
   where: BillWhereUniqueInput!
   update: BillUpdateWithoutFollowedByDataInput!
   create: BillCreateWithoutFollowedByInput!
 }
 
-input BillUpsertWithWhereUniqueWithoutSponsorInput {
+input BillUpsertWithWhereUniqueWithoutUpvotesInput {
   where: BillWhereUniqueInput!
-  update: BillUpdateWithoutSponsorDataInput!
-  create: BillCreateWithoutSponsorInput!
+  update: BillUpdateWithoutUpvotesDataInput!
+  create: BillCreateWithoutUpvotesInput!
 }
 
 input BillWhereInput {
@@ -690,28 +868,46 @@ input BillWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  number: Int
+  code: String
 
   """All values that are not equal to given value."""
-  number_not: Int
+  code_not: String
 
   """All values that are contained in given list."""
-  number_in: [Int!]
+  code_in: [String!]
 
   """All values that are not contained in given list."""
-  number_not_in: [Int!]
+  code_not_in: [String!]
 
   """All values less than the given value."""
-  number_lt: Int
+  code_lt: String
 
   """All values less than or equal the given value."""
-  number_lte: Int
+  code_lte: String
 
   """All values greater than the given value."""
-  number_gt: Int
+  code_gt: String
 
   """All values greater than or equal the given value."""
-  number_gte: Int
+  code_gte: String
+
+  """All values containing the given string."""
+  code_contains: String
+
+  """All values not containing the given string."""
+  code_not_contains: String
+
+  """All values starting with the given string."""
+  code_starts_with: String
+
+  """All values not starting with the given string."""
+  code_not_starts_with: String
+
+  """All values ending with the given string."""
+  code_ends_with: String
+
+  """All values not ending with the given string."""
+  code_not_ends_with: String
   title: String
 
   """All values that are not equal to given value."""
@@ -952,13 +1148,58 @@ input BillWhereInput {
 
   """All values not ending with the given string."""
   link_not_ends_with: String
-  sponsor: PoliticianWhereInput
+  sponsor: String
+
+  """All values that are not equal to given value."""
+  sponsor_not: String
+
+  """All values that are contained in given list."""
+  sponsor_in: [String!]
+
+  """All values that are not contained in given list."""
+  sponsor_not_in: [String!]
+
+  """All values less than the given value."""
+  sponsor_lt: String
+
+  """All values less than or equal the given value."""
+  sponsor_lte: String
+
+  """All values greater than the given value."""
+  sponsor_gt: String
+
+  """All values greater than or equal the given value."""
+  sponsor_gte: String
+
+  """All values containing the given string."""
+  sponsor_contains: String
+
+  """All values not containing the given string."""
+  sponsor_not_contains: String
+
+  """All values starting with the given string."""
+  sponsor_starts_with: String
+
+  """All values not starting with the given string."""
+  sponsor_not_starts_with: String
+
+  """All values ending with the given string."""
+  sponsor_ends_with: String
+
+  """All values not ending with the given string."""
+  sponsor_not_ends_with: String
   coSponsors_every: PoliticianWhereInput
   coSponsors_some: PoliticianWhereInput
   coSponsors_none: PoliticianWhereInput
   followedBy_every: UserWhereInput
   followedBy_some: UserWhereInput
   followedBy_none: UserWhereInput
+  upvotes_every: UserWhereInput
+  upvotes_some: UserWhereInput
+  upvotes_none: UserWhereInput
+  downvotes_every: UserWhereInput
+  downvotes_some: UserWhereInput
+  downvotes_none: UserWhereInput
 }
 
 input BillWhereUniqueInput {
@@ -1077,7 +1318,7 @@ input PoliticianCreateInput {
   website: String
   govUrl: String
   followedBy: UserCreateOneWithoutMyPoliticiansInput
-  bills: BillCreateManyWithoutSponsorInput
+  bills: BillCreateManyInput
   coBills: BillCreateManyWithoutCoSponsorsInput
 }
 
@@ -1089,29 +1330,6 @@ input PoliticianCreateManyWithoutCoBillsInput {
 input PoliticianCreateManyWithoutFollowedByInput {
   create: [PoliticianCreateWithoutFollowedByInput!]
   connect: [PoliticianWhereUniqueInput!]
-}
-
-input PoliticianCreateOneWithoutBillsInput {
-  create: PoliticianCreateWithoutBillsInput
-  connect: PoliticianWhereUniqueInput
-}
-
-input PoliticianCreateWithoutBillsInput {
-  party: String
-  name: String!
-  title: String
-  chamber: String
-  state: String
-  district: Int
-  nthCongress: String
-  phone: String
-  gender: String
-  image: String
-  largeImage: String
-  website: String
-  govUrl: String
-  followedBy: UserCreateOneWithoutMyPoliticiansInput
-  coBills: BillCreateManyWithoutCoSponsorsInput
 }
 
 input PoliticianCreateWithoutCoBillsInput {
@@ -1129,7 +1347,7 @@ input PoliticianCreateWithoutCoBillsInput {
   website: String
   govUrl: String
   followedBy: UserCreateOneWithoutMyPoliticiansInput
-  bills: BillCreateManyWithoutSponsorInput
+  bills: BillCreateManyInput
 }
 
 input PoliticianCreateWithoutFollowedByInput {
@@ -1146,7 +1364,7 @@ input PoliticianCreateWithoutFollowedByInput {
   largeImage: String
   website: String
   govUrl: String
-  bills: BillCreateManyWithoutSponsorInput
+  bills: BillCreateManyInput
   coBills: BillCreateManyWithoutCoSponsorsInput
 }
 
@@ -1864,7 +2082,7 @@ input PoliticianUpdateInput {
   website: String
   govUrl: String
   followedBy: UserUpdateOneWithoutMyPoliticiansInput
-  bills: BillUpdateManyWithoutSponsorInput
+  bills: BillUpdateManyInput
   coBills: BillUpdateManyWithoutCoSponsorsInput
 }
 
@@ -1927,33 +2145,6 @@ input PoliticianUpdateManyWithWhereNestedInput {
   data: PoliticianUpdateManyDataInput!
 }
 
-input PoliticianUpdateOneWithoutBillsInput {
-  create: PoliticianCreateWithoutBillsInput
-  connect: PoliticianWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: PoliticianUpdateWithoutBillsDataInput
-  upsert: PoliticianUpsertWithoutBillsInput
-}
-
-input PoliticianUpdateWithoutBillsDataInput {
-  party: String
-  name: String
-  title: String
-  chamber: String
-  state: String
-  district: Int
-  nthCongress: String
-  phone: String
-  gender: String
-  image: String
-  largeImage: String
-  website: String
-  govUrl: String
-  followedBy: UserUpdateOneWithoutMyPoliticiansInput
-  coBills: BillUpdateManyWithoutCoSponsorsInput
-}
-
 input PoliticianUpdateWithoutCoBillsDataInput {
   party: String
   name: String
@@ -1969,7 +2160,7 @@ input PoliticianUpdateWithoutCoBillsDataInput {
   website: String
   govUrl: String
   followedBy: UserUpdateOneWithoutMyPoliticiansInput
-  bills: BillUpdateManyWithoutSponsorInput
+  bills: BillUpdateManyInput
 }
 
 input PoliticianUpdateWithoutFollowedByDataInput {
@@ -1986,7 +2177,7 @@ input PoliticianUpdateWithoutFollowedByDataInput {
   largeImage: String
   website: String
   govUrl: String
-  bills: BillUpdateManyWithoutSponsorInput
+  bills: BillUpdateManyInput
   coBills: BillUpdateManyWithoutCoSponsorsInput
 }
 
@@ -1998,11 +2189,6 @@ input PoliticianUpdateWithWhereUniqueWithoutCoBillsInput {
 input PoliticianUpdateWithWhereUniqueWithoutFollowedByInput {
   where: PoliticianWhereUniqueInput!
   data: PoliticianUpdateWithoutFollowedByDataInput!
-}
-
-input PoliticianUpsertWithoutBillsInput {
-  update: PoliticianUpdateWithoutBillsDataInput!
-  create: PoliticianCreateWithoutBillsInput!
 }
 
 input PoliticianUpsertWithWhereUniqueWithoutCoBillsInput {
@@ -2623,6 +2809,7 @@ input PoliticianWhereInput {
 
 input PoliticianWhereUniqueInput {
   id: ID
+  name: String
 }
 
 type Query {
@@ -2657,6 +2844,8 @@ type User implements Node {
   permissions: [Permission!]!
   myPoliticians(where: PoliticianWhereInput, orderBy: PoliticianOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Politician!]
   myBills(where: BillWhereInput, orderBy: BillOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Bill!]
+  upvotedBills(where: BillWhereInput, orderBy: BillOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Bill!]
+  downvotedBills(where: BillWhereInput, orderBy: BillOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Bill!]
 }
 
 """A connection to a list of items."""
@@ -2676,10 +2865,22 @@ input UserCreateInput {
   permissions: UserCreatepermissionsInput
   myPoliticians: PoliticianCreateManyWithoutFollowedByInput
   myBills: BillCreateManyWithoutFollowedByInput
+  upvotedBills: BillCreateManyWithoutUpvotesInput
+  downvotedBills: BillCreateManyWithoutDownvotesInput
+}
+
+input UserCreateManyWithoutDownvotedBillsInput {
+  create: [UserCreateWithoutDownvotedBillsInput!]
+  connect: [UserWhereUniqueInput!]
 }
 
 input UserCreateManyWithoutMyBillsInput {
   create: [UserCreateWithoutMyBillsInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateManyWithoutUpvotedBillsInput {
+  create: [UserCreateWithoutUpvotedBillsInput!]
   connect: [UserWhereUniqueInput!]
 }
 
@@ -2692,12 +2893,24 @@ input UserCreatepermissionsInput {
   set: [Permission!]
 }
 
+input UserCreateWithoutDownvotedBillsInput {
+  name: String!
+  email: String!
+  password: String
+  permissions: UserCreatepermissionsInput
+  myPoliticians: PoliticianCreateManyWithoutFollowedByInput
+  myBills: BillCreateManyWithoutFollowedByInput
+  upvotedBills: BillCreateManyWithoutUpvotesInput
+}
+
 input UserCreateWithoutMyBillsInput {
   name: String!
   email: String!
   password: String
   permissions: UserCreatepermissionsInput
   myPoliticians: PoliticianCreateManyWithoutFollowedByInput
+  upvotedBills: BillCreateManyWithoutUpvotesInput
+  downvotedBills: BillCreateManyWithoutDownvotesInput
 }
 
 input UserCreateWithoutMyPoliticiansInput {
@@ -2706,6 +2919,18 @@ input UserCreateWithoutMyPoliticiansInput {
   password: String
   permissions: UserCreatepermissionsInput
   myBills: BillCreateManyWithoutFollowedByInput
+  upvotedBills: BillCreateManyWithoutUpvotesInput
+  downvotedBills: BillCreateManyWithoutDownvotesInput
+}
+
+input UserCreateWithoutUpvotedBillsInput {
+  name: String!
+  email: String!
+  password: String
+  permissions: UserCreatepermissionsInput
+  myPoliticians: PoliticianCreateManyWithoutFollowedByInput
+  myBills: BillCreateManyWithoutFollowedByInput
+  downvotedBills: BillCreateManyWithoutDownvotesInput
 }
 
 """An edge in a connection."""
@@ -2957,6 +3182,8 @@ input UserUpdateInput {
   permissions: UserUpdatepermissionsInput
   myPoliticians: PoliticianUpdateManyWithoutFollowedByInput
   myBills: BillUpdateManyWithoutFollowedByInput
+  upvotedBills: BillUpdateManyWithoutUpvotesInput
+  downvotedBills: BillUpdateManyWithoutDownvotesInput
 }
 
 input UserUpdateManyDataInput {
@@ -2973,6 +3200,17 @@ input UserUpdateManyMutationInput {
   permissions: UserUpdatepermissionsInput
 }
 
+input UserUpdateManyWithoutDownvotedBillsInput {
+  create: [UserCreateWithoutDownvotedBillsInput!]
+  connect: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  delete: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutDownvotedBillsInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+  deleteMany: [UserScalarWhereInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutDownvotedBillsInput!]
+}
+
 input UserUpdateManyWithoutMyBillsInput {
   create: [UserCreateWithoutMyBillsInput!]
   connect: [UserWhereUniqueInput!]
@@ -2982,6 +3220,17 @@ input UserUpdateManyWithoutMyBillsInput {
   updateMany: [UserUpdateManyWithWhereNestedInput!]
   deleteMany: [UserScalarWhereInput!]
   upsert: [UserUpsertWithWhereUniqueWithoutMyBillsInput!]
+}
+
+input UserUpdateManyWithoutUpvotedBillsInput {
+  create: [UserCreateWithoutUpvotedBillsInput!]
+  connect: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  delete: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutUpvotedBillsInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+  deleteMany: [UserScalarWhereInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutUpvotedBillsInput!]
 }
 
 input UserUpdateManyWithWhereNestedInput {
@@ -3002,12 +3251,24 @@ input UserUpdatepermissionsInput {
   set: [Permission!]
 }
 
+input UserUpdateWithoutDownvotedBillsDataInput {
+  name: String
+  email: String
+  password: String
+  permissions: UserUpdatepermissionsInput
+  myPoliticians: PoliticianUpdateManyWithoutFollowedByInput
+  myBills: BillUpdateManyWithoutFollowedByInput
+  upvotedBills: BillUpdateManyWithoutUpvotesInput
+}
+
 input UserUpdateWithoutMyBillsDataInput {
   name: String
   email: String
   password: String
   permissions: UserUpdatepermissionsInput
   myPoliticians: PoliticianUpdateManyWithoutFollowedByInput
+  upvotedBills: BillUpdateManyWithoutUpvotesInput
+  downvotedBills: BillUpdateManyWithoutDownvotesInput
 }
 
 input UserUpdateWithoutMyPoliticiansDataInput {
@@ -3016,6 +3277,23 @@ input UserUpdateWithoutMyPoliticiansDataInput {
   password: String
   permissions: UserUpdatepermissionsInput
   myBills: BillUpdateManyWithoutFollowedByInput
+  upvotedBills: BillUpdateManyWithoutUpvotesInput
+  downvotedBills: BillUpdateManyWithoutDownvotesInput
+}
+
+input UserUpdateWithoutUpvotedBillsDataInput {
+  name: String
+  email: String
+  password: String
+  permissions: UserUpdatepermissionsInput
+  myPoliticians: PoliticianUpdateManyWithoutFollowedByInput
+  myBills: BillUpdateManyWithoutFollowedByInput
+  downvotedBills: BillUpdateManyWithoutDownvotesInput
+}
+
+input UserUpdateWithWhereUniqueWithoutDownvotedBillsInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutDownvotedBillsDataInput!
 }
 
 input UserUpdateWithWhereUniqueWithoutMyBillsInput {
@@ -3023,15 +3301,32 @@ input UserUpdateWithWhereUniqueWithoutMyBillsInput {
   data: UserUpdateWithoutMyBillsDataInput!
 }
 
+input UserUpdateWithWhereUniqueWithoutUpvotedBillsInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutUpvotedBillsDataInput!
+}
+
 input UserUpsertWithoutMyPoliticiansInput {
   update: UserUpdateWithoutMyPoliticiansDataInput!
   create: UserCreateWithoutMyPoliticiansInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutDownvotedBillsInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutDownvotedBillsDataInput!
+  create: UserCreateWithoutDownvotedBillsInput!
 }
 
 input UserUpsertWithWhereUniqueWithoutMyBillsInput {
   where: UserWhereUniqueInput!
   update: UserUpdateWithoutMyBillsDataInput!
   create: UserCreateWithoutMyBillsInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutUpvotedBillsInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutUpvotedBillsDataInput!
+  create: UserCreateWithoutUpvotedBillsInput!
 }
 
 input UserWhereInput {
@@ -3209,6 +3504,12 @@ input UserWhereInput {
   myBills_every: BillWhereInput
   myBills_some: BillWhereInput
   myBills_none: BillWhereInput
+  upvotedBills_every: BillWhereInput
+  upvotedBills_some: BillWhereInput
+  upvotedBills_none: BillWhereInput
+  downvotedBills_every: BillWhereInput
+  downvotedBills_some: BillWhereInput
+  downvotedBills_none: BillWhereInput
 }
 
 input UserWhereUniqueInput {

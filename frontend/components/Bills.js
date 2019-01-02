@@ -10,10 +10,16 @@ const ALL_BILLS_QUERY = gql`
 	query ALL_BILLS_QUERY($skip: Int = 0, $first: Int = ${perPage}) {
 		bills(first: $first, skip: $skip, orderBy: createdAt_DESC) {
 			id
-			number
+			code
 			title
 			summary
 			committees
+			upvotes {
+				name
+			}
+			downvotes {
+				name
+			}
 		}
 	}
 `;
@@ -21,9 +27,9 @@ const ALL_BILLS_QUERY = gql`
 const Center = styled.div`text-align: center;`;
 const BillsList = styled.div`
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+]
 	grid-gap: 60px;
-	max-width: ${(props) => props.theme.maxWidth};
+	max-width: 1000px
 	margin: 0 auto;
 `;
 

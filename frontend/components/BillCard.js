@@ -6,50 +6,64 @@ import PoliticianStyles from './styles/PoliticianStyles';
 import DeleteBill from './DeleteBill';
 import FollowBill from './FollowBill';
 import UnfollowBill from './UnfollowBill';
+import UpvoteBill from './UpvoteBill';
+import DownvoteBill from './DownvoteBill';
+import styled from 'styled-components';
+
+const BillListItem = styled.div`
+	table {
+		table-layout: fixed;
+		width: 100%;
+		border-collapse: collapse;
+		border: 1px solid black;
+	}
+
+	th,
+	td {
+		padding: 10px;
+		width: auto;
+	}
+`;
 
 class BillCard extends Component {
 	render() {
 		const { bill } = this.props;
+		const score = bill.upvotes.length - bill.downvotes.length;
+
+		console.log(`score=${score}`);
 		return (
-			<PoliticianStyles>
-				<Link
-					href={{
-						pathname: '/bill',
-						query: { id: bill.id }
-					}}
-				>
-					<a href="">
-						{bill.image && <img src={bill.image} alt={bill.name} />}
-					</a>
-				</Link>
+			<BillListItem>
+				<table>
+					<tbody>
+						<Link
+							href={{
+								pathname: '/bill',
+								query: { id: bill.id }
+							}}
+						>
+							<tr>
+								<td>
+									<UpvoteBill id={bill.id}>👍</UpvoteBill>
+									<span>score: {score}</span>
+									<DownvoteBill id={bill.id}>👎</DownvoteBill>
+								</td>
 
-				<Name>
-					<Link
-						href={{
-							pathname: '/bill',
-							query: { id: bill.id }
-						}}
-					>
-						<a href="">{bill.number}</a>
-					</Link>
-					<h6>Title: {bill.title}</h6>
-					<h6>Summary: {bill.summary}</h6>
-				</Name>
+								<td>
+									<FollowBill id={bill.id} />Follow
+								</td>
+								<td>
+									<UnfollowBill id={bill.id} />
+								</td>
+								<td>{bill.title}</td>
+								<td>{bill.id}</td>
+								<td>{bill.code}</td>
 
-				<div className="buttonList">
-					<Link
-						href={{
-							pathname: '/update',
-							query: { id: bill.id }
-						}}
-					>
-						<h6>✏️</h6>
-					</Link>
-					<FollowBill id={bill.id}>❤️</FollowBill>
-					<UnfollowBill id={bill.id}>💔</UnfollowBill>
-					<DeleteBill id={bill.id}>✖️</DeleteBill>
-				</div>
-			</PoliticianStyles>
+								<td>{bill.sponsor}</td>
+							</tr>
+						</Link>
+					</tbody>
+				</table>
+			</BillListItem>
 		);
 	}
 }
