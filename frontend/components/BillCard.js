@@ -11,24 +11,31 @@ import DownvoteBill from './DownvoteBill';
 import styled from 'styled-components';
 
 const BillListItem = styled.div`
+	max-width: 900px;
 	background: ${(props) => props.theme.offWhite};
 	table {
 		table-layout: fixed;
-		width: 100%;
+		width: 800px;
 		border-collapse: collapse;
 		border: 1px solid black;
+		display: inline-block;
 	}
 
-	th,
 	td {
-		padding: 5px 1px;
-		width: 0px;
+		border: 100px solid
+		padding: none
+		width: 10%;
 		text-align: left;
+		spacing: none;
 	}
 
 	span {
 		background: ${(props) => props.theme.offWhite};
-		padding: 6px;
+		padding: none;
+		width: 1000px;
+		&:hover {
+			font-size: 2rem;
+		}
 	}
 `;
 
@@ -71,8 +78,12 @@ class BillCard extends Component {
 							>
 								<td>{bill.code}</td>
 							</Link>
-							<td>Title preview</td>
+							<td>
+								<div>{bill.title.substring(0, 30)}</div>
+							</td>
 							<td>{bill.sponsor}</td>
+							<td>{bill.chamber}</td>
+							<td>{bill.party}</td>
 						</tr>
 					</tbody>
 				</table>

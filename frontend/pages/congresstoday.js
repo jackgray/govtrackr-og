@@ -1,5 +1,6 @@
 import Link from 'next/link';
+import CongressToday from '../components/CongressToday';
 
-const CongressToday = (props) => <div />;
+const CongressTodayPage = (props) => <CongressToday />;
 
-export default CongressToday;
+export default CongressTodayPage;

@@ -4,6 +4,9 @@ import NavStyles from './styles/NavStyles';
 const Nav = () => {
 	return (
 		<NavStyles>
+			<Link href="/feed">
+				<a>Feed</a>
+			</Link>
 			<Link href="/people">
 				<a>People</a>
 			</Link>
@@ -19,13 +22,13 @@ const Nav = () => {
 			<Link href="/mybills">
 				<a>My Bills</a>
 			</Link>
-
+			<Link href="/congresstoday">
+				<a>Congress Today</a>
+			</Link>
 			<Link href="/about">
 				<a>About</a>
 			</Link>
-			<Link href="/contact">
-				<a>Contact</a>
-			</Link>
+
 			<Link href="/comingsoon">
 				<a>Upcoming Features</a>
 			</Link>

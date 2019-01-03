@@ -93,6 +93,10 @@ type Query {
 	scrapePoliticians(url: String): Politician
 }
 
+type Subscription {
+	billActionsChanged(code: String, actions: [String]): Bill
+}
+
 type User {
 	id: ID!
 	name: String!
@@ -101,6 +105,6 @@ type User {
 	listings: [Politician]
 	myPoliticians: [Politician]
 	myBills: [Bill]
-	yesVotes: [Bill]
-	noVotes: [Bill]
+	upvotedBills: [Bill]
+	downvotedBills: [Bill]
 }

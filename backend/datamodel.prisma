@@ -52,7 +52,8 @@ type Bill {
 	link: String
 	sponsor: String
 	coSponsors: [Politician] @relation(name: "BillCoSponsorPolitician")
+	actions: [String]
 	followedBy: [User] @relation(name: "UserFollowBill")
-	upvotes: [User] @relation(name: "UpvoteBill") @default(value: 0)
-	downvotes: [User] @relation(name: "DownvoteBill") @default(value: 0)
+	upvotes: [User] @relation(name: "UpvoteBill")
+	downvotes: [User] @relation(name: "DownvoteBill")
 }
