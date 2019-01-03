@@ -11,6 +11,7 @@ import DownvoteBill from './DownvoteBill';
 import styled from 'styled-components';
 
 const BillListItem = styled.div`
+	background: ${(props) => props.theme.offWhite};
 	table {
 		table-layout: fixed;
 		width: 100%;
@@ -20,8 +21,14 @@ const BillListItem = styled.div`
 
 	th,
 	td {
-		padding: 10px;
-		width: auto;
+		padding: 5px 1px;
+		width: 0px;
+		text-align: left;
+	}
+
+	span {
+		background: ${(props) => props.theme.offWhite};
+		padding: 6px;
 	}
 `;
 
@@ -35,32 +42,38 @@ class BillCard extends Component {
 			<BillListItem>
 				<table>
 					<tbody>
-						<Link
-							href={{
-								pathname: '/bill',
-								query: { id: bill.id }
-							}}
-						>
-							<tr>
-								<td>
-									<UpvoteBill id={bill.id}>👍</UpvoteBill>
-									<span>score: {score}</span>
-									<DownvoteBill id={bill.id}>👎</DownvoteBill>
-								</td>
+						<tr>
+							<td>
+								<UpvoteBill id={bill.id}>
+									<span>👍</span>
+								</UpvoteBill>
+								<span>{score}</span>
+								<DownvoteBill id={bill.id}>
+									<span>👎</span>
+								</DownvoteBill>
+							</td>
 
-								<td>
-									<FollowBill id={bill.id} />Follow
-								</td>
-								<td>
-									<UnfollowBill id={bill.id} />
-								</td>
-								<td>{bill.title}</td>
-								<td>{bill.id}</td>
+							<td>
+								<FollowBill id={bill.id}>
+									<span>Follow</span>
+								</FollowBill>
+
+								<UnfollowBill id={bill.id}>
+									<span>Unfollow</span>
+								</UnfollowBill>
+							</td>
+
+							<Link
+								href={{
+									pathname: '/bill',
+									query: { id: bill.id }
+								}}
+							>
 								<td>{bill.code}</td>
-
-								<td>{bill.sponsor}</td>
-							</tr>
-						</Link>
+							</Link>
+							<td>Title preview</td>
+							<td>{bill.sponsor}</td>
+						</tr>
 					</tbody>
 				</table>
 			</BillListItem>

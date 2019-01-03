@@ -6,6 +6,7 @@ import styled, { ThemeProvider, injectGlobal } from 'styled-components';
 const theme = {
 	primary: '#f44242', // soft red
 	secondary: '#2589cc', // twitter blue
+	backgroundWhite: '#fcfcfc',
 	red: '#38a8ff',
 	black: '#393939',
 	darkGrey: '#3A3A3A',
@@ -34,6 +35,7 @@ const Inner = styled.div`
 
 injectGlobal`
 	@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+	@import url('https://fonts.googleapis.com/css?family=Major+Mono+Display');
 
 	@font-face {
 		font-family: 'Inconsolata';
@@ -57,6 +59,11 @@ injectGlobal`
 		text-decoration: none;
 		color: ${theme.black}
 		font-size: 2rem;
+	}
+	button {
+
+
+		border: none;
 	}
 `;
 

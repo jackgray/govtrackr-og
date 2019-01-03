@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 
 const Logo = styled.h1`
-	@import url('https://fonts.googleapis.com/css?family=Major+Mono+Display'),
-		font-size: 1rem;
-	font-family: 'Major Mono Display';
+	font-family: 'Major Mono Display', monospace;
 	margin-left: 2rem;
 	position: relative;
 	z-index: 2;
