@@ -20,6 +20,9 @@ const ALL_BILLS_QUERY = gql`
 			downvotes {
 				name
 			}
+			followers {
+				name
+			}
 		}
 	}
 `;
@@ -37,12 +40,14 @@ class Bills extends Component {
 	render() {
 		return (
 			<Center>
-				<Pagination page={this.props.page} />
 				<Query
 					query={ALL_BILLS_QUERY}
-					variables={{
-						skip: this.props.page * perPage - perPage
-					}}
+					variables={
+						({
+							skip: this.props.page * perPage - perPage
+						},
+						{ id: this.props.id })
+					}
 				>
 					{({ data, error, loading }) => {
 						if (loading) return <p>Loading...</p>;
@@ -56,7 +61,6 @@ class Bills extends Component {
 						);
 					}}
 				</Query>
-				<Pagination page={this.props.page} />
 			</Center>
 		);
 	}

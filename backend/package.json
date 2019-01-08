@@ -1,5 +1,5 @@
 {
-	"name": "petwork-backend",
+	"name": "govtrackr-backend",
 	"version": "1.0.0",
 	"description": "",
 	"scripts": {
@@ -36,8 +36,6 @@
 		"url": "wesbos.com"
 	},
 	"babel": {
-		"presets": [
-			"env"
-		]
+		"presets": [ "env" ]
 	}
 }

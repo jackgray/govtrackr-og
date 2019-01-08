@@ -50,14 +50,14 @@ const Query = {
 		return myPolitician;
 	},
 
-	async myPoliticians(parent, args, ctx, info) {
+	myPoliticians: (parent, args, ctx, info) => {
 		const { userId } = ctx.request;
 
 		if (!userId) {
 			throw new Error('You must log in to view myPoliticians');
 		}
 
-		const myPoliticians = await ctx.db.query.politicians({
+		const myPoliticians = ctx.db.query.politicians({
 			where: {
 				user: {
 					id: userId
@@ -85,14 +85,14 @@ const Query = {
 	bill: forwardTo('db'),
 	bills: forwardTo('db'),
 
-	async myBills(parent, args, ctx, info) {
+	myBills(parent, args, ctx, info) {
 		const { userId } = ctx.request;
 
 		if (!userId) {
 			throw new Error('You must log in to view myBills');
 		}
 
-		const myBills = await ctx.db.query.bills({
+		const myBills = ctx.db.query.bills({
 			where: {
 				user: {
 					id: userId
@@ -101,6 +101,17 @@ const Query = {
 			info
 		});
 		return myBills;
+	},
+
+	async billComments(parent, args, ctx, info) {
+		const billComments = await ctx.db.query.bill({
+			where: {
+				comments: {
+					id: args.id
+				}
+			}
+		});
+		return billComments;
 	},
 
 	async billsScrape(parent, args, ctx, info) {

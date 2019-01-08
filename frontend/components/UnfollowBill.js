@@ -2,49 +2,50 @@ import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import { CURRENT_USER_QUERY } from './User';
-import { MY_POLITICIANS_QUERY } from './MyPoliticians';
+import { MY_BILLS_QUERY } from './MyBills';
 
-const UNFOLLOW_POLITICIAN_MUTATION = gql`
-	mutation unfollowPolitician($id: ID!) {
-		unfollowPolitician(id: $id) {
+const UNFOLLOW_BILL_MUTATION = gql`
+	mutation unfollowBill($id: ID!) {
+		unfollowBill(id: $id) {
 			id
 		}
 	}
 `;
 
-class UnfollowPolitician extends Component {
+class UnfollowBill extends Component {
 	update = (cache, payload) => {
 		console.log('update function called');
-		const data = cache.readQuery({ query: MY_POLITICIANS_QUERY });
+		const data = cache.readQuery({ query: MY_BILLS_QUERY });
 		console.log(data);
-		data.me.myPoliticians = data.me.myPoliticians.filter(
-			(myPolitician) =>
-				myPolitician.id !== payload.data.unfollowPolitician.id
+		data.me.myBills = data.me.myBills.filter(
+			(myBill) => myBill.id !== payload.data.unfollowBill.id
 		);
 
-		cache.writeQuery({ query: MY_POLITICIANS_QUERY, data });
+		cache.writeQuery({ query: MY_BILLS_QUERY, data });
 	};
 	render() {
-		const id = this.props.id;
+		const { id } = this.props;
 		return (
 			<Mutation
-				mutation={UNFOLLOW_POLITICIAN_MUTATION}
+				mutation={UNFOLLOW_BILL_MUTATION}
 				variables={{ id }}
 				update={this.update}
 			>
-				{(unfollowPolitician, { error }) => (
+				{(unfollowBill, { loading }) => (
 					<button
+						disabled={loading}
 						onClick={() => {
 							if (
 								confirm(
 									'Are you sure you want to unfollow this person?'
 								)
 							) {
-								unfollowPolitician();
+								unfollowBill();
 							}
 						}}
 					>
 						{this.props.children}
+						{loading && 'ing'}
 					</button>
 				)}
 			</Mutation>
@@ -52,5 +53,5 @@ class UnfollowPolitician extends Component {
 	}
 }
 
-export default UnfollowPolitician;
-export { UNFOLLOW_POLITICIAN_MUTATION };
+export default UnfollowBill;
+export { UNFOLLOW_BILL_MUTATION };

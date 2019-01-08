@@ -1,4 +1,4 @@
-# import * from './generated/prisma.graphql'
+# import * from '../graphql-schema/prisma.graphql'
 
 type Mutation {
 	createPolitician(
@@ -55,16 +55,19 @@ type Mutation {
 		billType: String
 		committees: String
 		link: String
+		comment: CommentWhereInput
 	): Bill
 	deleteBill(id: ID): Bill
 	followBill(id: ID): User
 	unfollowBill(id: ID): User
 	upvoteBill(id: ID): User
 	downvoteBill(id: ID): User
+	commentBill(id: ID): Comment
 	scrapeBill(code: String): Bill
 	signup(name: String!, email: String!, password: String!): User!
 	signin(email: String!, password: String!): User!
 	updatePermissions(permissions: [Permission], userId: ID!): User
+	pushNotification(label: String): Notification
 }
 
 type Query {
@@ -86,15 +89,19 @@ type Query {
 		first: Int
 	): [Bill]
 	myBills: [Bill]
+	billComments: [Comment]
 	billsScrape(url: String): Bill
 	me: User
 	users: [User]!
 	owner: User
 	scrapePoliticians(url: String): Politician
+	notifications: [Notification]
 }
 
 type Subscription {
-	billActionsChanged(code: String, actions: [String]): Bill
+	bills: BillSubscriptionPayload
+	billDeleted: Bill
+	billCreated: Bill
 }
 
 type User {
@@ -107,4 +114,5 @@ type User {
 	myBills: [Bill]
 	upvotedBills: [Bill]
 	downvotedBills: [Bill]
+	billComments: [Comment]
 }

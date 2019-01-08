@@ -1,9 +1,9 @@
 enum Permission {
 	ADMIN
 	USER
-	PETCREATE
-	PETUPDATE
-	PETDELETE
+	POLITICIANCREATE
+	POLITICIANUPDATE
+	POLITICIANDELETE
 	PERMISSIONUPDATE
 }
 
@@ -17,6 +17,9 @@ type User {
 	myBills: [Bill] @relation(name: "UserFollowBill")
 	upvotedBills: [Bill] @relation(name: "UpvoteBill")
 	downvotedBills: [Bill] @relation(name: "DownvoteBill")
+	billComments: [Comment] @relation(name: "UserCommentBill")
+	topicComments: [Topic] @relation(name: "UserCommentOnTopic")
+	notifications: [Notification] @relation(name: "UserNotification")
 }
 
 type Politician {
@@ -36,9 +39,10 @@ type Politician {
 	govUrl: String
 	createdAt: DateTime!
 	updatedAt: DateTime!
-	followedBy: User @relation(name: "UserFollowPolitician")
+	followers: User @relation(name: "UserFollowPolitician")
 	bills: [Bill] @relation(name: "BillSponsorPolitician")
 	coBills: [Bill] @relation(name: "BillCoSponsorPolitician")
+	mentions: [Comment] @relation(name: "PoliticianCommentMention")
 }
 
 type Bill {
@@ -53,7 +57,33 @@ type Bill {
 	sponsor: String
 	coSponsors: [Politician] @relation(name: "BillCoSponsorPolitician")
 	actions: [String]
-	followedBy: [User] @relation(name: "UserFollowBill")
+	followers: [User] @relation(name: "UserFollowBill")
 	upvotes: [User] @relation(name: "UpvoteBill")
 	downvotes: [User] @relation(name: "DownvoteBill")
+	comments: [Comment] @relation(name: "BillComment")
+}
+
+type Comment {
+	id: ID! @unique
+	content: String
+	reply: String
+	bill: Bill @relation(name: "BillComment")
+	author: User @relation(name: "UserCommentBill")
+	politiciansMentioned: [Politician]
+		@relation(name: "PoliticianCommentMention")
+	topic: Topic @relation(name: "TopicComment")
+}
+
+type Topic {
+	id: ID! @unique
+	title: String
+	comments: [Comment] @relation(name: "TopicComment")
+	commenters: [User] @relation(name: "UserCommentOnTopic")
+}
+
+type Notification {
+	id: ID! @unique
+	label: String
+	type: String
+	user: User @relation(name: "UserNotification")
 }

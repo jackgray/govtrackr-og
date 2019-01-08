@@ -40,11 +40,17 @@ const BillListItem = styled.div`
 `;
 
 class BillCard extends Component {
+	state = {
+		upvotes: this.props.bill.upvotes,
+		downvotes: this.props.bill.downvotes
+	};
 	render() {
 		const { bill } = this.props;
 		const score = bill.upvotes.length - bill.downvotes.length;
-
+		const stateScore =
+			this.state.upvotes.length - this.state.upvotes.length;
 		console.log(`score=${score}`);
+		console.log(`score2= ${stateScore}`);
 		return (
 			<BillListItem>
 				<table>
@@ -64,7 +70,7 @@ class BillCard extends Component {
 								<FollowBill id={bill.id}>
 									<span>Follow</span>
 								</FollowBill>
-
+								<span>{bill.followers.length}</span>
 								<UnfollowBill id={bill.id}>
 									<span>Unfollow</span>
 								</UnfollowBill>

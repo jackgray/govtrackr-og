@@ -55,7 +55,7 @@ const Mutations = {
 
 		connect = await ctx.db.mutation.updatePolitician({
 			data: {
-				followedBy: {
+				followers: {
 					connect: {
 						id: userId
 					}
@@ -79,7 +79,7 @@ const Mutations = {
 
 		disconnect = await ctx.db.mutation.updatePolitician({
 			data: {
-				followedBy: {
+				followers: {
 					disconnect: {
 						id: userId
 					}
@@ -116,7 +116,7 @@ const Mutations = {
 				id: args.id
 			},
 			data: {
-				followedBy: {
+				followers: {
 					connect: { id: userId }
 				}
 			}
@@ -124,7 +124,7 @@ const Mutations = {
 		disconnect = await ctx.db.mutation.updatePolitician({
 			where: { id: args.id },
 			data: {
-				followedBy: {
+				followers: {
 					disconnect: { id: userId }
 				}
 			}
@@ -185,7 +185,7 @@ const Mutations = {
 
 		connect = await ctx.db.mutation.updateBill({
 			data: {
-				followedBy: {
+				followers: {
 					connect: {
 						id: userId
 					}
@@ -207,7 +207,7 @@ const Mutations = {
 
 		disconnect = await ctx.db.mutation.updateBill({
 			data: {
-				followedBy: {
+				followers: {
 					disconnect: {
 						id: userId
 					}
@@ -254,22 +254,7 @@ const Mutations = {
 				id: args.id
 			}
 		});
-		console.log(connect);
-		disconnect = await ctx.db.mutation.updateBill(
-			{
-				data: {
-					downvotes: {
-						disconnect: {
-							id: userId
-						}
-					}
-				},
-				where: {
-					id: args.id
-				}
-			},
-			info
-		);
+
 		return upvote;
 	},
 
@@ -298,6 +283,21 @@ const Mutations = {
 		});
 
 		return downvote;
+	},
+
+	async commentBill(parent, args, ctx, info) {
+		const userId = ctx.request;
+		if (!userId) {
+			throw new Error('You must sign in to leave a comment');
+		}
+		const comment = await ctx.db.mutation.createComment({
+			data: {
+				content: args.content,
+				author: { connect: userId },
+				bill: { connect: args.billId }
+			}
+		});
+		return comment;
 	},
 
 	async scrapeBill(parent, { number, title }, ctx, info) {
@@ -377,6 +377,11 @@ const Mutations = {
 			maxAge: 1000 * 60 * 60 * 24 * 365
 		});
 		return user;
+	},
+	pushNotification: (parent, args) => {
+		const newNotification = { label: args.label };
+		notifications.push(newNotification);
+		return newNotification;
 	}
 };
 
