@@ -50,7 +50,7 @@ class BillCard extends Component {
 		const stateScore =
 			this.state.upvotes.length - this.state.upvotes.length;
 		console.log(`score=${score}`);
-		console.log(`score2= ${stateScore}`);
+		console.log(`state= ${stateScore}`);
 		return (
 			<BillListItem>
 				<table>

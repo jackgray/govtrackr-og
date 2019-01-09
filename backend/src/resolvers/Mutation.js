@@ -331,6 +331,22 @@ const Mutations = {
 		return bill;
 	},
 
+	pushNotification: (parent, args) => {
+		const newNotification = { label: args.label };
+		notifications.push(newNotification);
+		return newNotification;
+	},
+	createNotification: (parent, args, ctx, info) => {
+		return ctx.db.mutation.createNotification(
+			{
+				data: {
+					...args
+				}
+			},
+			info
+		);
+	},
+
 	async signup(parent, args, ctx, info) {
 		// convert email to lowercase
 		args.email = args.email.toLowerCase();
@@ -377,11 +393,6 @@ const Mutations = {
 			maxAge: 1000 * 60 * 60 * 24 * 365
 		});
 		return user;
-	},
-	pushNotification: (parent, args) => {
-		const newNotification = { label: args.label };
-		notifications.push(newNotification);
-		return newNotification;
 	}
 };
 

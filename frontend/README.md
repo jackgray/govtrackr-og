@@ -20,3 +20,12 @@ PRISMA_SECRET="prismasecret"
 APP_SECRET="jwtsecret"
 STRIPE_SECRET="stripesecret"
 PORT=4444
+
+TODO:
+    switch from prisma-bindings to prisma-client and $fragments
+    finish Notifications feature
+    refresh cache on upvote/downvote
+    create Topics page
+    move all gql tags to centralized tags folder
+
+    populate database of politicians and bills from public database if one exists

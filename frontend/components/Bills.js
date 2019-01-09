@@ -5,27 +5,7 @@ import styled from 'styled-components';
 import BillCard from './BillCard';
 import Pagination from './Pagination';
 import { perPage } from '../config';
-
-const ALL_BILLS_QUERY = gql`
-	query ALL_BILLS_QUERY($skip: Int = 0, $first: Int = ${perPage}) {
-		bills(first: $first, skip: $skip, orderBy: createdAt_DESC) {
-			id
-			code
-			title
-			summary
-			committees
-			upvotes {
-				name
-			}
-			downvotes {
-				name
-			}
-			followers {
-				name
-			}
-		}
-	}
-`;
+import ALL_BILLS_QUERY from './gql-tags/ALL_BILLS_QUERY';
 
 const Center = styled.div`text-align: center;`;
 const BillsList = styled.div`

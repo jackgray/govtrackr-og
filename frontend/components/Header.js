@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import Nav from './Nav';
+import Search from './Search';
 //import styles
 import Logo from './styles/Logo';
 import StyledHeader from './styles/StyledHeader';
@@ -36,7 +37,7 @@ const Header = (props) => {
 				<Nav />
 			</div>
 			<div className="sub-bar">
-				<p>Search</p>
+				<Search />
 			</div>
 		</StyledHeader>
 	);
