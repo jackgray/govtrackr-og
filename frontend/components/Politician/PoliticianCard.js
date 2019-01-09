@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import Name from './styles/Name';
-import PoliticianStyles from './styles/PoliticianStyles';
+import Name from '../styles/Name';
+import PoliticianStyles from '../styles/PoliticianStyles';
 import DeletePolitician from './DeletePolitician';
 import FollowPolitician from './FollowPolitician';
 import UnfollowPolitician from './UnfollowPolitician';
 import UpdatePolitician from './UpdatePolitician';
 // Styles
-import Card from './styles/Card';
+import Card from '../styles/Card';
 
 class PoliticianCard extends Component {
 	render() {

@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Downshift, { resetIdCounter } from 'downshift';
 import Router from 'next/router';
 import { ApolloConsumer } from 'react-apollo';
 import gql from 'graphql-tag';
 import debounce from 'lodash.debounce';
-import { DropDown, DropDownItem, SearchStyles } from './styles/DropDown';
+import { DropDown, DropDownItem, SearchStyles } from '../styles/DropDown';
 
 const SEARCH_POLITICIANS_QUERY = gql`
 	query SEARCH_POLITICIANS_QUERY($searchTerm: String!) {
@@ -32,7 +32,10 @@ function routeToItem(politician) {
 	});
 }
 
-class AutoComplete extends React.Component {
+// TODO: use enums and state to create prop for using search
+// to make other queries
+
+class AutoComplete extends Component {
 	state = {
 		politicians: [],
 		loading: false
@@ -114,7 +117,6 @@ class AutoComplete extends React.Component {
 									{!this.state.politicians.length &&
 									!this.state.loading && (
 										<DropDownItem>
-											{' '}
 											Nothing Found {inputValue}
 										</DropDownItem>
 									)}

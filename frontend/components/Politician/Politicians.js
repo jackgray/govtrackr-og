@@ -3,8 +3,8 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 import PoliticianCard from './PoliticianCard';
-import Pagination from './Pagination';
-import { perPage } from '../config';
+import Pagination from '../Main/Pagination';
+import { perPage } from '../../config';
 
 const ALL_POLITICIANS_QUERY = gql`
 	query ALL_POLITICIANS_QUERY($skip: Int = 0, $first: Int = ${perPage}) {

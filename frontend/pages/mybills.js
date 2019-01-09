@@ -1,5 +1,5 @@
 import React from 'react';
-import MyBills from '../components/MyBills';
+import MyBills from '../components/Bill/MyBills';
 
 const MyBillsPage = (props) => {
 	return (

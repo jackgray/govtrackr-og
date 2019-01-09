@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
-import { perPage } from '../config';
+import { perPage } from '../../config';
 import BillCard from './BillCard';
 
 const MY_BILLS_QUERY = gql`

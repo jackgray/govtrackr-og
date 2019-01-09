@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import Name from './styles/Name';
-import PoliticianStyles from './styles/PoliticianStyles';
+import Name from '../styles/Name';
+import PoliticianStyles from '../styles/PoliticianStyles';
 import DeleteBill from './DeleteBill';
 import FollowBill from './FollowBill';
 import UnfollowBill from './UnfollowBill';
@@ -90,6 +90,9 @@ class BillCard extends Component {
 							<td>{bill.sponsor}</td>
 							<td>{bill.chamber}</td>
 							<td>{bill.party}</td>
+							<td>
+								<DeleteBill id={bill.id}>❌</DeleteBill>
+							</td>
 						</tr>
 					</tbody>
 				</table>

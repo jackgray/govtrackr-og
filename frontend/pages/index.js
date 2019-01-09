@@ -1,4 +1,4 @@
-import Politicians from '../components/Politicians';
+import Politicians from '../components/Politician/Politicians';
 
 const Home = (props) => (
 	<div>

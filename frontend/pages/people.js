@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Politicians from '../components/Politicians';
+import Politicians from '../components/Politician/Politicians';
 
 const PoliticiansPage = (props) => (
 	<div>

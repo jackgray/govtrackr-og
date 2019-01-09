@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import Nav from './Nav';
-import Search from './Search';
+import Search from './Search.js';
 //import styles
-import Logo from './styles/Logo';
-import StyledHeader from './styles/StyledHeader';
+import Logo from '../styles/Logo';
+import StyledHeader from '../styles/StyledHeader';
 
 Router.onRouteChangeStart = () => {
 	NProgress.start();

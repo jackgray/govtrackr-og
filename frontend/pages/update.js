@@ -1,4 +1,4 @@
-import UpdatePolitician from '../components/UpdatePolitician';
+import UpdatePolitician from '../components/Politician/UpdatePolitician';
 
 const Update = ({ query }) => (
 	<div>

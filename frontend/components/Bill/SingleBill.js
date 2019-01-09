@@ -3,33 +3,11 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import styled from 'styled-components';
 import Head from 'next/head';
-import Error from './ErrorMessage';
+import Error from '../ErrorMessage';
 import UpvoteBill from './UpvoteBill';
 import DownvoteBill from './DownvoteBill';
 
-const SingleBillStyles = styled.div`
-	max-width: 600px;
-	max-height: 100px;
-	margin: 10rem auto;
-	box-shadow: ${(props) => props.theme.bs}
-	display: grid;
-	grid-auto-columns: 10fr;
-	grid-auto-flow: row;
-	min-height: 800px;
-	img {
-		width:100%;
-		height: 100%;
-		max-height: 600px;
-		object-fit: contain;
-	}
-	.details {
-		margin: 3rem;
-		font-size: 2rem;
-    }
-    span {
-        padding: 20px;
-    }
-`;
+import SingleBillStyles from '../styles/SingleBillStyles';
 
 const SINGLE_BILL_QUERY = gql`
 	query SINGLE_BILL_QUERY($id: ID!) {

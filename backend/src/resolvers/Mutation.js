@@ -293,8 +293,7 @@ const Mutations = {
 		const comment = await ctx.db.mutation.createComment({
 			data: {
 				content: args.content,
-				author: { connect: userId },
-				bill: { connect: args.billId }
+				author: { connect: userId }
 			}
 		});
 		return comment;

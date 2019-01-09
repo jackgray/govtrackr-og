@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import Router from 'next/router';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import Form from './styles/Form';
-import Error from './ErrorMessage';
-import { ALL_BILLS_QUERY } from './Bills';
+import Form from '../styles/Form';
+import Error from '../ErrorMessage';
+import { ALL_BILLS_QUERY } from '../gql-tags/ALL_BILLS_QUERY';
 
 // sponsor connection input type is (probably) BillCreateInput
 

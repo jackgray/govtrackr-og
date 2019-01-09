@@ -1,4 +1,4 @@
-import SingleBill from '../components/SingleBill';
+import SingleBill from '../components/Bill/SingleBill';
 
 const Bill = (props) => (
 	<div>

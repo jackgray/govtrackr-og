@@ -3,9 +3,9 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 import BillCard from './BillCard';
-import Pagination from './Pagination';
-import { perPage } from '../config';
-import ALL_BILLS_QUERY from './gql-tags/ALL_BILLS_QUERY';
+import Pagination from '../Main/Pagination';
+import { perPage } from '../../config';
+import ALL_BILLS_QUERY from '../gql-tags/ALL_BILLS_QUERY';
 
 const Center = styled.div`text-align: center;`;
 const BillsList = styled.div`

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Bills from '../components/Bills';
+import Bills from '../components/Bill/Bills';
 
 const BillsPage = (props) => (
 	<div>

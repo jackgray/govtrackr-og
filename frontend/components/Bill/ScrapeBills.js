@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Router from 'next/router';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import Form from './styles/Form';
-import Error from './ErrorMessage';
+import Form from '../styles/Form';
+import Error from '../ErrorMessage';
 import { ALL_BILLS_QUERY } from './Bills';
 
 const SCRAPE_BILLS_MUTATION = gql`

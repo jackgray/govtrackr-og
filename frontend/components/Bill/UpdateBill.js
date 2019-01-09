@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Router from 'next/router';
 import { Mutation, Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import Form from './styles/Form';
-import Error from './ErrorMessage';
+import Form from '../styles/Form';
+import Error from '../ErrorMessage';
 
 const SINGLE_BILL_QUERY = gql`
 	query SINGLE_BILL_QUERY($id: ID!) {

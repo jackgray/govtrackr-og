@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import styled from 'styled-components';
 import Head from 'next/head';
-import Error from './ErrorMessage';
+import Error from '../ErrorMessage';
 
 const SinglePoliticianStyles = styled.div`
 	max-width: 600px;

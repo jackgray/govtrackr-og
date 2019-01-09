@@ -1,5 +1,5 @@
 import React from 'react';
-import MyPoliticians from '../components/MyPoliticians';
+import MyPoliticians from '../components/Politician/MyPoliticians';
 
 const MyPoliticiansPage = (props) => {
 	return (

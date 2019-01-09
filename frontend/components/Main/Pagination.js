@@ -8,9 +8,9 @@ import { Query } from 'react-apollo';
 import Head from 'next/head';
 import Link from 'next/link';
 // config files. perPage = number of elements to show on each page
-import { perPage } from '../config';
+import { perPage } from '../../config';
 // styled components
-import PaginationStyles from './styles/PaginationStyles';
+import PaginationStyles from '../styles/PaginationStyles';
 
 const PAGINATION_QUERY = gql`
 	query PAGINATION_QUERY {

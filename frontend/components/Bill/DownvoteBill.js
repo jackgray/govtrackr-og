@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import { CURRENT_USER_QUERY } from './User';
+import { CURRENT_USER_QUERY } from '../User/User';
 
 const DOWNVOTE_BILL_MUTATION = gql`
 	mutation downvoteBill($id: ID!) {

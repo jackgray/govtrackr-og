@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
+import { perPage } from '../../config';
 
-export default (ALL_BILLS_QUERY = gql`
+const ALL_BILLS_QUERY = gql`
 	query ALL_BILLS_QUERY($skip: Int = 0, $first: Int = ${perPage}) {
 		bills(first: $first, skip: $skip, orderBy: createdAt_DESC) {
 			id
@@ -19,4 +20,6 @@ export default (ALL_BILLS_QUERY = gql`
 			}
 		}
 	}
-`);
+`;
+
+export default ALL_BILLS_QUERY;
