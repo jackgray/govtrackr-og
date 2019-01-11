@@ -40,6 +40,8 @@ const BillListItem = styled.div`
 `;
 
 class BillCard extends Component {
+	// consideration: use state to update votes
+	// instead of refetching queries
 	state = {
 		upvotes: this.props.bill.upvotes,
 		downvotes: this.props.bill.downvotes

@@ -6,6 +6,7 @@ import Head from 'next/head';
 import Error from '../ErrorMessage';
 import UpvoteBill from './UpvoteBill';
 import DownvoteBill from './DownvoteBill';
+import CreateComment from '../CreateComment';
 
 import SingleBillStyles from '../styles/SingleBillStyles';
 
@@ -24,6 +25,13 @@ const SINGLE_BILL_QUERY = gql`
 			downvotes {
 				name
 			}
+			comments {
+				id
+				content
+				author {
+					name
+				}
+			}
 		}
 	}
 `;
@@ -39,6 +47,7 @@ class SingleBill extends Component {
 						return <p>no data for id: {this.props.id}</p>;
 					const bill = data.bill;
 					const score = bill.upvotes.length - bill.downvotes.length;
+					console.log('comments:', bill.comments);
 					return (
 						<SingleBillStyles>
 							<Head>
@@ -59,7 +68,13 @@ class SingleBill extends Component {
 									<span>{score}</span>
 									<DownvoteBill>👎</DownvoteBill>
 								</p>
+								<p>
+									{bill.comments.map((comment) => (
+										<p>{comment.content}</p>
+									))}
+								</p>
 							</div>
+							<CreateComment id={bill.id} key={bill.id} />
 						</SingleBillStyles>
 					);
 				}}

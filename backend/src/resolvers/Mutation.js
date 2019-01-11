@@ -290,11 +290,12 @@ const Mutations = {
 		if (!userId) {
 			throw new Error('You must sign in to leave a comment');
 		}
-		const comment = await ctx.db.mutation.createComment({
+		const comment = await ctx.db.mutation.updateBill({
 			data: {
-				content: args.content,
-				author: { connect: userId }
-			}
+				comments: { create: { content: args.content } }
+				// author: { connect: userId }
+			},
+			where: { id: args.id }
 		});
 		return comment;
 	},

@@ -26,6 +26,7 @@ class UpvoteBill extends Component {
 	};
 	render() {
 		const { id } = this.props;
+		console.log(this.props);
 		return (
 			<Mutation
 				mutation={UPVOTE_BILL_MUTATION}

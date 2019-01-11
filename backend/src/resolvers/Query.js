@@ -145,7 +145,10 @@ const Query = {
 			});
 
 		return bills;
-	}
+	},
+	// comment related queries
+	comment: forwardTo('db'),
+	comments: forwardTo('db')
 };
 
 module.exports = Query;

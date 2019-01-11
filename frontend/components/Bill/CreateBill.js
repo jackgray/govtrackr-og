@@ -6,7 +6,8 @@ import Form from '../styles/Form';
 import Error from '../ErrorMessage';
 import { ALL_BILLS_QUERY } from '../gql-tags/ALL_BILLS_QUERY';
 
-// sponsor connection input type is (probably) BillCreateInput
+// TODO: connect bills to their sponsor
+// (sponsor connection input type is BillCreateInput)
 
 const CREATE_BILL_MUTATION = gql`
 	mutation CREATE_BILL_MUTATION(
@@ -46,37 +47,7 @@ class CreateBill extends Component {
 		this.setState({ [name]: val });
 	};
 
-	uploadFile = async (e) => {
-		console.log('Uploading file...');
-		const files = e.target.files;
-		const data = new FormData();
-		data.append('file', files[0]);
-		data.append('upload_preset', 'default');
-
-		const res = await fetch(
-			'https://api.cloudinary.com/v1_1/politicious/image/upload',
-			{
-				method: 'POST',
-				body: data
-			}
-		);
-		const file = await res.json();
-		console.log(file);
-		this.setState({
-			image: file.secure_url,
-			largeImage: file.eager[0].secure_url
-		});
-	};
-
-	update = (cache, payload) => {
-		// deleteBill removes listing from the SERVER
-		// udate will update the cache to sync the client side
-		// 1. Read the cache
-		const data = cache.readQuery({ query: ALL_BILLS_QUERY });
-		console.log(data);
-
-		cache.writeQuery({ query: ALL_BILLS_QUERY, data });
-	};
+	// refresh the query and update the cache
 
 	render() {
 		return (

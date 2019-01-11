@@ -62,7 +62,8 @@ type Mutation {
 	unfollowBill(id: ID): User
 	upvoteBill(id: ID): User
 	downvoteBill(id: ID): User
-	commentBill(id: ID): Comment
+	comment(id: ID): Comment
+	commentBill(content: String, id: ID): Bill
 	scrapeBill(code: String): Bill
 	signup(name: String!, email: String!, password: String!): User!
 	signin(email: String!, password: String!): User!
@@ -90,6 +91,8 @@ type Query {
 		first: Int
 	): [Bill]
 	myBills: [Bill]
+	comment: Comment
+	comments: [Comment]
 	billComments: [Comment]
 	billsScrape(url: String): Bill
 	me: User
@@ -100,7 +103,8 @@ type Query {
 }
 
 type Subscription {
-	bills: BillSubscriptionPayload
+	#bills: BillSubscriptionPayload
+	bills: [Bill]
 	billDeleted: Bill
 	billCreated: Bill
 }

@@ -87,3 +87,8 @@ type Notification {
 	type: String
 	user: User @relation(name: "UserNotification")
 }
+
+type Subscription {
+	newBillComment: Comment
+	newBill: Bill
+}

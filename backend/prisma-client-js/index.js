@@ -25,6 +25,10 @@ var models = [
     embedded: false
   },
   {
+    name: "Subscription",
+    embedded: false
+  },
+  {
     name: "Topic",
     embedded: false
   },

@@ -15,6 +15,10 @@ type AggregatePolitician {
   count: Int!
 }
 
+type AggregateSubscription {
+  count: Int!
+}
+
 type AggregateTopic {
   count: Int!
 }
@@ -95,6 +99,11 @@ input BillCreateManyWithoutFollowersInput {
 input BillCreateManyWithoutUpvotesInput {
   create: [BillCreateWithoutUpvotesInput!]
   connect: [BillWhereUniqueInput!]
+}
+
+input BillCreateOneInput {
+  create: BillCreateInput
+  connect: BillWhereUniqueInput
 }
 
 input BillCreateOneWithoutCommentsInput {
@@ -210,19 +219,6 @@ enum BillOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
-}
-
-type BillPreviousValues {
-  id: ID!
-  code: String
-  title: String
-  summary: String
-  congressNumber: String
-  chamber: String
-  committees: String
-  link: String
-  sponsor: String
-  actions: [String!]!
 }
 
 input BillScalarWhereInput {
@@ -355,24 +351,6 @@ input BillScalarWhereInput {
   AND: [BillScalarWhereInput!]
   OR: [BillScalarWhereInput!]
   NOT: [BillScalarWhereInput!]
-}
-
-type BillSubscriptionPayload {
-  mutation: MutationType!
-  node: Bill
-  updatedFields: [String!]
-  previousValues: BillPreviousValues
-}
-
-input BillSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: BillWhereInput
-  AND: [BillSubscriptionWhereInput!]
-  OR: [BillSubscriptionWhereInput!]
-  NOT: [BillSubscriptionWhereInput!]
 }
 
 input BillUpdateactionsInput {
@@ -842,6 +820,11 @@ input CommentCreateManyWithoutTopicInput {
   connect: [CommentWhereUniqueInput!]
 }
 
+input CommentCreateOneInput {
+  create: CommentCreateInput
+  connect: CommentWhereUniqueInput
+}
+
 input CommentCreateWithoutAuthorInput {
   content: String
   reply: String
@@ -892,12 +875,6 @@ enum CommentOrderByInput {
   updatedAt_DESC
 }
 
-type CommentPreviousValues {
-  id: ID!
-  content: String
-  reply: String
-}
-
 input CommentScalarWhereInput {
   id: ID
   id_not: ID
@@ -944,24 +921,6 @@ input CommentScalarWhereInput {
   AND: [CommentScalarWhereInput!]
   OR: [CommentScalarWhereInput!]
   NOT: [CommentScalarWhereInput!]
-}
-
-type CommentSubscriptionPayload {
-  mutation: MutationType!
-  node: Comment
-  updatedFields: [String!]
-  previousValues: CommentPreviousValues
-}
-
-input CommentSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: CommentWhereInput
-  AND: [CommentSubscriptionWhereInput!]
-  OR: [CommentSubscriptionWhereInput!]
-  NOT: [CommentSubscriptionWhereInput!]
 }
 
 input CommentUpdateInput {
@@ -1195,6 +1154,8 @@ type Mutation {
   upsertPolitician(where: PoliticianWhereUniqueInput!, create: PoliticianCreateInput!, update: PoliticianUpdateInput!): Politician!
   deletePolitician(where: PoliticianWhereUniqueInput!): Politician
   deleteManyPoliticians(where: PoliticianWhereInput): BatchPayload!
+  createSubscription(data: SubscriptionCreateInput!): Subscription!
+  deleteManySubscriptions(where: SubscriptionWhereInput): BatchPayload!
   createTopic(data: TopicCreateInput!): Topic!
   updateTopic(data: TopicUpdateInput!, where: TopicWhereUniqueInput!): Topic
   updateManyTopics(data: TopicUpdateManyMutationInput!, where: TopicWhereInput): BatchPayload!
@@ -1207,12 +1168,6 @@ type Mutation {
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   deleteUser(where: UserWhereUniqueInput!): User
   deleteManyUsers(where: UserWhereInput): BatchPayload!
-}
-
-enum MutationType {
-  CREATED
-  UPDATED
-  DELETED
 }
 
 interface Node {
@@ -1266,12 +1221,6 @@ enum NotificationOrderByInput {
   updatedAt_DESC
 }
 
-type NotificationPreviousValues {
-  id: ID!
-  label: String
-  type: String
-}
-
 input NotificationScalarWhereInput {
   id: ID
   id_not: ID
@@ -1318,24 +1267,6 @@ input NotificationScalarWhereInput {
   AND: [NotificationScalarWhereInput!]
   OR: [NotificationScalarWhereInput!]
   NOT: [NotificationScalarWhereInput!]
-}
-
-type NotificationSubscriptionPayload {
-  mutation: MutationType!
-  node: Notification
-  updatedFields: [String!]
-  previousValues: NotificationPreviousValues
-}
-
-input NotificationSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: NotificationWhereInput
-  AND: [NotificationSubscriptionWhereInput!]
-  OR: [NotificationSubscriptionWhereInput!]
-  NOT: [NotificationSubscriptionWhereInput!]
 }
 
 input NotificationUpdateInput {
@@ -1616,25 +1547,6 @@ enum PoliticianOrderByInput {
   updatedAt_DESC
 }
 
-type PoliticianPreviousValues {
-  id: ID!
-  party: String
-  name: String!
-  title: String
-  chamber: String
-  state: String
-  district: Int
-  nthCongress: String
-  phone: String
-  gender: String
-  image: String
-  largeImage: String
-  website: String
-  govUrl: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
 input PoliticianScalarWhereInput {
   id: ID
   id_not: ID
@@ -1845,24 +1757,6 @@ input PoliticianScalarWhereInput {
   AND: [PoliticianScalarWhereInput!]
   OR: [PoliticianScalarWhereInput!]
   NOT: [PoliticianScalarWhereInput!]
-}
-
-type PoliticianSubscriptionPayload {
-  mutation: MutationType!
-  node: Politician
-  updatedFields: [String!]
-  previousValues: PoliticianPreviousValues
-}
-
-input PoliticianSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: PoliticianWhereInput
-  AND: [PoliticianSubscriptionWhereInput!]
-  OR: [PoliticianSubscriptionWhereInput!]
-  NOT: [PoliticianSubscriptionWhereInput!]
 }
 
 input PoliticianUpdateInput {
@@ -2285,6 +2179,8 @@ type Query {
   politician(where: PoliticianWhereUniqueInput!): Politician
   politicians(where: PoliticianWhereInput, orderBy: PoliticianOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Politician]!
   politiciansConnection(where: PoliticianWhereInput, orderBy: PoliticianOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PoliticianConnection!
+  subscriptions(where: SubscriptionWhereInput, orderBy: SubscriptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Subscription]!
+  subscriptionsConnection(where: SubscriptionWhereInput, orderBy: SubscriptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SubscriptionConnection!
   topic(where: TopicWhereUniqueInput!): Topic
   topics(where: TopicWhereInput, orderBy: TopicOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Topic]!
   topicsConnection(where: TopicWhereInput, orderBy: TopicOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TopicConnection!
@@ -2295,12 +2191,41 @@ type Query {
 }
 
 type Subscription {
-  bill(where: BillSubscriptionWhereInput): BillSubscriptionPayload
-  comment(where: CommentSubscriptionWhereInput): CommentSubscriptionPayload
-  notification(where: NotificationSubscriptionWhereInput): NotificationSubscriptionPayload
-  politician(where: PoliticianSubscriptionWhereInput): PoliticianSubscriptionPayload
-  topic(where: TopicSubscriptionWhereInput): TopicSubscriptionPayload
-  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  newBillComment: Comment
+  newBill: Bill
+}
+
+type SubscriptionConnection {
+  pageInfo: PageInfo!
+  edges: [SubscriptionEdge]!
+  aggregate: AggregateSubscription!
+}
+
+input SubscriptionCreateInput {
+  newBillComment: CommentCreateOneInput
+  newBill: BillCreateOneInput
+}
+
+type SubscriptionEdge {
+  node: Subscription!
+  cursor: String!
+}
+
+enum SubscriptionOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+input SubscriptionWhereInput {
+  newBillComment: CommentWhereInput
+  newBill: BillWhereInput
+  AND: [SubscriptionWhereInput!]
+  OR: [SubscriptionWhereInput!]
+  NOT: [SubscriptionWhereInput!]
 }
 
 type Topic {
@@ -2358,11 +2283,6 @@ enum TopicOrderByInput {
   updatedAt_DESC
 }
 
-type TopicPreviousValues {
-  id: ID!
-  title: String
-}
-
 input TopicScalarWhereInput {
   id: ID
   id_not: ID
@@ -2395,24 +2315,6 @@ input TopicScalarWhereInput {
   AND: [TopicScalarWhereInput!]
   OR: [TopicScalarWhereInput!]
   NOT: [TopicScalarWhereInput!]
-}
-
-type TopicSubscriptionPayload {
-  mutation: MutationType!
-  node: Topic
-  updatedFields: [String!]
-  previousValues: TopicPreviousValues
-}
-
-input TopicSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: TopicWhereInput
-  AND: [TopicSubscriptionWhereInput!]
-  OR: [TopicSubscriptionWhereInput!]
-  NOT: [TopicSubscriptionWhereInput!]
 }
 
 input TopicUpdateInput {
@@ -2709,14 +2611,6 @@ enum UserOrderByInput {
   updatedAt_DESC
 }
 
-type UserPreviousValues {
-  id: ID!
-  name: String!
-  email: String!
-  password: String
-  permissions: [Permission!]!
-}
-
 input UserScalarWhereInput {
   id: ID
   id_not: ID
@@ -2777,24 +2671,6 @@ input UserScalarWhereInput {
   AND: [UserScalarWhereInput!]
   OR: [UserScalarWhereInput!]
   NOT: [UserScalarWhereInput!]
-}
-
-type UserSubscriptionPayload {
-  mutation: MutationType!
-  node: User
-  updatedFields: [String!]
-  previousValues: UserPreviousValues
-}
-
-input UserSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: UserWhereInput
-  AND: [UserSubscriptionWhereInput!]
-  OR: [UserSubscriptionWhereInput!]
-  NOT: [UserSubscriptionWhereInput!]
 }
 
 input UserUpdateInput {

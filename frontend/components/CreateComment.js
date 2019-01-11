@@ -4,20 +4,28 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
-import { ALL_COMMENTS_QUERY } from './Comments';
+import { perPage } from '../config';
+//import { ALL_COMMENTS_QUERY } from './Comment';
 
-const CREATE_COMMENT_MUTATION = gql`
-	mutation CREATE_COMMENT_MUTATION($content: String, $reply: String) {
-		createComment(content: $content) {
+const COMMENT_BILL_MUTATION = gql`
+	mutation COMMENT_BILL_MUTATION($id: ID, $content: String) {
+		commentBill(id: $id, content: $content) {
 			id
+			comments {
+				content
+			}
 		}
 	}
 `;
+
+// the bill id is already in the props, so we just need to
+// connect it to the comment
 
 class CreateComment extends Component {
 	state = {
 		content: ''
 	};
+
 	handleChange = (e) => {
 		const { name, type, value } = e.target;
 
@@ -28,28 +36,21 @@ class CreateComment extends Component {
 		this.setState({ [name]: val });
 	};
 
-	update = (cache, payload) => {
-		// deleteComment removes listing from the SERVER
-		// udate will update the cache to sync the client side
-		// 1. Read the cache
-		const data = cache.readQuery({ query: ALL_COMMENTS_QUERY });
-		console.log(data);
-
-		cache.writeQuery({ query: ALL_COMMENTS_QUERY, data });
-	};
+	// refresh queries and update the cache
 
 	render() {
+		const { id } = this.props;
 		return (
-			<Mutation mutation={CREATE_COMMENT_MUTATION} variables={this.state}>
-				{(createComment, { loading, error }) => (
+			<Mutation mutation={COMMENT_BILL_MUTATION}>
+				{(commentBill, { data, loading, error }) => (
 					<Form
 						onSubmit={async (e) => {
 							e.preventDefault();
-							const res = await createComment();
-							console.log(res);
-							Router.push({
-								pathname: '/people',
-								query: { id: res.data.createComment.id }
+							commentBill({
+								variables: {
+									id: this.props.id,
+									content: this.state.content
+								}
 							});
 						}}
 					>
@@ -57,7 +58,6 @@ class CreateComment extends Component {
 						<fieldset disabled={loading} aria-busy={loading}>
 							<label htmlFor="content">
 								<input
-									style="height:300px"
 									type="text"
 									id="content"
 									name="content"
