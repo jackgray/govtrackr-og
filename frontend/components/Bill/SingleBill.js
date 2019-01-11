@@ -69,6 +69,7 @@ class SingleBill extends Component {
 									<DownvoteBill>👎</DownvoteBill>
 								</p>
 								<p>
+									<h4>Comments:</h4>
 									{bill.comments.map((comment) => (
 										<p>{comment.content}</p>
 									))}
