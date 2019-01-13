@@ -91,9 +91,9 @@ type Query {
 		first: Int
 	): [Bill]
 	myBills: [Bill]
-	comment: Comment
+	comment(where: CommentWhereUniqueInput): Comment
 	comments: [Comment]
-	billComments: [Comment]
+	billComment: Comment
 	billsScrape(url: String): Bill
 	me: User
 	users: [User]!

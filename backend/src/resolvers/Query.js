@@ -103,17 +103,6 @@ const Query = {
 		return myBills;
 	},
 
-	async billComments(parent, args, ctx, info) {
-		const billComments = await ctx.db.query.bill({
-			where: {
-				comments: {
-					id: args.id
-				}
-			}
-		});
-		return billComments;
-	},
-
 	async billsScrape(parent, args, ctx, info) {
 		// const { bill } = await ctx.db.query(
 		// 	{
@@ -148,7 +137,16 @@ const Query = {
 	},
 	// comment related queries
 	comment: forwardTo('db'),
-	comments: forwardTo('db')
+	comments: forwardTo('db'),
+	async billComment(parent, args, ctx, info) {
+		const { comment } = await ctx.db.query({
+			where: {
+				id: args.id
+			},
+			info
+		});
+		return comment;
+	}
 };
 
 module.exports = Query;

@@ -45,7 +45,7 @@ const Form = styled.form`
 		border: 0;
 		font-size: 2rem;
 		font-weight: 600;
-		padding: 0.5rem 1.2rem;
+		padding: .5rem 1.2rem;
 	}
 	fieldset {
 		border: 0;
@@ -58,13 +58,6 @@ const Form = styled.form`
 			height: 10px;
 			margin-bottom: 10px;
 			content: '';
-			display: block;
-			background-image: linear-gradient(
-				to right,
-				${(props) => props.theme.lightGrey} 0%,
-				${(props) => props.theme.lightRed} 50%,
-				#ff3019 100%
-			);
 		}
 		&[aria-busy='true']::before {
 			background-size: 50% auto;
@@ -84,31 +77,6 @@ const Form = styled.form`
 		opacity: 0;
 		width: 0;
 		height: 0;
-	}
-
-	/* The slider */
-	.slider {
-		position: absolute;
-		cursor: pointer;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background-color: #ccc;
-		-webkit-transition: .4s;
-		transition: .4s;
-	}
-
-	.slider:before {
-		position: absolute;
-		content: "";
-		height: 26px;
-		width: 26px;
-		left: 4px;
-		bottom: 4px;
-		background-color: white;
-		-webkit-transition: .4s;
-		transition: .4s;
 	}
 
 	input:checked + .slider {

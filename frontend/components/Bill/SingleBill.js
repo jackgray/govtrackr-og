@@ -7,36 +7,18 @@ import Error from '../ErrorMessage';
 import UpvoteBill from './UpvoteBill';
 import DownvoteBill from './DownvoteBill';
 import CreateComment from '../CreateComment';
-
+import Comment from '../Comment';
 import SingleBillStyles from '../styles/SingleBillStyles';
 
-const SINGLE_BILL_QUERY = gql`
-	query SINGLE_BILL_QUERY($id: ID!) {
-		bill(where: { id: $id }) {
-			id
-			code
-			title
-			summary
-			committees
-			sponsor
-			upvotes {
-				name
-			}
-			downvotes {
-				name
-			}
-			comments {
-				id
-				content
-				author {
-					name
-				}
-			}
-		}
-	}
-`;
+import CURRENT_USER_QUERY from '../User/User';
+import SINGLE_BILL_QUERY from '../gql-tags/SINGLE_BILL_QUERY';
 
 class SingleBill extends Component {
+	_updateCacheAfterComment = (cache, commentBill, id) => {
+		const data = cache.readQuery({ query: SINGLE_BILL_QUERY });
+
+		cache.writeQuery({ query: SINGLE_BILL_QUERY, data });
+	};
 	render() {
 		return (
 			<Query query={SINGLE_BILL_QUERY} variables={{ id: this.props.id }}>
@@ -45,9 +27,13 @@ class SingleBill extends Component {
 					if (loading) return <p>Loading...</p>;
 					if (!data.bill)
 						return <p>no data for id: {this.props.id}</p>;
+
 					const bill = data.bill;
+					const comments = data.comment;
+					console.log('comments:', comments);
+					console.log(bill.comments.author);
 					const score = bill.upvotes.length - bill.downvotes.length;
-					console.log('comments:', bill.comments);
+
 					return (
 						<SingleBillStyles>
 							<Head>
@@ -70,8 +56,12 @@ class SingleBill extends Component {
 								</p>
 								<p>
 									<h4>Comments:</h4>
-									{bill.comments.map((comment) => (
-										<p>{comment.content}</p>
+
+									{data.bill.comments.map((comment) => (
+										<Comment
+											id={comment.id}
+											key={comment.id}
+										/>
 									))}
 								</p>
 							</div>

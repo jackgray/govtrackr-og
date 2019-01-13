@@ -286,17 +286,24 @@ const Mutations = {
 	},
 
 	async commentBill(parent, args, ctx, info) {
-		const userId = ctx.request;
+		const { userId } = ctx.request;
 		if (!userId) {
 			throw new Error('You must sign in to leave a comment');
 		}
-		const comment = await ctx.db.mutation.updateBill({
-			data: {
-				comments: { create: { content: args.content } }
-				// author: { connect: userId }
+		const comment = await ctx.db.mutation.updateBill(
+			{
+				data: {
+					comments: {
+						create: {
+							content: args.content,
+							author: { connect: { id: userId } }
+						}
+					}
+				},
+				where: { id: args.id }
 			},
-			where: { id: args.id }
-		});
+			info
+		);
 		return comment;
 	},
 

@@ -5,7 +5,8 @@ import gql from 'graphql-tag';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
 import { perPage } from '../config';
-//import { ALL_COMMENTS_QUERY } from './Comment';
+import { ALL_COMMENTS_QUERY } from './Comment';
+import SINGLE_BILL_QUERY from './gql-tags/SINGLE_BILL_QUERY';
 
 const COMMENT_BILL_MUTATION = gql`
 	mutation COMMENT_BILL_MUTATION($id: ID, $content: String) {
@@ -14,6 +15,9 @@ const COMMENT_BILL_MUTATION = gql`
 			comments {
 				content
 			}
+		}
+		comment {
+			content
 		}
 	}
 `;
@@ -41,7 +45,21 @@ class CreateComment extends Component {
 	render() {
 		const { id } = this.props;
 		return (
-			<Mutation mutation={COMMENT_BILL_MUTATION}>
+			<Mutation
+				mutation={COMMENT_BILL_MUTATION}
+				update={(cache, { data: { commentBill } }) => {
+					const { comments } = cache.readQuery({
+						query: SINGLE_BILL_QUERY
+					});
+					console.log('update called');
+					cache.writeQuery({
+						query: SINGLE_BILL_QUERY,
+						data: {
+							comments: comments.content.concat([ commentBill ])
+						}
+					});
+				}}
+			>
 				{(commentBill, { data, loading, error }) => (
 					<Form
 						onSubmit={async (e) => {
