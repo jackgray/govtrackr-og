@@ -1,18 +1,5 @@
 import Signup from '../components/User/Signup';
-import Signin from '../components/User/Signin';
-import styled from 'styled-components';
 
-const Columns = styled.div`
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-	grid-gap: 20px;
-`;
-
-const SignupPage = (props) => (
-	<Columns>
-		<Signup />
-		<Signin />
-	</Columns>
-);
+const SignupPage = (props) => <Signup />;
 
 export default SignupPage;

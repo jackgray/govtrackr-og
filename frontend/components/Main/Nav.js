@@ -7,6 +7,9 @@ const Nav = () => {
 			<Link href="/feed">
 				<a>Feed</a>
 			</Link>
+			<Link href="/myImpact">
+				<a>Engage!</a>
+			</Link>
 			<Link href="/people">
 				<a>People</a>
 			</Link>
@@ -32,9 +35,12 @@ const Nav = () => {
 			<Link href="/comingsoon">
 				<a>Upcoming Features</a>
 			</Link>
+			<Link href="/login">
+				<a>Log In</a>
+			</Link>
 
 			<Link href="/signup">
-				<a>Log In</a>
+				<a>Sign Up</a>
 			</Link>
 			<Link href="/add">
 				<a>Add To Database</a>
