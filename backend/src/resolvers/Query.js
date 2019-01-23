@@ -27,6 +27,28 @@ const Query = {
 	},
 	// politician related queries
 	politicians: forwardTo('db'),
+	// async politicians(parent, args, ctx) {
+	// 	const count = await ctx.prisma
+	// 		.politiciansConnection({
+	// 			where: {
+	// 				OR: [ { name_contains: args.filter }, { bills_contains: args.filter } ]
+	// 			}
+	// 		})
+	// 		.aggregate()
+	// 		.count();
+	// 	const politicians = await ctx.prisma.politicians({
+	// 		where: {
+	// 			OR: [ { name_contains: args.filter }, { bills_contains: args.filter } ]
+	// 		},
+	// 		skip: args.skip,
+	// 		first: args.first,
+	// 		orderBy: args.orderBy
+	// 	});
+	// 	return {
+	// 		count,
+	// 		politicians
+	// 	};
+	// },
 	politician: forwardTo('db'),
 	politiciansConnection: forwardTo('db'),
 	async myPolitician(parents, args, ctx, info) {
@@ -122,9 +144,7 @@ const Query = {
 				await page.waitForSelector('li.expanded > a'); // bill number is inside a tag with href for the bill page. li.expanded represents a single billCard result
 
 				const bills = await page.evaluate(() => {
-					bills.numbers = Array.from(
-						document.querySelectorAll('li.expanded . a')
-					);
+					bills.numbers = Array.from(document.querySelectorAll('li.expanded . a'));
 					return bills;
 				});
 			})
@@ -147,6 +167,9 @@ const Query = {
 		});
 		return comment;
 	}
+	// vote related queries
+	// upvote: forwardTo('db'),
+	// downvote: forwardTo('db')
 };
 
-module.exports = Query;
+module.exports = { Query };

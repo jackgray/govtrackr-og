@@ -18,8 +18,7 @@ class UnfollowPolitician extends Component {
 		const data = cache.readQuery({ query: MY_POLITICIANS_QUERY });
 		console.log(data);
 		data.me.myPoliticians = data.me.myPoliticians.filter(
-			(myPolitician) =>
-				myPolitician.id !== payload.data.unfollowPolitician.id
+			(myPolitician) => myPolitician.id !== payload.data.unfollowPolitician.id
 		);
 
 		cache.writeQuery({ query: MY_POLITICIANS_QUERY, data });
@@ -27,19 +26,11 @@ class UnfollowPolitician extends Component {
 	render() {
 		const id = this.props.id;
 		return (
-			<Mutation
-				mutation={UNFOLLOW_POLITICIAN_MUTATION}
-				variables={{ id }}
-				update={this.update}
-			>
+			<Mutation mutation={UNFOLLOW_POLITICIAN_MUTATION} variables={{ id }} update={this.update}>
 				{(unfollowPolitician, { error }) => (
 					<button
 						onClick={() => {
-							if (
-								confirm(
-									'Are you sure you want to unfollow this person?'
-								)
-							) {
+							if (confirm('Are you sure you want to unfollow this person?')) {
 								unfollowPolitician();
 							}
 						}}

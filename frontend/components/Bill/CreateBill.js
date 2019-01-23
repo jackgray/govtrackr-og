@@ -4,7 +4,7 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Form from '../styles/Form';
 import Error from '../ErrorMessage';
-import { ALL_BILLS_QUERY } from '../gql-tags/ALL_BILLS_QUERY';
+import { ALL_BILLS_QUERY } from '../_gql-tags/ALL_BILLS_QUERY';
 
 // TODO: connect bills to their sponsor
 // (sponsor connection input type is BillCreateInput)
@@ -17,13 +17,7 @@ const CREATE_BILL_MUTATION = gql`
 		$committees: String
 		$sponsor: String
 	) {
-		createBill(
-			code: $code
-			title: $title
-			summary: $summary
-			committees: $committees
-			sponsor: $sponsor
-		) {
+		createBill(code: $code, title: $title, summary: $summary, committees: $committees, sponsor: $sponsor) {
 			id
 		}
 	}

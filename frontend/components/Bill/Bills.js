@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
-import BillCard from './BillCard';
+import Bill from './Bill';
 import Pagination from '../Main/Pagination';
 import { perPage } from '../../config';
-import ALL_BILLS_QUERY from '../gql-tags/ALL_BILLS_QUERY';
+import ALL_BILLS_QUERY from '../_gql-tags/ALL_BILLS_QUERY';
 
 const Center = styled.div`text-align: center;`;
 const BillsList = styled.div`
@@ -17,6 +17,12 @@ const BillsList = styled.div`
 `;
 
 class Bills extends Component {
+	_updateCacheAfterUpvote = (cache, upvoteBill, id) => {
+		const data = cache.readQuery({ query: ALL_BILLS_QUERY });
+
+		cache.writeQuery({ query: ALL_BILLS_QUERY, data });
+	};
+
 	render() {
 		return (
 			<Center>
@@ -34,8 +40,13 @@ class Bills extends Component {
 						if (error) return <p>Error: {error.message}</p>;
 						return (
 							<BillsList>
-								{data.bills.map((bill) => (
-									<BillCard bill={bill} key={bill.id} />
+								{data.bills.map((bill, index) => (
+									<Bill
+										bill={bill}
+										key={bill.id}
+										index={index}
+										updateStoreAfterUpvote={this._updateCacheAfterUpvote}
+									/>
 								))}
 							</BillsList>
 						);

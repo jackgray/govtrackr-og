@@ -3,7 +3,7 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 import { perPage } from '../../config';
-import BillCard from './BillCard';
+import Bill from './Bill';
 
 const MY_BILLS_QUERY = gql`
 	query MY_BILLS_QUERY {
@@ -54,13 +54,7 @@ class MyBills extends Component {
 						const myBills = data.me.myBills;
 						console.log('loading myBill bills...');
 						console.log(myBills.id);
-						return (
-							<BillsList>
-								{myBills.map((bill) => (
-									<BillCard bill={bill} key={bill.id} />
-								))}
-							</BillsList>
-						);
+						return <BillsList>{myBills.map((bill) => <Bill bill={bill} key={bill.id} />)}</BillsList>;
 					}}
 				</Query>
 			</Center>

@@ -55,25 +55,13 @@ class UpdateBill extends Component {
 			<Query query={SINGLE_BILL_QUERY} variables={{ id: this.props.id }}>
 				{({ data, loading }) => {
 					if (loading) return <p>Loading...</p>;
-					if (!data.bill)
-						return (
-							<p>No bill found in database for {this.props.id}</p>
-						);
+					if (!data.bill) return <p>No bill found in database for {this.props.id}</p>;
 					return (
-						<Mutation
-							mutation={UPDATE_BILL_MUTATION}
-							variables={this.state}
-						>
+						<Mutation mutation={UPDATE_BILL_MUTATION} variables={this.state}>
 							{(updateBill, { loading, error }) => (
-								<Form
-									onSubmit={(e) =>
-										this.updateBill(e, updateBill)}
-								>
+								<Form onSubmit={(e) => this.updateBill(e, updateBill)}>
 									<Error error={error} />
-									<fieldset
-										disabled={loading}
-										aria-busy={loading}
-									>
+									<fieldset disabled={loading} aria-busy={loading}>
 										<label htmlFor="code">
 											Code
 											<input
@@ -98,9 +86,7 @@ class UpdateBill extends Component {
 											/>
 										</label>
 
-										<button type="submit">
-											Save Changes
-										</button>
+										<button type="submit">Save Changes</button>
 									</fieldset>
 								</Form>
 							)}

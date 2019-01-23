@@ -52,25 +52,18 @@ const SINGLE_POLITICIAN_QUERY = gql`
 class SinglePolitician extends Component {
 	render() {
 		return (
-			<Query
-				query={SINGLE_POLITICIAN_QUERY}
-				variables={{ id: this.props.id }}
-			>
+			<Query query={SINGLE_POLITICIAN_QUERY} variables={{ id: this.props.id }}>
 				{({ error, loading, data }) => {
 					if (error) return <Error error={error} />;
 					if (loading) return <p>Loading...</p>;
-					if (!data.politician)
-						return <p>no data for id: {this.props.id}</p>;
+					if (!data.politician) return <p>no data for id: {this.props.id}</p>;
 					const politician = data.politician;
 					return (
 						<SinglePoliticianStyles>
 							<Head>
 								<title>GovTrackr | {politician.name}</title>
 							</Head>
-							<img
-								src={politician.largeImage}
-								alt={politician.name}
-							/>
+							<img src={politician.largeImage} alt={politician.name} />
 							<div>
 								<h2 className="details">{politician.name}</h2>
 								<p>{politician.party}</p>

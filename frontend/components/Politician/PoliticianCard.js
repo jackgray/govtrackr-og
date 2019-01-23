@@ -42,9 +42,7 @@ class PoliticianCard extends Component {
 							</ul>
 						</div>
 						<div className="follow">
-							<FollowPolitician id={politician.id}>
-								Follow
-							</FollowPolitician>
+							<FollowPolitician id={politician.id}>Follow</FollowPolitician>
 						</div>
 						<div className="follow">
 							<Link

@@ -58,10 +58,7 @@ class Politicians extends Component {
 						return (
 							<PoliticiansList>
 								{data.politicians.map((politician) => (
-									<PoliticianCard
-										politician={politician}
-										key={politician.id}
-									/>
+									<PoliticianCard politician={politician} key={politician.id} />
 								))}
 							</PoliticiansList>
 						);

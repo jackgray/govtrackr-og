@@ -19,9 +19,7 @@ class FollowBill extends Component {
 			<Mutation
 				mutation={FOLLOW_BILL_MUTATION}
 				variables={{ id }}
-				refetchQueries={[
-					{ query: CURRENT_USER_QUERY, MY_BILLS_QUERY }
-				]}
+				refetchQueries={[ { query: CURRENT_USER_QUERY, MY_BILLS_QUERY } ]}
 			>
 				{(followBill, { loading }) => (
 					<button disabled={loading} onClick={followBill}>

@@ -7,6 +7,10 @@ type AggregateComment {
   count: Int!
 }
 
+type AggregateFeed {
+  count: Int!
+}
+
 type AggregateNotification {
   count: Int!
 }
@@ -71,8 +75,8 @@ input BillCreateInput {
   coSponsors: PoliticianCreateManyWithoutCoBillsInput
   actions: BillCreateactionsInput
   followers: UserCreateManyWithoutMyBillsInput
-  upvotes: UserCreateManyWithoutUpvotedBillsInput
-  downvotes: UserCreateManyWithoutDownvotedBillsInput
+  upvotes: UserCreateManyInput
+  downvotes: UserCreateManyInput
   comments: CommentCreateManyWithoutBillInput
 }
 
@@ -86,18 +90,8 @@ input BillCreateManyWithoutCoSponsorsInput {
   connect: [BillWhereUniqueInput!]
 }
 
-input BillCreateManyWithoutDownvotesInput {
-  create: [BillCreateWithoutDownvotesInput!]
-  connect: [BillWhereUniqueInput!]
-}
-
 input BillCreateManyWithoutFollowersInput {
   create: [BillCreateWithoutFollowersInput!]
-  connect: [BillWhereUniqueInput!]
-}
-
-input BillCreateManyWithoutUpvotesInput {
-  create: [BillCreateWithoutUpvotesInput!]
   connect: [BillWhereUniqueInput!]
 }
 
@@ -123,8 +117,8 @@ input BillCreateWithoutCommentsInput {
   coSponsors: PoliticianCreateManyWithoutCoBillsInput
   actions: BillCreateactionsInput
   followers: UserCreateManyWithoutMyBillsInput
-  upvotes: UserCreateManyWithoutUpvotedBillsInput
-  downvotes: UserCreateManyWithoutDownvotedBillsInput
+  upvotes: UserCreateManyInput
+  downvotes: UserCreateManyInput
 }
 
 input BillCreateWithoutCoSponsorsInput {
@@ -138,24 +132,8 @@ input BillCreateWithoutCoSponsorsInput {
   sponsor: String
   actions: BillCreateactionsInput
   followers: UserCreateManyWithoutMyBillsInput
-  upvotes: UserCreateManyWithoutUpvotedBillsInput
-  downvotes: UserCreateManyWithoutDownvotedBillsInput
-  comments: CommentCreateManyWithoutBillInput
-}
-
-input BillCreateWithoutDownvotesInput {
-  code: String
-  title: String
-  summary: String
-  congressNumber: String
-  chamber: String
-  committees: String
-  link: String
-  sponsor: String
-  coSponsors: PoliticianCreateManyWithoutCoBillsInput
-  actions: BillCreateactionsInput
-  followers: UserCreateManyWithoutMyBillsInput
-  upvotes: UserCreateManyWithoutUpvotedBillsInput
+  upvotes: UserCreateManyInput
+  downvotes: UserCreateManyInput
   comments: CommentCreateManyWithoutBillInput
 }
 
@@ -170,24 +148,8 @@ input BillCreateWithoutFollowersInput {
   sponsor: String
   coSponsors: PoliticianCreateManyWithoutCoBillsInput
   actions: BillCreateactionsInput
-  upvotes: UserCreateManyWithoutUpvotedBillsInput
-  downvotes: UserCreateManyWithoutDownvotedBillsInput
-  comments: CommentCreateManyWithoutBillInput
-}
-
-input BillCreateWithoutUpvotesInput {
-  code: String
-  title: String
-  summary: String
-  congressNumber: String
-  chamber: String
-  committees: String
-  link: String
-  sponsor: String
-  coSponsors: PoliticianCreateManyWithoutCoBillsInput
-  actions: BillCreateactionsInput
-  followers: UserCreateManyWithoutMyBillsInput
-  downvotes: UserCreateManyWithoutDownvotedBillsInput
+  upvotes: UserCreateManyInput
+  downvotes: UserCreateManyInput
   comments: CommentCreateManyWithoutBillInput
 }
 
@@ -369,8 +331,8 @@ input BillUpdateDataInput {
   coSponsors: PoliticianUpdateManyWithoutCoBillsInput
   actions: BillUpdateactionsInput
   followers: UserUpdateManyWithoutMyBillsInput
-  upvotes: UserUpdateManyWithoutUpvotedBillsInput
-  downvotes: UserUpdateManyWithoutDownvotedBillsInput
+  upvotes: UserUpdateManyInput
+  downvotes: UserUpdateManyInput
   comments: CommentUpdateManyWithoutBillInput
 }
 
@@ -386,8 +348,8 @@ input BillUpdateInput {
   coSponsors: PoliticianUpdateManyWithoutCoBillsInput
   actions: BillUpdateactionsInput
   followers: UserUpdateManyWithoutMyBillsInput
-  upvotes: UserUpdateManyWithoutUpvotedBillsInput
-  downvotes: UserUpdateManyWithoutDownvotedBillsInput
+  upvotes: UserUpdateManyInput
+  downvotes: UserUpdateManyInput
   comments: CommentUpdateManyWithoutBillInput
 }
 
@@ -437,17 +399,6 @@ input BillUpdateManyWithoutCoSponsorsInput {
   updateMany: [BillUpdateManyWithWhereNestedInput!]
 }
 
-input BillUpdateManyWithoutDownvotesInput {
-  create: [BillCreateWithoutDownvotesInput!]
-  delete: [BillWhereUniqueInput!]
-  connect: [BillWhereUniqueInput!]
-  disconnect: [BillWhereUniqueInput!]
-  update: [BillUpdateWithWhereUniqueWithoutDownvotesInput!]
-  upsert: [BillUpsertWithWhereUniqueWithoutDownvotesInput!]
-  deleteMany: [BillScalarWhereInput!]
-  updateMany: [BillUpdateManyWithWhereNestedInput!]
-}
-
 input BillUpdateManyWithoutFollowersInput {
   create: [BillCreateWithoutFollowersInput!]
   delete: [BillWhereUniqueInput!]
@@ -455,17 +406,6 @@ input BillUpdateManyWithoutFollowersInput {
   disconnect: [BillWhereUniqueInput!]
   update: [BillUpdateWithWhereUniqueWithoutFollowersInput!]
   upsert: [BillUpsertWithWhereUniqueWithoutFollowersInput!]
-  deleteMany: [BillScalarWhereInput!]
-  updateMany: [BillUpdateManyWithWhereNestedInput!]
-}
-
-input BillUpdateManyWithoutUpvotesInput {
-  create: [BillCreateWithoutUpvotesInput!]
-  delete: [BillWhereUniqueInput!]
-  connect: [BillWhereUniqueInput!]
-  disconnect: [BillWhereUniqueInput!]
-  update: [BillUpdateWithWhereUniqueWithoutUpvotesInput!]
-  upsert: [BillUpsertWithWhereUniqueWithoutUpvotesInput!]
   deleteMany: [BillScalarWhereInput!]
   updateMany: [BillUpdateManyWithWhereNestedInput!]
 }
@@ -496,8 +436,8 @@ input BillUpdateWithoutCommentsDataInput {
   coSponsors: PoliticianUpdateManyWithoutCoBillsInput
   actions: BillUpdateactionsInput
   followers: UserUpdateManyWithoutMyBillsInput
-  upvotes: UserUpdateManyWithoutUpvotedBillsInput
-  downvotes: UserUpdateManyWithoutDownvotedBillsInput
+  upvotes: UserUpdateManyInput
+  downvotes: UserUpdateManyInput
 }
 
 input BillUpdateWithoutCoSponsorsDataInput {
@@ -511,24 +451,8 @@ input BillUpdateWithoutCoSponsorsDataInput {
   sponsor: String
   actions: BillUpdateactionsInput
   followers: UserUpdateManyWithoutMyBillsInput
-  upvotes: UserUpdateManyWithoutUpvotedBillsInput
-  downvotes: UserUpdateManyWithoutDownvotedBillsInput
-  comments: CommentUpdateManyWithoutBillInput
-}
-
-input BillUpdateWithoutDownvotesDataInput {
-  code: String
-  title: String
-  summary: String
-  congressNumber: String
-  chamber: String
-  committees: String
-  link: String
-  sponsor: String
-  coSponsors: PoliticianUpdateManyWithoutCoBillsInput
-  actions: BillUpdateactionsInput
-  followers: UserUpdateManyWithoutMyBillsInput
-  upvotes: UserUpdateManyWithoutUpvotedBillsInput
+  upvotes: UserUpdateManyInput
+  downvotes: UserUpdateManyInput
   comments: CommentUpdateManyWithoutBillInput
 }
 
@@ -543,24 +467,8 @@ input BillUpdateWithoutFollowersDataInput {
   sponsor: String
   coSponsors: PoliticianUpdateManyWithoutCoBillsInput
   actions: BillUpdateactionsInput
-  upvotes: UserUpdateManyWithoutUpvotedBillsInput
-  downvotes: UserUpdateManyWithoutDownvotedBillsInput
-  comments: CommentUpdateManyWithoutBillInput
-}
-
-input BillUpdateWithoutUpvotesDataInput {
-  code: String
-  title: String
-  summary: String
-  congressNumber: String
-  chamber: String
-  committees: String
-  link: String
-  sponsor: String
-  coSponsors: PoliticianUpdateManyWithoutCoBillsInput
-  actions: BillUpdateactionsInput
-  followers: UserUpdateManyWithoutMyBillsInput
-  downvotes: UserUpdateManyWithoutDownvotedBillsInput
+  upvotes: UserUpdateManyInput
+  downvotes: UserUpdateManyInput
   comments: CommentUpdateManyWithoutBillInput
 }
 
@@ -574,19 +482,9 @@ input BillUpdateWithWhereUniqueWithoutCoSponsorsInput {
   data: BillUpdateWithoutCoSponsorsDataInput!
 }
 
-input BillUpdateWithWhereUniqueWithoutDownvotesInput {
-  where: BillWhereUniqueInput!
-  data: BillUpdateWithoutDownvotesDataInput!
-}
-
 input BillUpdateWithWhereUniqueWithoutFollowersInput {
   where: BillWhereUniqueInput!
   data: BillUpdateWithoutFollowersDataInput!
-}
-
-input BillUpdateWithWhereUniqueWithoutUpvotesInput {
-  where: BillWhereUniqueInput!
-  data: BillUpdateWithoutUpvotesDataInput!
 }
 
 input BillUpsertWithoutCommentsInput {
@@ -606,22 +504,10 @@ input BillUpsertWithWhereUniqueWithoutCoSponsorsInput {
   create: BillCreateWithoutCoSponsorsInput!
 }
 
-input BillUpsertWithWhereUniqueWithoutDownvotesInput {
-  where: BillWhereUniqueInput!
-  update: BillUpdateWithoutDownvotesDataInput!
-  create: BillCreateWithoutDownvotesInput!
-}
-
 input BillUpsertWithWhereUniqueWithoutFollowersInput {
   where: BillWhereUniqueInput!
   update: BillUpdateWithoutFollowersDataInput!
   create: BillCreateWithoutFollowersInput!
-}
-
-input BillUpsertWithWhereUniqueWithoutUpvotesInput {
-  where: BillWhereUniqueInput!
-  update: BillUpdateWithoutUpvotesDataInput!
-  create: BillCreateWithoutUpvotesInput!
 }
 
 input BillWhereInput {
@@ -1127,6 +1013,64 @@ input CommentWhereUniqueInput {
 
 scalar DateTime
 
+type Feed {
+  politicians(where: PoliticianWhereInput, orderBy: PoliticianOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Politician!]
+  bills(where: BillWhereInput, orderBy: BillOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Bill!]
+  count: Int!
+}
+
+type FeedConnection {
+  pageInfo: PageInfo!
+  edges: [FeedEdge]!
+  aggregate: AggregateFeed!
+}
+
+input FeedCreateInput {
+  politicians: PoliticianCreateManyInput
+  bills: BillCreateManyInput
+  count: Int!
+}
+
+type FeedEdge {
+  node: Feed!
+  cursor: String!
+}
+
+enum FeedOrderByInput {
+  count_ASC
+  count_DESC
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+input FeedUpdateManyMutationInput {
+  count: Int
+}
+
+input FeedWhereInput {
+  politicians_every: PoliticianWhereInput
+  politicians_some: PoliticianWhereInput
+  politicians_none: PoliticianWhereInput
+  bills_every: BillWhereInput
+  bills_some: BillWhereInput
+  bills_none: BillWhereInput
+  count: Int
+  count_not: Int
+  count_in: [Int!]
+  count_not_in: [Int!]
+  count_lt: Int
+  count_lte: Int
+  count_gt: Int
+  count_gte: Int
+  AND: [FeedWhereInput!]
+  OR: [FeedWhereInput!]
+  NOT: [FeedWhereInput!]
+}
+
 scalar Long
 
 type Mutation {
@@ -1142,6 +1086,9 @@ type Mutation {
   upsertComment(where: CommentWhereUniqueInput!, create: CommentCreateInput!, update: CommentUpdateInput!): Comment!
   deleteComment(where: CommentWhereUniqueInput!): Comment
   deleteManyComments(where: CommentWhereInput): BatchPayload!
+  createFeed(data: FeedCreateInput!): Feed!
+  updateManyFeeds(data: FeedUpdateManyMutationInput!, where: FeedWhereInput): BatchPayload!
+  deleteManyFeeds(where: FeedWhereInput): BatchPayload!
   createNotification(data: NotificationCreateInput!): Notification!
   updateNotification(data: NotificationUpdateInput!, where: NotificationWhereUniqueInput!): Notification
   updateManyNotifications(data: NotificationUpdateManyMutationInput!, where: NotificationWhereInput): BatchPayload!
@@ -1433,6 +1380,11 @@ input PoliticianCreateInput {
   bills: BillCreateManyInput
   coBills: BillCreateManyWithoutCoSponsorsInput
   mentions: CommentCreateManyWithoutPoliticiansMentionedInput
+}
+
+input PoliticianCreateManyInput {
+  create: [PoliticianCreateInput!]
+  connect: [PoliticianWhereUniqueInput!]
 }
 
 input PoliticianCreateManyWithoutCoBillsInput {
@@ -2173,6 +2125,8 @@ type Query {
   comment(where: CommentWhereUniqueInput!): Comment
   comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment]!
   commentsConnection(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommentConnection!
+  feeds(where: FeedWhereInput, orderBy: FeedOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Feed]!
+  feedsConnection(where: FeedWhereInput, orderBy: FeedOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FeedConnection!
   notification(where: NotificationWhereUniqueInput!): Notification
   notifications(where: NotificationWhereInput, orderBy: NotificationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Notification]!
   notificationsConnection(where: NotificationWhereInput, orderBy: NotificationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): NotificationConnection!
@@ -2454,15 +2408,15 @@ input UserCreateInput {
   permissions: UserCreatepermissionsInput
   myPoliticians: PoliticianCreateManyWithoutFollowersInput
   myBills: BillCreateManyWithoutFollowersInput
-  upvotedBills: BillCreateManyWithoutUpvotesInput
-  downvotedBills: BillCreateManyWithoutDownvotesInput
+  upvotedBills: BillCreateManyInput
+  downvotedBills: BillCreateManyInput
   billComments: CommentCreateManyWithoutAuthorInput
   topicComments: TopicCreateManyWithoutCommentersInput
   notifications: NotificationCreateManyWithoutUserInput
 }
 
-input UserCreateManyWithoutDownvotedBillsInput {
-  create: [UserCreateWithoutDownvotedBillsInput!]
+input UserCreateManyInput {
+  create: [UserCreateInput!]
   connect: [UserWhereUniqueInput!]
 }
 
@@ -2473,11 +2427,6 @@ input UserCreateManyWithoutMyBillsInput {
 
 input UserCreateManyWithoutTopicCommentsInput {
   create: [UserCreateWithoutTopicCommentsInput!]
-  connect: [UserWhereUniqueInput!]
-}
-
-input UserCreateManyWithoutUpvotedBillsInput {
-  create: [UserCreateWithoutUpvotedBillsInput!]
   connect: [UserWhereUniqueInput!]
 }
 
@@ -2507,21 +2456,8 @@ input UserCreateWithoutBillCommentsInput {
   permissions: UserCreatepermissionsInput
   myPoliticians: PoliticianCreateManyWithoutFollowersInput
   myBills: BillCreateManyWithoutFollowersInput
-  upvotedBills: BillCreateManyWithoutUpvotesInput
-  downvotedBills: BillCreateManyWithoutDownvotesInput
-  topicComments: TopicCreateManyWithoutCommentersInput
-  notifications: NotificationCreateManyWithoutUserInput
-}
-
-input UserCreateWithoutDownvotedBillsInput {
-  name: String!
-  email: String!
-  password: String
-  permissions: UserCreatepermissionsInput
-  myPoliticians: PoliticianCreateManyWithoutFollowersInput
-  myBills: BillCreateManyWithoutFollowersInput
-  upvotedBills: BillCreateManyWithoutUpvotesInput
-  billComments: CommentCreateManyWithoutAuthorInput
+  upvotedBills: BillCreateManyInput
+  downvotedBills: BillCreateManyInput
   topicComments: TopicCreateManyWithoutCommentersInput
   notifications: NotificationCreateManyWithoutUserInput
 }
@@ -2532,8 +2468,8 @@ input UserCreateWithoutMyBillsInput {
   password: String
   permissions: UserCreatepermissionsInput
   myPoliticians: PoliticianCreateManyWithoutFollowersInput
-  upvotedBills: BillCreateManyWithoutUpvotesInput
-  downvotedBills: BillCreateManyWithoutDownvotesInput
+  upvotedBills: BillCreateManyInput
+  downvotedBills: BillCreateManyInput
   billComments: CommentCreateManyWithoutAuthorInput
   topicComments: TopicCreateManyWithoutCommentersInput
   notifications: NotificationCreateManyWithoutUserInput
@@ -2545,8 +2481,8 @@ input UserCreateWithoutMyPoliticiansInput {
   password: String
   permissions: UserCreatepermissionsInput
   myBills: BillCreateManyWithoutFollowersInput
-  upvotedBills: BillCreateManyWithoutUpvotesInput
-  downvotedBills: BillCreateManyWithoutDownvotesInput
+  upvotedBills: BillCreateManyInput
+  downvotedBills: BillCreateManyInput
   billComments: CommentCreateManyWithoutAuthorInput
   topicComments: TopicCreateManyWithoutCommentersInput
   notifications: NotificationCreateManyWithoutUserInput
@@ -2559,8 +2495,8 @@ input UserCreateWithoutNotificationsInput {
   permissions: UserCreatepermissionsInput
   myPoliticians: PoliticianCreateManyWithoutFollowersInput
   myBills: BillCreateManyWithoutFollowersInput
-  upvotedBills: BillCreateManyWithoutUpvotesInput
-  downvotedBills: BillCreateManyWithoutDownvotesInput
+  upvotedBills: BillCreateManyInput
+  downvotedBills: BillCreateManyInput
   billComments: CommentCreateManyWithoutAuthorInput
   topicComments: TopicCreateManyWithoutCommentersInput
 }
@@ -2572,22 +2508,9 @@ input UserCreateWithoutTopicCommentsInput {
   permissions: UserCreatepermissionsInput
   myPoliticians: PoliticianCreateManyWithoutFollowersInput
   myBills: BillCreateManyWithoutFollowersInput
-  upvotedBills: BillCreateManyWithoutUpvotesInput
-  downvotedBills: BillCreateManyWithoutDownvotesInput
+  upvotedBills: BillCreateManyInput
+  downvotedBills: BillCreateManyInput
   billComments: CommentCreateManyWithoutAuthorInput
-  notifications: NotificationCreateManyWithoutUserInput
-}
-
-input UserCreateWithoutUpvotedBillsInput {
-  name: String!
-  email: String!
-  password: String
-  permissions: UserCreatepermissionsInput
-  myPoliticians: PoliticianCreateManyWithoutFollowersInput
-  myBills: BillCreateManyWithoutFollowersInput
-  downvotedBills: BillCreateManyWithoutDownvotesInput
-  billComments: CommentCreateManyWithoutAuthorInput
-  topicComments: TopicCreateManyWithoutCommentersInput
   notifications: NotificationCreateManyWithoutUserInput
 }
 
@@ -2673,6 +2596,20 @@ input UserScalarWhereInput {
   NOT: [UserScalarWhereInput!]
 }
 
+input UserUpdateDataInput {
+  name: String
+  email: String
+  password: String
+  permissions: UserUpdatepermissionsInput
+  myPoliticians: PoliticianUpdateManyWithoutFollowersInput
+  myBills: BillUpdateManyWithoutFollowersInput
+  upvotedBills: BillUpdateManyInput
+  downvotedBills: BillUpdateManyInput
+  billComments: CommentUpdateManyWithoutAuthorInput
+  topicComments: TopicUpdateManyWithoutCommentersInput
+  notifications: NotificationUpdateManyWithoutUserInput
+}
+
 input UserUpdateInput {
   name: String
   email: String
@@ -2680,8 +2617,8 @@ input UserUpdateInput {
   permissions: UserUpdatepermissionsInput
   myPoliticians: PoliticianUpdateManyWithoutFollowersInput
   myBills: BillUpdateManyWithoutFollowersInput
-  upvotedBills: BillUpdateManyWithoutUpvotesInput
-  downvotedBills: BillUpdateManyWithoutDownvotesInput
+  upvotedBills: BillUpdateManyInput
+  downvotedBills: BillUpdateManyInput
   billComments: CommentUpdateManyWithoutAuthorInput
   topicComments: TopicUpdateManyWithoutCommentersInput
   notifications: NotificationUpdateManyWithoutUserInput
@@ -2694,22 +2631,22 @@ input UserUpdateManyDataInput {
   permissions: UserUpdatepermissionsInput
 }
 
+input UserUpdateManyInput {
+  create: [UserCreateInput!]
+  update: [UserUpdateWithWhereUniqueNestedInput!]
+  upsert: [UserUpsertWithWhereUniqueNestedInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+}
+
 input UserUpdateManyMutationInput {
   name: String
   email: String
   password: String
   permissions: UserUpdatepermissionsInput
-}
-
-input UserUpdateManyWithoutDownvotedBillsInput {
-  create: [UserCreateWithoutDownvotedBillsInput!]
-  delete: [UserWhereUniqueInput!]
-  connect: [UserWhereUniqueInput!]
-  disconnect: [UserWhereUniqueInput!]
-  update: [UserUpdateWithWhereUniqueWithoutDownvotedBillsInput!]
-  upsert: [UserUpsertWithWhereUniqueWithoutDownvotedBillsInput!]
-  deleteMany: [UserScalarWhereInput!]
-  updateMany: [UserUpdateManyWithWhereNestedInput!]
 }
 
 input UserUpdateManyWithoutMyBillsInput {
@@ -2730,17 +2667,6 @@ input UserUpdateManyWithoutTopicCommentsInput {
   disconnect: [UserWhereUniqueInput!]
   update: [UserUpdateWithWhereUniqueWithoutTopicCommentsInput!]
   upsert: [UserUpsertWithWhereUniqueWithoutTopicCommentsInput!]
-  deleteMany: [UserScalarWhereInput!]
-  updateMany: [UserUpdateManyWithWhereNestedInput!]
-}
-
-input UserUpdateManyWithoutUpvotedBillsInput {
-  create: [UserCreateWithoutUpvotedBillsInput!]
-  delete: [UserWhereUniqueInput!]
-  connect: [UserWhereUniqueInput!]
-  disconnect: [UserWhereUniqueInput!]
-  update: [UserUpdateWithWhereUniqueWithoutUpvotedBillsInput!]
-  upsert: [UserUpsertWithWhereUniqueWithoutUpvotedBillsInput!]
   deleteMany: [UserScalarWhereInput!]
   updateMany: [UserUpdateManyWithWhereNestedInput!]
 }
@@ -2788,21 +2714,8 @@ input UserUpdateWithoutBillCommentsDataInput {
   permissions: UserUpdatepermissionsInput
   myPoliticians: PoliticianUpdateManyWithoutFollowersInput
   myBills: BillUpdateManyWithoutFollowersInput
-  upvotedBills: BillUpdateManyWithoutUpvotesInput
-  downvotedBills: BillUpdateManyWithoutDownvotesInput
-  topicComments: TopicUpdateManyWithoutCommentersInput
-  notifications: NotificationUpdateManyWithoutUserInput
-}
-
-input UserUpdateWithoutDownvotedBillsDataInput {
-  name: String
-  email: String
-  password: String
-  permissions: UserUpdatepermissionsInput
-  myPoliticians: PoliticianUpdateManyWithoutFollowersInput
-  myBills: BillUpdateManyWithoutFollowersInput
-  upvotedBills: BillUpdateManyWithoutUpvotesInput
-  billComments: CommentUpdateManyWithoutAuthorInput
+  upvotedBills: BillUpdateManyInput
+  downvotedBills: BillUpdateManyInput
   topicComments: TopicUpdateManyWithoutCommentersInput
   notifications: NotificationUpdateManyWithoutUserInput
 }
@@ -2813,8 +2726,8 @@ input UserUpdateWithoutMyBillsDataInput {
   password: String
   permissions: UserUpdatepermissionsInput
   myPoliticians: PoliticianUpdateManyWithoutFollowersInput
-  upvotedBills: BillUpdateManyWithoutUpvotesInput
-  downvotedBills: BillUpdateManyWithoutDownvotesInput
+  upvotedBills: BillUpdateManyInput
+  downvotedBills: BillUpdateManyInput
   billComments: CommentUpdateManyWithoutAuthorInput
   topicComments: TopicUpdateManyWithoutCommentersInput
   notifications: NotificationUpdateManyWithoutUserInput
@@ -2826,8 +2739,8 @@ input UserUpdateWithoutMyPoliticiansDataInput {
   password: String
   permissions: UserUpdatepermissionsInput
   myBills: BillUpdateManyWithoutFollowersInput
-  upvotedBills: BillUpdateManyWithoutUpvotesInput
-  downvotedBills: BillUpdateManyWithoutDownvotesInput
+  upvotedBills: BillUpdateManyInput
+  downvotedBills: BillUpdateManyInput
   billComments: CommentUpdateManyWithoutAuthorInput
   topicComments: TopicUpdateManyWithoutCommentersInput
   notifications: NotificationUpdateManyWithoutUserInput
@@ -2840,8 +2753,8 @@ input UserUpdateWithoutNotificationsDataInput {
   permissions: UserUpdatepermissionsInput
   myPoliticians: PoliticianUpdateManyWithoutFollowersInput
   myBills: BillUpdateManyWithoutFollowersInput
-  upvotedBills: BillUpdateManyWithoutUpvotesInput
-  downvotedBills: BillUpdateManyWithoutDownvotesInput
+  upvotedBills: BillUpdateManyInput
+  downvotedBills: BillUpdateManyInput
   billComments: CommentUpdateManyWithoutAuthorInput
   topicComments: TopicUpdateManyWithoutCommentersInput
 }
@@ -2853,28 +2766,15 @@ input UserUpdateWithoutTopicCommentsDataInput {
   permissions: UserUpdatepermissionsInput
   myPoliticians: PoliticianUpdateManyWithoutFollowersInput
   myBills: BillUpdateManyWithoutFollowersInput
-  upvotedBills: BillUpdateManyWithoutUpvotesInput
-  downvotedBills: BillUpdateManyWithoutDownvotesInput
+  upvotedBills: BillUpdateManyInput
+  downvotedBills: BillUpdateManyInput
   billComments: CommentUpdateManyWithoutAuthorInput
   notifications: NotificationUpdateManyWithoutUserInput
 }
 
-input UserUpdateWithoutUpvotedBillsDataInput {
-  name: String
-  email: String
-  password: String
-  permissions: UserUpdatepermissionsInput
-  myPoliticians: PoliticianUpdateManyWithoutFollowersInput
-  myBills: BillUpdateManyWithoutFollowersInput
-  downvotedBills: BillUpdateManyWithoutDownvotesInput
-  billComments: CommentUpdateManyWithoutAuthorInput
-  topicComments: TopicUpdateManyWithoutCommentersInput
-  notifications: NotificationUpdateManyWithoutUserInput
-}
-
-input UserUpdateWithWhereUniqueWithoutDownvotedBillsInput {
+input UserUpdateWithWhereUniqueNestedInput {
   where: UserWhereUniqueInput!
-  data: UserUpdateWithoutDownvotedBillsDataInput!
+  data: UserUpdateDataInput!
 }
 
 input UserUpdateWithWhereUniqueWithoutMyBillsInput {
@@ -2885,11 +2785,6 @@ input UserUpdateWithWhereUniqueWithoutMyBillsInput {
 input UserUpdateWithWhereUniqueWithoutTopicCommentsInput {
   where: UserWhereUniqueInput!
   data: UserUpdateWithoutTopicCommentsDataInput!
-}
-
-input UserUpdateWithWhereUniqueWithoutUpvotedBillsInput {
-  where: UserWhereUniqueInput!
-  data: UserUpdateWithoutUpvotedBillsDataInput!
 }
 
 input UserUpsertWithoutBillCommentsInput {
@@ -2907,10 +2802,10 @@ input UserUpsertWithoutNotificationsInput {
   create: UserCreateWithoutNotificationsInput!
 }
 
-input UserUpsertWithWhereUniqueWithoutDownvotedBillsInput {
+input UserUpsertWithWhereUniqueNestedInput {
   where: UserWhereUniqueInput!
-  update: UserUpdateWithoutDownvotedBillsDataInput!
-  create: UserCreateWithoutDownvotedBillsInput!
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
 }
 
 input UserUpsertWithWhereUniqueWithoutMyBillsInput {
@@ -2923,12 +2818,6 @@ input UserUpsertWithWhereUniqueWithoutTopicCommentsInput {
   where: UserWhereUniqueInput!
   update: UserUpdateWithoutTopicCommentsDataInput!
   create: UserCreateWithoutTopicCommentsInput!
-}
-
-input UserUpsertWithWhereUniqueWithoutUpvotedBillsInput {
-  where: UserWhereUniqueInput!
-  update: UserUpdateWithoutUpvotedBillsDataInput!
-  create: UserCreateWithoutUpvotedBillsInput!
 }
 
 input UserWhereInput {

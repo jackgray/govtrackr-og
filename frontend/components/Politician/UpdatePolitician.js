@@ -89,13 +89,10 @@ class UpdatePolitician extends Component {
 		data.append('file', files[0]);
 		data.append('upload_preset', 'default');
 
-		const res = await fetch(
-			'https://api.cloudinary.com/v1_1/govtrackr/image/upload',
-			{
-				method: 'POST',
-				body: data
-			}
-		);
+		const res = await fetch('https://api.cloudinary.com/v1_1/govtrackr/image/upload', {
+			method: 'POST',
+			body: data
+		});
 		const file = await res.json();
 		console.log(file);
 		this.setState({
@@ -107,10 +104,7 @@ class UpdatePolitician extends Component {
 
 	render() {
 		return (
-			<Query
-				query={SINGLE_POLITICIAN_QUERY}
-				variables={{ id: this.props.id }}
-			>
+			<Query query={SINGLE_POLITICIAN_QUERY} variables={{ id: this.props.id }}>
 				{({ data, loading }) => {
 					if (loading) return <p>Loading...</p>;
 					if (!data.politician)
@@ -121,23 +115,11 @@ class UpdatePolitician extends Component {
 							</p>
 						);
 					return (
-						<Mutation
-							mutation={UPDATE_POLITICIAN_MUTATION}
-							variables={this.state}
-						>
+						<Mutation mutation={UPDATE_POLITICIAN_MUTATION} variables={this.state}>
 							{(updatePolitician, { loading, error }) => (
-								<Form
-									onSubmit={(e) =>
-										this.updatePolitician(
-											e,
-											updatePolitician
-										)}
-								>
+								<Form onSubmit={(e) => this.updatePolitician(e, updatePolitician)}>
 									<Error error={error} />
-									<fieldset
-										disabled={loading}
-										aria-busy={loading}
-									>
+									<fieldset disabled={loading} aria-busy={loading}>
 										<label htmlFor="file">
 											Image
 											<input
@@ -145,17 +127,11 @@ class UpdatePolitician extends Component {
 												id="file"
 												name="file"
 												placeholder="Upload an image"
-												defaultValue={
-													data.politician.image
-												}
+												defaultValue={data.politician.image}
 												onChange={this.uploadFile}
 											/>
 											{this.state.image && (
-												<img
-													width="200"
-													src={this.state.image}
-													alt="Upload Preview"
-												/>
+												<img width="200" src={this.state.image} alt="Upload Preview" />
 											)}
 										</label>
 										<label htmlFor="name">
@@ -177,9 +153,7 @@ class UpdatePolitician extends Component {
 												id="district"
 												name="district"
 												placeholder=""
-												defaultValue={
-													this.state.district
-												}
+												defaultValue={this.state.district}
 												onChange={this.handleChange}
 											/>
 										</label>
@@ -202,9 +176,7 @@ class UpdatePolitician extends Component {
 												id="website"
 												name="website"
 												placeholder="Website"
-												defaultValue={
-													this.state.website
-												}
+												defaultValue={this.state.website}
 												onChange={this.handleChange}
 											/>
 										</label>
@@ -227,9 +199,7 @@ class UpdatePolitician extends Component {
 												id="chamber"
 												name="chamber"
 												placeholder="Chamber"
-												defaultValue={
-													this.state.chamber
-												}
+												defaultValue={this.state.chamber}
 												onChange={this.handleChange}
 											/>
 										</label>
@@ -253,9 +223,7 @@ class UpdatePolitician extends Component {
 												id="nthCongress"
 												name="nthCongress"
 												placeholder="nth Congress"
-												defaultValue={
-													this.state.nthCongress
-												}
+												defaultValue={this.state.nthCongress}
 												onChange={this.handleChange}
 											/>
 										</label>
@@ -282,9 +250,7 @@ class UpdatePolitician extends Component {
 												onChange={this.handleChange}
 											/>
 										</label>
-										<button type="submit">
-											Save Changes
-										</button>
+										<button type="submit">Save Changes</button>
 									</fieldset>
 								</Form>
 							)}

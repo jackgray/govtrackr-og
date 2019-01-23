@@ -10,16 +10,22 @@ const SINGLE_BILL_QUERY = gql`
 			committees
 			sponsor
 			upvotes {
-				name
+				id
+				user {
+					id
+				}
 			}
 			downvotes {
-				name
+				user {
+					id
+				}
 			}
 			comments {
 				id
 				author {
 					name
 				}
+				content
 			}
 		}
 	}

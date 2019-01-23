@@ -8,14 +8,7 @@ import { DropDown, DropDownItem, SearchStyles } from '../styles/DropDown';
 
 const SEARCH_POLITICIANS_QUERY = gql`
 	query SEARCH_POLITICIANS_QUERY($searchTerm: String!) {
-		politicians(
-			where: {
-				OR: [
-					{ name_contains: $searchTerm }
-					{ state_contains: $searchTerm }
-				]
-			}
-		) {
+		politicians(where: { OR: [{ name_contains: $searchTerm }, { state_contains: $searchTerm }] }) {
 			id
 			image
 			name
@@ -65,21 +58,14 @@ class AutoComplete extends Component {
 							politician === null ? '' :
 							politician.name}
 				>
-					{({
-						getInputProps,
-						getItemProps,
-						isOpen,
-						inputValue,
-						highlightedIndex
-					}) => (
+					{({ getInputProps, getItemProps, isOpen, inputValue, highlightedIndex }) => (
 						<div>
 							<ApolloConsumer>
 								{(client) => (
 									<input
 										{...getInputProps({
 											type: 'search',
-											placeholder:
-												'Search By Name or State',
+											placeholder: 'Search By Name or State',
 											id: 'search',
 											className:
 												this.state.loading ? 'loading' :
@@ -94,32 +80,20 @@ class AutoComplete extends Component {
 							</ApolloConsumer>
 							{isOpen && (
 								<DropDown>
-									{this.state.politicians.map(
-										(politician, index) => (
-											<DropDownItem
-												{...getItemProps({
-													politician
-												})}
-												key={politician.id}
-												highlighted={
-													index === highlightedIndex
-												}
-											>
-												<img
-													width="50"
-													src={politician.image}
-													alt={politician.name}
-												/>
-												{politician.name}
-											</DropDownItem>
-										)
-									)}
-									{!this.state.politicians.length &&
-									!this.state.loading && (
-										<DropDownItem>
-											Nothing Found {inputValue}
+									{this.state.politicians.map((politician, index) => (
+										<DropDownItem
+											{...getItemProps({
+												politician
+											})}
+											key={politician.id}
+											highlighted={index === highlightedIndex}
+										>
+											<img width="50" src={politician.image} alt={politician.name} />
+											{politician.name}
 										</DropDownItem>
-									)}
+									))}
+									{!this.state.politicians.length &&
+									!this.state.loading && <DropDownItem>Nothing Found {inputValue}</DropDownItem>}
 								</DropDown>
 							)}
 						</div>

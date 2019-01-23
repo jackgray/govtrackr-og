@@ -7,18 +7,8 @@ import Error from '../ErrorMessage';
 import { ALL_BILLS_QUERY } from './Bills';
 
 const SCRAPE_BILLS_MUTATION = gql`
-	mutation SCRAPE_BILLS_MUTATION(
-		$number: Int
-		$title: String!
-		$summary: String
-		$committees: String
-	) {
-		scrapeBills(
-			number: $number
-			title: $title
-			summary: $summary
-			committees: $committees
-		) {
+	mutation SCRAPE_BILLS_MUTATION($number: Int, $title: String!, $summary: String, $committees: String) {
+		scrapeBills(number: $number, title: $title, summary: $summary, committees: $committees) {
 			id
 		}
 	}

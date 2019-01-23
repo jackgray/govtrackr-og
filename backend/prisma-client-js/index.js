@@ -13,6 +13,10 @@ var models = [
     embedded: false
   },
   {
+    name: "Feed",
+    embedded: false
+  },
+  {
     name: "Notification",
     embedded: false
   },

@@ -18,9 +18,7 @@ class UpvoteBill extends Component {
 	update = (cache, payload) => {
 		const data = cache.readQuery({ query: ALL_BILLS_QUERY });
 		console.log(data);
-		data.bills.upvotes = data.bills.upvotes.filter(
-			(upvote) => upvote.name !== payload.data.upvote.name
-		);
+		data.bills.upvotes = data.bills.upvotes.filter((upvote) => upvote.name !== payload.data.upvote.name);
 		console.log(data.bills.upvote.name);
 		cache.writeQuery({ query: ALL_BILLS_QUERY, data });
 	};
@@ -31,9 +29,7 @@ class UpvoteBill extends Component {
 			<Mutation
 				mutation={UPVOTE_BILL_MUTATION}
 				variables={{ id }}
-				refetchQueries={[
-					{ query: CURRENT_USER_QUERY, ALL_BILLS_QUERY }
-				]}
+				refetchQueries={[ { query: CURRENT_USER_QUERY, ALL_BILLS_QUERY } ]}
 			>
 				{(upvoteBill, { loading }) => (
 					<button disabled={loading} onClick={upvoteBill}>

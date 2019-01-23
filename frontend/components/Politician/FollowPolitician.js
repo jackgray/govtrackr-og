@@ -19,9 +19,7 @@ class FollowPolitician extends Component {
 			<Mutation
 				mutation={FOLLOW_POLITICIAN_MUTATION}
 				variables={{ id }}
-				refetchQueries={[
-					{ query: CURRENT_USER_QUERY, MY_POLITICIANS_QUERY }
-				]}
+				refetchQueries={[ { query: CURRENT_USER_QUERY, MY_POLITICIANS_QUERY } ]}
 			>
 				{(followPolitician, { loading }) => (
 					<button disabled={loading} onClick={followPolitician}>

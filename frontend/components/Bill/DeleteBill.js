@@ -12,34 +12,22 @@ const DELETE_BILL_MUTATION = gql`
 `;
 
 class DeleteBill extends Component {
+	// update cache directly instead of calling the server
 	update = (cache, payload) => {
-		// deleteBill removes listing from the SERVER
-		// udate will update the cache to sync the client side
-		// 1. Read the cache
 		const data = cache.readQuery({ query: ALL_BILLS_QUERY });
 		console.log(data);
-		// 2. Filter removed listing out of the page
-		data.bills = data.bills.filter(
-			(bill) => bill.id !== payload.data.deleteBill.id
-		);
-		// 3. put the filtered data back
+		// filter out deleted bill by its id
+		data.bills = data.bills.filter((bill) => bill.id !== payload.data.deleteBill.id);
+		// overwrite cache with filtered query
 		cache.writeQuery({ query: ALL_BILLS_QUERY, data });
 	};
 	render() {
 		return (
-			<Mutation
-				mutation={DELETE_BILL_MUTATION}
-				variables={{ id: this.props.id }}
-				update={this.update}
-			>
+			<Mutation mutation={DELETE_BILL_MUTATION} variables={{ id: this.props.id }} update={this.update}>
 				{(deleteBill, { error }) => (
 					<button
 						onClick={() => {
-							if (
-								confirm(
-									'Are you sure you want to remove this person?'
-								)
-							) {
+							if (confirm('Are you sure you want to remove this person?')) {
 								deleteBill();
 							}
 						}}

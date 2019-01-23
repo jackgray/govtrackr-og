@@ -58,8 +58,8 @@ type Bill {
 	coSponsors: [Politician] @relation(name: "BillCoSponsorPolitician")
 	actions: [String]
 	followers: [User] @relation(name: "UserFollowBill")
-	upvotes: [User] @relation(name: "UpvoteBill")
-	downvotes: [User] @relation(name: "DownvoteBill")
+	upvotes: [User] @relation(name: "BillUpvote")
+	downvotes: [User] @relation(name: "BillDownvote")
 	comments: [Comment] @relation(name: "BillComment")
 }
 
@@ -69,8 +69,7 @@ type Comment {
 	reply: String
 	bill: Bill @relation(name: "BillComment")
 	author: User @relation(name: "UserCommentBill")
-	politiciansMentioned: [Politician]
-		@relation(name: "PoliticianCommentMention")
+	politiciansMentioned: [Politician] @relation(name: "PoliticianCommentMention")
 	topic: Topic @relation(name: "TopicComment")
 }
 
@@ -91,4 +90,10 @@ type Notification {
 type Subscription {
 	newBillComment: Comment
 	newBill: Bill
+}
+
+type Feed {
+	politicians: [Politician!]!
+	bills: [Bill!]!
+	count: Int!
 }

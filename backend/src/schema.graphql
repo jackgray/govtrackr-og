@@ -60,8 +60,8 @@ type Mutation {
 	deleteBill(id: ID): Bill
 	followBill(id: ID): User
 	unfollowBill(id: ID): User
-	upvoteBill(id: ID): User
-	downvoteBill(id: ID): User
+	upvoteBill(id: ID): Bill!
+	downvoteBill(id: ID): Bill!
 	comment(id: ID): Comment
 	commentBill(content: String, id: ID): Bill
 	scrapeBill(code: String): Bill
@@ -75,21 +75,17 @@ type Mutation {
 type Query {
 	politicians(
 		where: PoliticianWhereInput
-		orderBy: PoliticianOrderByInput
+		filter: String
 		skip: Int
 		first: Int
+		orderBy: PoliticianOrderByInput
 	): [Politician]!
 	politician(where: PoliticianWhereUniqueInput!): Politician
 	politiciansConnection(where: PoliticianWhereInput): PoliticianConnection!
 	myPolitician: Politician
 	myPoliticians: [Politician]
 	bill(where: BillWhereUniqueInput): Bill
-	bills(
-		where: BillWhereInput
-		orderBy: BillOrderByInput
-		skip: Int
-		first: Int
-	): [Bill]
+	bills(where: BillWhereInput, orderBy: BillOrderByInput, skip: Int, first: Int): [Bill]
 	myBills: [Bill]
 	comment(where: CommentWhereUniqueInput): Comment
 	comments: [Comment]
@@ -103,6 +99,7 @@ type Query {
 }
 
 type Subscription {
+	# TODO subscribe to new politician-bill connections
 	#bills: BillSubscriptionPayload
 	bills: [Bill]
 	billDeleted: Bill

@@ -19,27 +19,17 @@ class DeletePolitician extends Component {
 		const data = cache.readQuery({ query: ALL_POLITICIANS_QUERY });
 		console.log(data);
 		// 2. Filter removed listing out of the page
-		data.politicians = data.politicians.filter(
-			(politician) => politician.id !== payload.data.deletePolitician.id
-		);
+		data.politicians = data.politicians.filter((politician) => politician.id !== payload.data.deletePolitician.id);
 		// 3. put the filtered data back
 		cache.writeQuery({ query: ALL_POLITICIANS_QUERY, data });
 	};
 	render() {
 		return (
-			<Mutation
-				mutation={DELTE_POLITICIAN_MUTATION}
-				variables={{ id: this.props.id }}
-				update={this.update}
-			>
+			<Mutation mutation={DELTE_POLITICIAN_MUTATION} variables={{ id: this.props.id }} update={this.update}>
 				{(deletePolitician, { error }) => (
 					<button
 						onClick={() => {
-							if (
-								confirm(
-									'Are you sure you want to remove this person?'
-								)
-							) {
+							if (confirm('Are you sure you want to remove this person?')) {
 								deletePolitician();
 							}
 						}}

@@ -43,21 +43,12 @@ class CreateComment extends Component {
 	// refresh queries and update the cache
 
 	render() {
-		const { id } = this.props;
+		const { bill } = this.props;
 		return (
 			<Mutation
 				mutation={COMMENT_BILL_MUTATION}
 				update={(cache, { data: { commentBill } }) => {
-					const { comments } = cache.readQuery({
-						query: SINGLE_BILL_QUERY
-					});
-					console.log('update called');
-					cache.writeQuery({
-						query: SINGLE_BILL_QUERY,
-						data: {
-							comments: comments.content.concat([ commentBill ])
-						}
-					});
+					this.props.updateStoreAfterComment(cache, commentBill, bill);
 				}}
 			>
 				{(commentBill, { data, loading, error }) => (
@@ -66,7 +57,7 @@ class CreateComment extends Component {
 							e.preventDefault();
 							commentBill({
 								variables: {
-									id: this.props.id,
+									id: bill.id,
 									content: this.state.content
 								}
 							});

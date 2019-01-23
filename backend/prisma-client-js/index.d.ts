@@ -16,6 +16,7 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export interface Exists {
   bill: (where?: BillWhereInput) => Promise<boolean>;
   comment: (where?: CommentWhereInput) => Promise<boolean>;
+  feed: (where?: FeedWhereInput) => Promise<boolean>;
   notification: (where?: NotificationWhereInput) => Promise<boolean>;
   politician: (where?: PoliticianWhereInput) => Promise<boolean>;
   subscription: (where?: SubscriptionWhereInput) => Promise<boolean>;
@@ -43,165 +44,155 @@ export interface Prisma {
    */
 
   bill: (where: BillWhereUniqueInput) => BillPromise;
-  bills: (
-    args?: {
-      where?: BillWhereInput;
-      orderBy?: BillOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => FragmentableArray<Bill>;
-  billsConnection: (
-    args?: {
-      where?: BillWhereInput;
-      orderBy?: BillOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => BillConnectionPromise;
+  bills: (args?: {
+    where?: BillWhereInput;
+    orderBy?: BillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Bill>;
+  billsConnection: (args?: {
+    where?: BillWhereInput;
+    orderBy?: BillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => BillConnectionPromise;
   comment: (where: CommentWhereUniqueInput) => CommentPromise;
-  comments: (
-    args?: {
-      where?: CommentWhereInput;
-      orderBy?: CommentOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => FragmentableArray<Comment>;
-  commentsConnection: (
-    args?: {
-      where?: CommentWhereInput;
-      orderBy?: CommentOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => CommentConnectionPromise;
+  comments: (args?: {
+    where?: CommentWhereInput;
+    orderBy?: CommentOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Comment>;
+  commentsConnection: (args?: {
+    where?: CommentWhereInput;
+    orderBy?: CommentOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => CommentConnectionPromise;
+  feeds: (args?: {
+    where?: FeedWhereInput;
+    orderBy?: FeedOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Feed>;
+  feedsConnection: (args?: {
+    where?: FeedWhereInput;
+    orderBy?: FeedOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FeedConnectionPromise;
   notification: (where: NotificationWhereUniqueInput) => NotificationPromise;
-  notifications: (
-    args?: {
-      where?: NotificationWhereInput;
-      orderBy?: NotificationOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => FragmentableArray<Notification>;
-  notificationsConnection: (
-    args?: {
-      where?: NotificationWhereInput;
-      orderBy?: NotificationOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => NotificationConnectionPromise;
+  notifications: (args?: {
+    where?: NotificationWhereInput;
+    orderBy?: NotificationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Notification>;
+  notificationsConnection: (args?: {
+    where?: NotificationWhereInput;
+    orderBy?: NotificationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => NotificationConnectionPromise;
   politician: (where: PoliticianWhereUniqueInput) => PoliticianPromise;
-  politicians: (
-    args?: {
-      where?: PoliticianWhereInput;
-      orderBy?: PoliticianOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => FragmentableArray<Politician>;
-  politiciansConnection: (
-    args?: {
-      where?: PoliticianWhereInput;
-      orderBy?: PoliticianOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => PoliticianConnectionPromise;
-  subscriptions: (
-    args?: {
-      where?: SubscriptionWhereInput;
-      orderBy?: SubscriptionOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => FragmentableArray<Subscription>;
-  subscriptionsConnection: (
-    args?: {
-      where?: SubscriptionWhereInput;
-      orderBy?: SubscriptionOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => SubscriptionConnectionPromise;
+  politicians: (args?: {
+    where?: PoliticianWhereInput;
+    orderBy?: PoliticianOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Politician>;
+  politiciansConnection: (args?: {
+    where?: PoliticianWhereInput;
+    orderBy?: PoliticianOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => PoliticianConnectionPromise;
+  subscriptions: (args?: {
+    where?: SubscriptionWhereInput;
+    orderBy?: SubscriptionOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Subscription>;
+  subscriptionsConnection: (args?: {
+    where?: SubscriptionWhereInput;
+    orderBy?: SubscriptionOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => SubscriptionConnectionPromise;
   topic: (where: TopicWhereUniqueInput) => TopicPromise;
-  topics: (
-    args?: {
-      where?: TopicWhereInput;
-      orderBy?: TopicOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => FragmentableArray<Topic>;
-  topicsConnection: (
-    args?: {
-      where?: TopicWhereInput;
-      orderBy?: TopicOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => TopicConnectionPromise;
+  topics: (args?: {
+    where?: TopicWhereInput;
+    orderBy?: TopicOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Topic>;
+  topicsConnection: (args?: {
+    where?: TopicWhereInput;
+    orderBy?: TopicOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => TopicConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserPromise;
-  users: (
-    args?: {
-      where?: UserWhereInput;
-      orderBy?: UserOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => FragmentableArray<User>;
-  usersConnection: (
-    args?: {
-      where?: UserWhereInput;
-      orderBy?: UserOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => UserConnectionPromise;
+  users: (args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<User>;
+  usersConnection: (args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => UserConnectionPromise;
   node: (args: { id: ID_Output }) => Node;
 
   /**
@@ -209,54 +200,57 @@ export interface Prisma {
    */
 
   createBill: (data: BillCreateInput) => BillPromise;
-  updateBill: (
-    args: { data: BillUpdateInput; where: BillWhereUniqueInput }
-  ) => BillPromise;
-  updateManyBills: (
-    args: { data: BillUpdateManyMutationInput; where?: BillWhereInput }
-  ) => BatchPayloadPromise;
-  upsertBill: (
-    args: {
-      where: BillWhereUniqueInput;
-      create: BillCreateInput;
-      update: BillUpdateInput;
-    }
-  ) => BillPromise;
+  updateBill: (args: {
+    data: BillUpdateInput;
+    where: BillWhereUniqueInput;
+  }) => BillPromise;
+  updateManyBills: (args: {
+    data: BillUpdateManyMutationInput;
+    where?: BillWhereInput;
+  }) => BatchPayloadPromise;
+  upsertBill: (args: {
+    where: BillWhereUniqueInput;
+    create: BillCreateInput;
+    update: BillUpdateInput;
+  }) => BillPromise;
   deleteBill: (where: BillWhereUniqueInput) => BillPromise;
   deleteManyBills: (where?: BillWhereInput) => BatchPayloadPromise;
   createComment: (data: CommentCreateInput) => CommentPromise;
-  updateComment: (
-    args: { data: CommentUpdateInput; where: CommentWhereUniqueInput }
-  ) => CommentPromise;
-  updateManyComments: (
-    args: { data: CommentUpdateManyMutationInput; where?: CommentWhereInput }
-  ) => BatchPayloadPromise;
-  upsertComment: (
-    args: {
-      where: CommentWhereUniqueInput;
-      create: CommentCreateInput;
-      update: CommentUpdateInput;
-    }
-  ) => CommentPromise;
+  updateComment: (args: {
+    data: CommentUpdateInput;
+    where: CommentWhereUniqueInput;
+  }) => CommentPromise;
+  updateManyComments: (args: {
+    data: CommentUpdateManyMutationInput;
+    where?: CommentWhereInput;
+  }) => BatchPayloadPromise;
+  upsertComment: (args: {
+    where: CommentWhereUniqueInput;
+    create: CommentCreateInput;
+    update: CommentUpdateInput;
+  }) => CommentPromise;
   deleteComment: (where: CommentWhereUniqueInput) => CommentPromise;
   deleteManyComments: (where?: CommentWhereInput) => BatchPayloadPromise;
+  createFeed: (data: FeedCreateInput) => FeedPromise;
+  updateManyFeeds: (args: {
+    data: FeedUpdateManyMutationInput;
+    where?: FeedWhereInput;
+  }) => BatchPayloadPromise;
+  deleteManyFeeds: (where?: FeedWhereInput) => BatchPayloadPromise;
   createNotification: (data: NotificationCreateInput) => NotificationPromise;
-  updateNotification: (
-    args: { data: NotificationUpdateInput; where: NotificationWhereUniqueInput }
-  ) => NotificationPromise;
-  updateManyNotifications: (
-    args: {
-      data: NotificationUpdateManyMutationInput;
-      where?: NotificationWhereInput;
-    }
-  ) => BatchPayloadPromise;
-  upsertNotification: (
-    args: {
-      where: NotificationWhereUniqueInput;
-      create: NotificationCreateInput;
-      update: NotificationUpdateInput;
-    }
-  ) => NotificationPromise;
+  updateNotification: (args: {
+    data: NotificationUpdateInput;
+    where: NotificationWhereUniqueInput;
+  }) => NotificationPromise;
+  updateManyNotifications: (args: {
+    data: NotificationUpdateManyMutationInput;
+    where?: NotificationWhereInput;
+  }) => BatchPayloadPromise;
+  upsertNotification: (args: {
+    where: NotificationWhereUniqueInput;
+    create: NotificationCreateInput;
+    update: NotificationUpdateInput;
+  }) => NotificationPromise;
   deleteNotification: (
     where: NotificationWhereUniqueInput
   ) => NotificationPromise;
@@ -264,22 +258,19 @@ export interface Prisma {
     where?: NotificationWhereInput
   ) => BatchPayloadPromise;
   createPolitician: (data: PoliticianCreateInput) => PoliticianPromise;
-  updatePolitician: (
-    args: { data: PoliticianUpdateInput; where: PoliticianWhereUniqueInput }
-  ) => PoliticianPromise;
-  updateManyPoliticians: (
-    args: {
-      data: PoliticianUpdateManyMutationInput;
-      where?: PoliticianWhereInput;
-    }
-  ) => BatchPayloadPromise;
-  upsertPolitician: (
-    args: {
-      where: PoliticianWhereUniqueInput;
-      create: PoliticianCreateInput;
-      update: PoliticianUpdateInput;
-    }
-  ) => PoliticianPromise;
+  updatePolitician: (args: {
+    data: PoliticianUpdateInput;
+    where: PoliticianWhereUniqueInput;
+  }) => PoliticianPromise;
+  updateManyPoliticians: (args: {
+    data: PoliticianUpdateManyMutationInput;
+    where?: PoliticianWhereInput;
+  }) => BatchPayloadPromise;
+  upsertPolitician: (args: {
+    where: PoliticianWhereUniqueInput;
+    create: PoliticianCreateInput;
+    update: PoliticianUpdateInput;
+  }) => PoliticianPromise;
   deletePolitician: (where: PoliticianWhereUniqueInput) => PoliticianPromise;
   deleteManyPoliticians: (where?: PoliticianWhereInput) => BatchPayloadPromise;
   createSubscription: (data: SubscriptionCreateInput) => SubscriptionPromise;
@@ -287,35 +278,35 @@ export interface Prisma {
     where?: SubscriptionWhereInput
   ) => BatchPayloadPromise;
   createTopic: (data: TopicCreateInput) => TopicPromise;
-  updateTopic: (
-    args: { data: TopicUpdateInput; where: TopicWhereUniqueInput }
-  ) => TopicPromise;
-  updateManyTopics: (
-    args: { data: TopicUpdateManyMutationInput; where?: TopicWhereInput }
-  ) => BatchPayloadPromise;
-  upsertTopic: (
-    args: {
-      where: TopicWhereUniqueInput;
-      create: TopicCreateInput;
-      update: TopicUpdateInput;
-    }
-  ) => TopicPromise;
+  updateTopic: (args: {
+    data: TopicUpdateInput;
+    where: TopicWhereUniqueInput;
+  }) => TopicPromise;
+  updateManyTopics: (args: {
+    data: TopicUpdateManyMutationInput;
+    where?: TopicWhereInput;
+  }) => BatchPayloadPromise;
+  upsertTopic: (args: {
+    where: TopicWhereUniqueInput;
+    create: TopicCreateInput;
+    update: TopicUpdateInput;
+  }) => TopicPromise;
   deleteTopic: (where: TopicWhereUniqueInput) => TopicPromise;
   deleteManyTopics: (where?: TopicWhereInput) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
-  updateUser: (
-    args: { data: UserUpdateInput; where: UserWhereUniqueInput }
-  ) => UserPromise;
-  updateManyUsers: (
-    args: { data: UserUpdateManyMutationInput; where?: UserWhereInput }
-  ) => BatchPayloadPromise;
-  upsertUser: (
-    args: {
-      where: UserWhereUniqueInput;
-      create: UserCreateInput;
-      update: UserUpdateInput;
-    }
-  ) => UserPromise;
+  updateUser: (args: {
+    data: UserUpdateInput;
+    where: UserWhereUniqueInput;
+  }) => UserPromise;
+  updateManyUsers: (args: {
+    data: UserUpdateManyMutationInput;
+    where?: UserWhereInput;
+  }) => BatchPayloadPromise;
+  upsertUser: (args: {
+    where: UserWhereUniqueInput;
+    create: UserCreateInput;
+    update: UserUpdateInput;
+  }) => UserPromise;
   deleteUser: (where: UserWhereUniqueInput) => UserPromise;
   deleteManyUsers: (where?: UserWhereInput) => BatchPayloadPromise;
 
@@ -453,6 +444,16 @@ export type NotificationOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
+export type FeedOrderByInput =
+  | "count_ASC"
+  | "count_DESC"
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
 export type SubscriptionOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -461,9 +462,8 @@ export type SubscriptionOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
-export interface PoliticianUpdateWithWhereUniqueWithoutFollowersInput {
-  where: PoliticianWhereUniqueInput;
-  data: PoliticianUpdateWithoutFollowersDataInput;
+export interface BillUpdateactionsInput {
+  set?: String[] | String;
 }
 
 export interface UserUpdateManyMutationInput {
@@ -473,33 +473,35 @@ export interface UserUpdateManyMutationInput {
   permissions?: UserUpdatepermissionsInput;
 }
 
-export interface UserUpdateManyWithoutMyBillsInput {
-  create?: UserCreateWithoutMyBillsInput[] | UserCreateWithoutMyBillsInput;
-  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-  update?:
-    | UserUpdateWithWhereUniqueWithoutMyBillsInput[]
-    | UserUpdateWithWhereUniqueWithoutMyBillsInput;
-  upsert?:
-    | UserUpsertWithWhereUniqueWithoutMyBillsInput[]
-    | UserUpsertWithWhereUniqueWithoutMyBillsInput;
-  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput;
-  updateMany?:
-    | UserUpdateManyWithWhereNestedInput[]
-    | UserUpdateManyWithWhereNestedInput;
+export interface PoliticianUpdateWithWhereUniqueWithoutFollowersInput {
+  where: PoliticianWhereUniqueInput;
+  data: PoliticianUpdateWithoutFollowersDataInput;
 }
 
 export type BillWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
 }>;
 
-export interface UserUpdateWithWhereUniqueWithoutMyBillsInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateWithoutMyBillsDataInput;
+export interface PoliticianUpdateWithoutFollowersDataInput {
+  party?: String;
+  name?: String;
+  title?: String;
+  chamber?: String;
+  state?: String;
+  district?: Int;
+  nthCongress?: String;
+  phone?: String;
+  gender?: String;
+  image?: String;
+  largeImage?: String;
+  website?: String;
+  govUrl?: String;
+  bills?: BillUpdateManyInput;
+  coBills?: BillUpdateManyWithoutCoSponsorsInput;
+  mentions?: CommentUpdateManyWithoutPoliticiansMentionedInput;
 }
 
-export interface TopicWhereInput {
+export interface NotificationWhereInput {
   id?: ID_Input;
   id_not?: ID_Input;
   id_in?: ID_Input[] | ID_Input;
@@ -514,42 +516,55 @@ export interface TopicWhereInput {
   id_not_starts_with?: ID_Input;
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
-  title?: String;
-  title_not?: String;
-  title_in?: String[] | String;
-  title_not_in?: String[] | String;
-  title_lt?: String;
-  title_lte?: String;
-  title_gt?: String;
-  title_gte?: String;
-  title_contains?: String;
-  title_not_contains?: String;
-  title_starts_with?: String;
-  title_not_starts_with?: String;
-  title_ends_with?: String;
-  title_not_ends_with?: String;
-  comments_every?: CommentWhereInput;
-  comments_some?: CommentWhereInput;
-  comments_none?: CommentWhereInput;
-  commenters_every?: UserWhereInput;
-  commenters_some?: UserWhereInput;
-  commenters_none?: UserWhereInput;
-  AND?: TopicWhereInput[] | TopicWhereInput;
-  OR?: TopicWhereInput[] | TopicWhereInput;
-  NOT?: TopicWhereInput[] | TopicWhereInput;
+  label?: String;
+  label_not?: String;
+  label_in?: String[] | String;
+  label_not_in?: String[] | String;
+  label_lt?: String;
+  label_lte?: String;
+  label_gt?: String;
+  label_gte?: String;
+  label_contains?: String;
+  label_not_contains?: String;
+  label_starts_with?: String;
+  label_not_starts_with?: String;
+  label_ends_with?: String;
+  label_not_ends_with?: String;
+  type?: String;
+  type_not?: String;
+  type_in?: String[] | String;
+  type_not_in?: String[] | String;
+  type_lt?: String;
+  type_lte?: String;
+  type_gt?: String;
+  type_gte?: String;
+  type_contains?: String;
+  type_not_contains?: String;
+  type_starts_with?: String;
+  type_not_starts_with?: String;
+  type_ends_with?: String;
+  type_not_ends_with?: String;
+  user?: UserWhereInput;
+  AND?: NotificationWhereInput[] | NotificationWhereInput;
+  OR?: NotificationWhereInput[] | NotificationWhereInput;
+  NOT?: NotificationWhereInput[] | NotificationWhereInput;
 }
 
-export interface UserUpdateWithoutMyBillsDataInput {
-  name?: String;
-  email?: String;
-  password?: String;
-  permissions?: UserUpdatepermissionsInput;
-  myPoliticians?: PoliticianUpdateManyWithoutFollowersInput;
-  upvotedBills?: BillUpdateManyWithoutUpvotesInput;
-  downvotedBills?: BillUpdateManyWithoutDownvotesInput;
-  billComments?: CommentUpdateManyWithoutAuthorInput;
-  topicComments?: TopicUpdateManyWithoutCommentersInput;
-  notifications?: NotificationUpdateManyWithoutUserInput;
+export interface BillUpdateManyInput {
+  create?: BillCreateInput[] | BillCreateInput;
+  update?:
+    | BillUpdateWithWhereUniqueNestedInput[]
+    | BillUpdateWithWhereUniqueNestedInput;
+  upsert?:
+    | BillUpsertWithWhereUniqueNestedInput[]
+    | BillUpsertWithWhereUniqueNestedInput;
+  delete?: BillWhereUniqueInput[] | BillWhereUniqueInput;
+  connect?: BillWhereUniqueInput[] | BillWhereUniqueInput;
+  disconnect?: BillWhereUniqueInput[] | BillWhereUniqueInput;
+  deleteMany?: BillScalarWhereInput[] | BillScalarWhereInput;
+  updateMany?:
+    | BillUpdateManyWithWhereNestedInput[]
+    | BillUpdateManyWithWhereNestedInput;
 }
 
 export interface CommentWhereInput {
@@ -606,21 +621,9 @@ export interface CommentWhereInput {
   NOT?: CommentWhereInput[] | CommentWhereInput;
 }
 
-export interface BillUpdateManyWithoutUpvotesInput {
-  create?: BillCreateWithoutUpvotesInput[] | BillCreateWithoutUpvotesInput;
-  delete?: BillWhereUniqueInput[] | BillWhereUniqueInput;
-  connect?: BillWhereUniqueInput[] | BillWhereUniqueInput;
-  disconnect?: BillWhereUniqueInput[] | BillWhereUniqueInput;
-  update?:
-    | BillUpdateWithWhereUniqueWithoutUpvotesInput[]
-    | BillUpdateWithWhereUniqueWithoutUpvotesInput;
-  upsert?:
-    | BillUpsertWithWhereUniqueWithoutUpvotesInput[]
-    | BillUpsertWithWhereUniqueWithoutUpvotesInput;
-  deleteMany?: BillScalarWhereInput[] | BillScalarWhereInput;
-  updateMany?:
-    | BillUpdateManyWithWhereNestedInput[]
-    | BillUpdateManyWithWhereNestedInput;
+export interface BillUpdateWithWhereUniqueNestedInput {
+  where: BillWhereUniqueInput;
+  data: BillUpdateDataInput;
 }
 
 export interface UserWhereInput {
@@ -706,53 +709,37 @@ export interface UserWhereInput {
   NOT?: UserWhereInput[] | UserWhereInput;
 }
 
-export interface BillUpdateManyWithoutFollowersInput {
-  create?: BillCreateWithoutFollowersInput[] | BillCreateWithoutFollowersInput;
-  delete?: BillWhereUniqueInput[] | BillWhereUniqueInput;
-  connect?: BillWhereUniqueInput[] | BillWhereUniqueInput;
-  disconnect?: BillWhereUniqueInput[] | BillWhereUniqueInput;
-  update?:
-    | BillUpdateWithWhereUniqueWithoutFollowersInput[]
-    | BillUpdateWithWhereUniqueWithoutFollowersInput;
-  upsert?:
-    | BillUpsertWithWhereUniqueWithoutFollowersInput[]
-    | BillUpsertWithWhereUniqueWithoutFollowersInput;
-  deleteMany?: BillScalarWhereInput[] | BillScalarWhereInput;
-  updateMany?:
-    | BillUpdateManyWithWhereNestedInput[]
-    | BillUpdateManyWithWhereNestedInput;
-}
-
-export interface CommentUpdateManyWithoutPoliticiansMentionedInput {
+export interface PoliticianUpdateManyWithoutCoBillsInput {
   create?:
-    | CommentCreateWithoutPoliticiansMentionedInput[]
-    | CommentCreateWithoutPoliticiansMentionedInput;
-  delete?: CommentWhereUniqueInput[] | CommentWhereUniqueInput;
-  connect?: CommentWhereUniqueInput[] | CommentWhereUniqueInput;
-  disconnect?: CommentWhereUniqueInput[] | CommentWhereUniqueInput;
+    | PoliticianCreateWithoutCoBillsInput[]
+    | PoliticianCreateWithoutCoBillsInput;
+  delete?: PoliticianWhereUniqueInput[] | PoliticianWhereUniqueInput;
+  connect?: PoliticianWhereUniqueInput[] | PoliticianWhereUniqueInput;
+  disconnect?: PoliticianWhereUniqueInput[] | PoliticianWhereUniqueInput;
   update?:
-    | CommentUpdateWithWhereUniqueWithoutPoliticiansMentionedInput[]
-    | CommentUpdateWithWhereUniqueWithoutPoliticiansMentionedInput;
+    | PoliticianUpdateWithWhereUniqueWithoutCoBillsInput[]
+    | PoliticianUpdateWithWhereUniqueWithoutCoBillsInput;
   upsert?:
-    | CommentUpsertWithWhereUniqueWithoutPoliticiansMentionedInput[]
-    | CommentUpsertWithWhereUniqueWithoutPoliticiansMentionedInput;
-  deleteMany?: CommentScalarWhereInput[] | CommentScalarWhereInput;
+    | PoliticianUpsertWithWhereUniqueWithoutCoBillsInput[]
+    | PoliticianUpsertWithWhereUniqueWithoutCoBillsInput;
+  deleteMany?: PoliticianScalarWhereInput[] | PoliticianScalarWhereInput;
   updateMany?:
-    | CommentUpdateManyWithWhereNestedInput[]
-    | CommentUpdateManyWithWhereNestedInput;
+    | PoliticianUpdateManyWithWhereNestedInput[]
+    | PoliticianUpdateManyWithWhereNestedInput;
 }
 
-export interface BillUpdateWithWhereUniqueWithoutFollowersInput {
-  where: BillWhereUniqueInput;
-  data: BillUpdateWithoutFollowersDataInput;
+export interface UserUpsertWithWhereUniqueWithoutMyBillsInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutMyBillsDataInput;
+  create: UserCreateWithoutMyBillsInput;
 }
 
-export interface BillUpdateWithWhereUniqueWithoutUpvotesInput {
-  where: BillWhereUniqueInput;
-  data: BillUpdateWithoutUpvotesDataInput;
+export interface PoliticianUpdateWithWhereUniqueWithoutCoBillsInput {
+  where: PoliticianWhereUniqueInput;
+  data: PoliticianUpdateWithoutCoBillsDataInput;
 }
 
-export interface BillUpdateWithoutFollowersDataInput {
+export interface BillUpdateDataInput {
   code?: String;
   title?: String;
   summary?: String;
@@ -763,9 +750,29 @@ export interface BillUpdateWithoutFollowersDataInput {
   sponsor?: String;
   coSponsors?: PoliticianUpdateManyWithoutCoBillsInput;
   actions?: BillUpdateactionsInput;
-  upvotes?: UserUpdateManyWithoutUpvotedBillsInput;
-  downvotes?: UserUpdateManyWithoutDownvotedBillsInput;
+  followers?: UserUpdateManyWithoutMyBillsInput;
+  upvotes?: UserUpdateManyInput;
+  downvotes?: UserUpdateManyInput;
   comments?: CommentUpdateManyWithoutBillInput;
+}
+
+export interface PoliticianUpdateWithoutCoBillsDataInput {
+  party?: String;
+  name?: String;
+  title?: String;
+  chamber?: String;
+  state?: String;
+  district?: Int;
+  nthCongress?: String;
+  phone?: String;
+  gender?: String;
+  image?: String;
+  largeImage?: String;
+  website?: String;
+  govUrl?: String;
+  followers?: UserUpdateOneWithoutMyPoliticiansInput;
+  bills?: BillUpdateManyInput;
+  mentions?: CommentUpdateManyWithoutPoliticiansMentionedInput;
 }
 
 export interface PoliticianWhereInput {
@@ -990,65 +997,186 @@ export interface PoliticianWhereInput {
   NOT?: PoliticianWhereInput[] | PoliticianWhereInput;
 }
 
-export interface BillUpdateactionsInput {
-  set?: String[] | String;
+export interface UserUpdateOneWithoutMyPoliticiansInput {
+  create?: UserCreateWithoutMyPoliticiansInput;
+  update?: UserUpdateWithoutMyPoliticiansDataInput;
+  upsert?: UserUpsertWithoutMyPoliticiansInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
+  connect?: UserWhereUniqueInput;
 }
 
-export interface TopicUpdateManyMutationInput {
+export interface TopicUpdateInput {
   title?: String;
+  comments?: CommentUpdateManyWithoutTopicInput;
+  commenters?: UserUpdateManyWithoutTopicCommentsInput;
 }
 
-export interface UserUpdateManyWithoutUpvotedBillsInput {
-  create?:
-    | UserCreateWithoutUpvotedBillsInput[]
-    | UserCreateWithoutUpvotedBillsInput;
+export interface UserUpdateWithoutMyPoliticiansDataInput {
+  name?: String;
+  email?: String;
+  password?: String;
+  permissions?: UserUpdatepermissionsInput;
+  myBills?: BillUpdateManyWithoutFollowersInput;
+  upvotedBills?: BillUpdateManyInput;
+  downvotedBills?: BillUpdateManyInput;
+  billComments?: CommentUpdateManyWithoutAuthorInput;
+  topicComments?: TopicUpdateManyWithoutCommentersInput;
+  notifications?: NotificationUpdateManyWithoutUserInput;
+}
+
+export interface BillCreateOneInput {
+  create?: BillCreateInput;
+  connect?: BillWhereUniqueInput;
+}
+
+export interface UserUpdatepermissionsInput {
+  set?: Permission[] | Permission;
+}
+
+export interface SubscriptionCreateInput {
+  newBillComment?: CommentCreateOneInput;
+  newBill?: BillCreateOneInput;
+}
+
+export interface BillUpdateManyWithoutFollowersInput {
+  create?: BillCreateWithoutFollowersInput[] | BillCreateWithoutFollowersInput;
+  delete?: BillWhereUniqueInput[] | BillWhereUniqueInput;
+  connect?: BillWhereUniqueInput[] | BillWhereUniqueInput;
+  disconnect?: BillWhereUniqueInput[] | BillWhereUniqueInput;
+  update?:
+    | BillUpdateWithWhereUniqueWithoutFollowersInput[]
+    | BillUpdateWithWhereUniqueWithoutFollowersInput;
+  upsert?:
+    | BillUpsertWithWhereUniqueWithoutFollowersInput[]
+    | BillUpsertWithWhereUniqueWithoutFollowersInput;
+  deleteMany?: BillScalarWhereInput[] | BillScalarWhereInput;
+  updateMany?:
+    | BillUpdateManyWithWhereNestedInput[]
+    | BillUpdateManyWithWhereNestedInput;
+}
+
+export interface PoliticianUpdateManyMutationInput {
+  party?: String;
+  name?: String;
+  title?: String;
+  chamber?: String;
+  state?: String;
+  district?: Int;
+  nthCongress?: String;
+  phone?: String;
+  gender?: String;
+  image?: String;
+  largeImage?: String;
+  website?: String;
+  govUrl?: String;
+}
+
+export interface BillUpdateWithWhereUniqueWithoutFollowersInput {
+  where: BillWhereUniqueInput;
+  data: BillUpdateWithoutFollowersDataInput;
+}
+
+export interface NotificationUpdateManyMutationInput {
+  label?: String;
+  type?: String;
+}
+
+export interface BillUpdateWithoutFollowersDataInput {
+  code?: String;
+  title?: String;
+  summary?: String;
+  congressNumber?: String;
+  chamber?: String;
+  committees?: String;
+  link?: String;
+  sponsor?: String;
+  coSponsors?: PoliticianUpdateManyWithoutCoBillsInput;
+  actions?: BillUpdateactionsInput;
+  upvotes?: UserUpdateManyInput;
+  downvotes?: UserUpdateManyInput;
+  comments?: CommentUpdateManyWithoutBillInput;
+}
+
+export interface UserUpsertWithoutNotificationsInput {
+  update: UserUpdateWithoutNotificationsDataInput;
+  create: UserCreateWithoutNotificationsInput;
+}
+
+export interface CommentUpdateWithoutPoliticiansMentionedDataInput {
+  content?: String;
+  reply?: String;
+  bill?: BillUpdateOneWithoutCommentsInput;
+  author?: UserUpdateOneWithoutBillCommentsInput;
+  topic?: TopicUpdateOneWithoutCommentsInput;
+}
+
+export interface UserUpdateOneWithoutNotificationsInput {
+  create?: UserCreateWithoutNotificationsInput;
+  update?: UserUpdateWithoutNotificationsDataInput;
+  upsert?: UserUpsertWithoutNotificationsInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface UserUpdateManyInput {
+  create?: UserCreateInput[] | UserCreateInput;
+  update?:
+    | UserUpdateWithWhereUniqueNestedInput[]
+    | UserUpdateWithWhereUniqueNestedInput;
+  upsert?:
+    | UserUpsertWithWhereUniqueNestedInput[]
+    | UserUpsertWithWhereUniqueNestedInput;
   delete?: UserWhereUniqueInput[] | UserWhereUniqueInput;
   connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
   disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-  update?:
-    | UserUpdateWithWhereUniqueWithoutUpvotedBillsInput[]
-    | UserUpdateWithWhereUniqueWithoutUpvotedBillsInput;
-  upsert?:
-    | UserUpsertWithWhereUniqueWithoutUpvotedBillsInput[]
-    | UserUpsertWithWhereUniqueWithoutUpvotedBillsInput;
   deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput;
   updateMany?:
     | UserUpdateManyWithWhereNestedInput[]
     | UserUpdateManyWithWhereNestedInput;
 }
 
-export interface TopicCreateInput {
-  title?: String;
-  comments?: CommentCreateManyWithoutTopicInput;
-  commenters?: UserCreateManyWithoutTopicCommentsInput;
+export interface UserCreateWithoutNotificationsInput {
+  name: String;
+  email: String;
+  password?: String;
+  permissions?: UserCreatepermissionsInput;
+  myPoliticians?: PoliticianCreateManyWithoutFollowersInput;
+  myBills?: BillCreateManyWithoutFollowersInput;
+  upvotedBills?: BillCreateManyInput;
+  downvotedBills?: BillCreateManyInput;
+  billComments?: CommentCreateManyWithoutAuthorInput;
+  topicComments?: TopicCreateManyWithoutCommentersInput;
 }
 
-export interface UserUpdateWithWhereUniqueWithoutUpvotedBillsInput {
+export interface UserUpdateWithWhereUniqueNestedInput {
   where: UserWhereUniqueInput;
-  data: UserUpdateWithoutUpvotedBillsDataInput;
+  data: UserUpdateDataInput;
 }
 
-export interface CommentCreateOneInput {
-  create?: CommentCreateInput;
-  connect?: CommentWhereUniqueInput;
+export interface UserCreateOneWithoutNotificationsInput {
+  create?: UserCreateWithoutNotificationsInput;
+  connect?: UserWhereUniqueInput;
 }
 
-export interface UserUpdateWithoutUpvotedBillsDataInput {
+export interface UserUpdateDataInput {
   name?: String;
   email?: String;
   password?: String;
   permissions?: UserUpdatepermissionsInput;
   myPoliticians?: PoliticianUpdateManyWithoutFollowersInput;
   myBills?: BillUpdateManyWithoutFollowersInput;
-  downvotedBills?: BillUpdateManyWithoutDownvotesInput;
+  upvotedBills?: BillUpdateManyInput;
+  downvotedBills?: BillUpdateManyInput;
   billComments?: CommentUpdateManyWithoutAuthorInput;
   topicComments?: TopicUpdateManyWithoutCommentersInput;
   notifications?: NotificationUpdateManyWithoutUserInput;
 }
 
-export type CommentWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
+export interface FeedUpdateManyMutationInput {
+  count?: Int;
+}
 
 export interface PoliticianUpdateManyWithoutFollowersInput {
   create?:
@@ -1069,9 +1197,9 @@ export interface PoliticianUpdateManyWithoutFollowersInput {
     | PoliticianUpdateManyWithWhereNestedInput;
 }
 
-export interface PoliticianUpdateInput {
+export interface PoliticianCreateInput {
   party?: String;
-  name?: String;
+  name: String;
   title?: String;
   chamber?: String;
   state?: String;
@@ -1083,105 +1211,13 @@ export interface PoliticianUpdateInput {
   largeImage?: String;
   website?: String;
   govUrl?: String;
-  followers?: UserUpdateOneWithoutMyPoliticiansInput;
-  bills?: BillUpdateManyInput;
-  coBills?: BillUpdateManyWithoutCoSponsorsInput;
-  mentions?: CommentUpdateManyWithoutPoliticiansMentionedInput;
+  followers?: UserCreateOneWithoutMyPoliticiansInput;
+  bills?: BillCreateManyInput;
+  coBills?: BillCreateManyWithoutCoSponsorsInput;
+  mentions?: CommentCreateManyWithoutPoliticiansMentionedInput;
 }
 
-export interface PoliticianUpsertWithWhereUniqueWithoutFollowersInput {
-  where: PoliticianWhereUniqueInput;
-  update: PoliticianUpdateWithoutFollowersDataInput;
-  create: PoliticianCreateWithoutFollowersInput;
-}
-
-export type NotificationWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
-
-export interface PoliticianUpdateWithoutFollowersDataInput {
-  party?: String;
-  name?: String;
-  title?: String;
-  chamber?: String;
-  state?: String;
-  district?: Int;
-  nthCongress?: String;
-  phone?: String;
-  gender?: String;
-  image?: String;
-  largeImage?: String;
-  website?: String;
-  govUrl?: String;
-  bills?: BillUpdateManyInput;
-  coBills?: BillUpdateManyWithoutCoSponsorsInput;
-  mentions?: CommentUpdateManyWithoutPoliticiansMentionedInput;
-}
-
-export interface UserUpsertWithoutNotificationsInput {
-  update: UserUpdateWithoutNotificationsDataInput;
-  create: UserCreateWithoutNotificationsInput;
-}
-
-export interface BillUpdateManyInput {
-  create?: BillCreateInput[] | BillCreateInput;
-  update?:
-    | BillUpdateWithWhereUniqueNestedInput[]
-    | BillUpdateWithWhereUniqueNestedInput;
-  upsert?:
-    | BillUpsertWithWhereUniqueNestedInput[]
-    | BillUpsertWithWhereUniqueNestedInput;
-  delete?: BillWhereUniqueInput[] | BillWhereUniqueInput;
-  connect?: BillWhereUniqueInput[] | BillWhereUniqueInput;
-  disconnect?: BillWhereUniqueInput[] | BillWhereUniqueInput;
-  deleteMany?: BillScalarWhereInput[] | BillScalarWhereInput;
-  updateMany?:
-    | BillUpdateManyWithWhereNestedInput[]
-    | BillUpdateManyWithWhereNestedInput;
-}
-
-export type PoliticianWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-  name?: String;
-}>;
-
-export interface BillUpdateWithWhereUniqueNestedInput {
-  where: BillWhereUniqueInput;
-  data: BillUpdateDataInput;
-}
-
-export interface NotificationUpdateInput {
-  label?: String;
-  type?: String;
-  user?: UserUpdateOneWithoutNotificationsInput;
-}
-
-export interface BillUpdateDataInput {
-  code?: String;
-  title?: String;
-  summary?: String;
-  congressNumber?: String;
-  chamber?: String;
-  committees?: String;
-  link?: String;
-  sponsor?: String;
-  coSponsors?: PoliticianUpdateManyWithoutCoBillsInput;
-  actions?: BillUpdateactionsInput;
-  followers?: UserUpdateManyWithoutMyBillsInput;
-  upvotes?: UserUpdateManyWithoutUpvotedBillsInput;
-  downvotes?: UserUpdateManyWithoutDownvotedBillsInput;
-  comments?: CommentUpdateManyWithoutBillInput;
-}
-
-export interface SubscriptionWhereInput {
-  newBillComment?: CommentWhereInput;
-  newBill?: BillWhereInput;
-  AND?: SubscriptionWhereInput[] | SubscriptionWhereInput;
-  OR?: SubscriptionWhereInput[] | SubscriptionWhereInput;
-  NOT?: SubscriptionWhereInput[] | SubscriptionWhereInput;
-}
-
-export interface NotificationWhereInput {
+export interface TopicWhereInput {
   id?: ID_Input;
   id_not?: ID_Input;
   id_in?: ID_Input[] | ID_Input;
@@ -1196,59 +1232,45 @@ export interface NotificationWhereInput {
   id_not_starts_with?: ID_Input;
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
-  label?: String;
-  label_not?: String;
-  label_in?: String[] | String;
-  label_not_in?: String[] | String;
-  label_lt?: String;
-  label_lte?: String;
-  label_gt?: String;
-  label_gte?: String;
-  label_contains?: String;
-  label_not_contains?: String;
-  label_starts_with?: String;
-  label_not_starts_with?: String;
-  label_ends_with?: String;
-  label_not_ends_with?: String;
-  type?: String;
-  type_not?: String;
-  type_in?: String[] | String;
-  type_not_in?: String[] | String;
-  type_lt?: String;
-  type_lte?: String;
-  type_gt?: String;
-  type_gte?: String;
-  type_contains?: String;
-  type_not_contains?: String;
-  type_starts_with?: String;
-  type_not_starts_with?: String;
-  type_ends_with?: String;
-  type_not_ends_with?: String;
-  user?: UserWhereInput;
-  AND?: NotificationWhereInput[] | NotificationWhereInput;
-  OR?: NotificationWhereInput[] | NotificationWhereInput;
-  NOT?: NotificationWhereInput[] | NotificationWhereInput;
+  title?: String;
+  title_not?: String;
+  title_in?: String[] | String;
+  title_not_in?: String[] | String;
+  title_lt?: String;
+  title_lte?: String;
+  title_gt?: String;
+  title_gte?: String;
+  title_contains?: String;
+  title_not_contains?: String;
+  title_starts_with?: String;
+  title_not_starts_with?: String;
+  title_ends_with?: String;
+  title_not_ends_with?: String;
+  comments_every?: CommentWhereInput;
+  comments_some?: CommentWhereInput;
+  comments_none?: CommentWhereInput;
+  commenters_every?: UserWhereInput;
+  commenters_some?: UserWhereInput;
+  commenters_none?: UserWhereInput;
+  AND?: TopicWhereInput[] | TopicWhereInput;
+  OR?: TopicWhereInput[] | TopicWhereInput;
+  NOT?: TopicWhereInput[] | TopicWhereInput;
 }
 
-export interface NotificationCreateInput {
-  label?: String;
-  type?: String;
-  user?: UserCreateOneWithoutNotificationsInput;
+export interface FeedCreateInput {
+  politicians?: PoliticianCreateManyInput;
+  bills?: BillCreateManyInput;
+  count: Int;
 }
 
-export interface CommentUpsertWithWhereUniqueWithoutPoliticiansMentionedInput {
+export interface CommentUpdateWithWhereUniqueWithoutPoliticiansMentionedInput {
   where: CommentWhereUniqueInput;
-  update: CommentUpdateWithoutPoliticiansMentionedDataInput;
-  create: CommentCreateWithoutPoliticiansMentionedInput;
+  data: CommentUpdateWithoutPoliticiansMentionedDataInput;
 }
 
-export interface CommentUpdateInput {
+export interface CommentUpdateManyMutationInput {
   content?: String;
   reply?: String;
-  bill?: BillUpdateOneWithoutCommentsInput;
-  author?: UserUpdateOneWithoutBillCommentsInput;
-  politiciansMentioned?: PoliticianUpdateManyWithoutMentionsInput;
-  topic?: TopicUpdateOneWithoutCommentsInput;
 }
 
 export interface BillWhereInput {
@@ -1407,23 +1429,33 @@ export interface CommentCreateInput {
   topic?: TopicCreateOneWithoutCommentsInput;
 }
 
-export interface CommentUpdateWithoutPoliticiansMentionedDataInput {
-  content?: String;
-  reply?: String;
-  bill?: BillUpdateOneWithoutCommentsInput;
-  author?: UserUpdateOneWithoutBillCommentsInput;
-  topic?: TopicUpdateOneWithoutCommentsInput;
+export interface CommentUpdateManyWithoutPoliticiansMentionedInput {
+  create?:
+    | CommentCreateWithoutPoliticiansMentionedInput[]
+    | CommentCreateWithoutPoliticiansMentionedInput;
+  delete?: CommentWhereUniqueInput[] | CommentWhereUniqueInput;
+  connect?: CommentWhereUniqueInput[] | CommentWhereUniqueInput;
+  disconnect?: CommentWhereUniqueInput[] | CommentWhereUniqueInput;
+  update?:
+    | CommentUpdateWithWhereUniqueWithoutPoliticiansMentionedInput[]
+    | CommentUpdateWithWhereUniqueWithoutPoliticiansMentionedInput;
+  upsert?:
+    | CommentUpsertWithWhereUniqueWithoutPoliticiansMentionedInput[]
+    | CommentUpsertWithWhereUniqueWithoutPoliticiansMentionedInput;
+  deleteMany?: CommentScalarWhereInput[] | CommentScalarWhereInput;
+  updateMany?:
+    | CommentUpdateManyWithWhereNestedInput[]
+    | CommentUpdateManyWithWhereNestedInput;
 }
 
-export interface PoliticianUpsertWithWhereUniqueWithoutCoBillsInput {
-  where: PoliticianWhereUniqueInput;
-  update: PoliticianUpdateWithoutCoBillsDataInput;
-  create: PoliticianCreateWithoutCoBillsInput;
-}
+export type TopicWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
 
-export interface CommentUpdateWithWhereUniqueWithoutPoliticiansMentionedInput {
-  where: CommentWhereUniqueInput;
-  data: CommentUpdateWithoutPoliticiansMentionedDataInput;
+export interface BillUpsertWithWhereUniqueNestedInput {
+  where: BillWhereUniqueInput;
+  update: BillUpdateDataInput;
+  create: BillCreateInput;
 }
 
 export interface UserUpsertWithoutMyPoliticiansInput {
@@ -1431,112 +1463,57 @@ export interface UserUpsertWithoutMyPoliticiansInput {
   create: UserCreateWithoutMyPoliticiansInput;
 }
 
-export interface BillUpdateWithoutUpvotesDataInput {
-  code?: String;
-  title?: String;
-  summary?: String;
-  congressNumber?: String;
-  chamber?: String;
-  committees?: String;
-  link?: String;
-  sponsor?: String;
-  coSponsors?: PoliticianUpdateManyWithoutCoBillsInput;
-  actions?: BillUpdateactionsInput;
-  followers?: UserUpdateManyWithoutMyBillsInput;
-  downvotes?: UserUpdateManyWithoutDownvotedBillsInput;
-  comments?: CommentUpdateManyWithoutBillInput;
-}
-
-export interface UserUpsertWithWhereUniqueWithoutUpvotedBillsInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateWithoutUpvotedBillsDataInput;
-  create: UserCreateWithoutUpvotedBillsInput;
-}
-
-export interface UserUpdateManyWithoutDownvotedBillsInput {
-  create?:
-    | UserCreateWithoutDownvotedBillsInput[]
-    | UserCreateWithoutDownvotedBillsInput;
+export interface UserUpdateManyWithoutMyBillsInput {
+  create?: UserCreateWithoutMyBillsInput[] | UserCreateWithoutMyBillsInput;
   delete?: UserWhereUniqueInput[] | UserWhereUniqueInput;
   connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
   disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
   update?:
-    | UserUpdateWithWhereUniqueWithoutDownvotedBillsInput[]
-    | UserUpdateWithWhereUniqueWithoutDownvotedBillsInput;
+    | UserUpdateWithWhereUniqueWithoutMyBillsInput[]
+    | UserUpdateWithWhereUniqueWithoutMyBillsInput;
   upsert?:
-    | UserUpsertWithWhereUniqueWithoutDownvotedBillsInput[]
-    | UserUpsertWithWhereUniqueWithoutDownvotedBillsInput;
+    | UserUpsertWithWhereUniqueWithoutMyBillsInput[]
+    | UserUpsertWithWhereUniqueWithoutMyBillsInput;
   deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput;
   updateMany?:
     | UserUpdateManyWithWhereNestedInput[]
     | UserUpdateManyWithWhereNestedInput;
 }
 
-export interface BillCreateInput {
-  code?: String;
-  title?: String;
-  summary?: String;
-  congressNumber?: String;
-  chamber?: String;
-  committees?: String;
-  link?: String;
-  sponsor?: String;
-  coSponsors?: PoliticianCreateManyWithoutCoBillsInput;
-  actions?: BillCreateactionsInput;
-  followers?: UserCreateManyWithoutMyBillsInput;
-  upvotes?: UserCreateManyWithoutUpvotedBillsInput;
-  downvotes?: UserCreateManyWithoutDownvotedBillsInput;
-  comments?: CommentCreateManyWithoutBillInput;
-}
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+  email?: String;
+}>;
 
-export interface UserUpdateWithWhereUniqueWithoutDownvotedBillsInput {
+export interface UserUpdateWithWhereUniqueWithoutMyBillsInput {
   where: UserWhereUniqueInput;
-  data: UserUpdateWithoutDownvotedBillsDataInput;
+  data: UserUpdateWithoutMyBillsDataInput;
 }
 
-export interface PoliticianCreateWithoutCoBillsInput {
-  party?: String;
-  name: String;
-  title?: String;
-  chamber?: String;
-  state?: String;
-  district?: Int;
-  nthCongress?: String;
-  phone?: String;
-  gender?: String;
-  image?: String;
-  largeImage?: String;
-  website?: String;
-  govUrl?: String;
-  followers?: UserCreateOneWithoutMyPoliticiansInput;
-  bills?: BillCreateManyInput;
-  mentions?: CommentCreateManyWithoutPoliticiansMentionedInput;
+export interface PoliticianUpsertWithWhereUniqueWithoutFollowersInput {
+  where: PoliticianWhereUniqueInput;
+  update: PoliticianUpdateWithoutFollowersDataInput;
+  create: PoliticianCreateWithoutFollowersInput;
 }
 
-export interface UserUpdateWithoutDownvotedBillsDataInput {
+export interface UserUpdateWithoutMyBillsDataInput {
   name?: String;
   email?: String;
   password?: String;
   permissions?: UserUpdatepermissionsInput;
   myPoliticians?: PoliticianUpdateManyWithoutFollowersInput;
-  myBills?: BillUpdateManyWithoutFollowersInput;
-  upvotedBills?: BillUpdateManyWithoutUpvotesInput;
+  upvotedBills?: BillUpdateManyInput;
+  downvotedBills?: BillUpdateManyInput;
   billComments?: CommentUpdateManyWithoutAuthorInput;
   topicComments?: TopicUpdateManyWithoutCommentersInput;
   notifications?: NotificationUpdateManyWithoutUserInput;
 }
 
-export interface UserCreateWithoutMyPoliticiansInput {
-  name: String;
-  email: String;
-  password?: String;
-  permissions?: UserCreatepermissionsInput;
-  myBills?: BillCreateManyWithoutFollowersInput;
-  upvotedBills?: BillCreateManyWithoutUpvotesInput;
-  downvotedBills?: BillCreateManyWithoutDownvotesInput;
-  billComments?: CommentCreateManyWithoutAuthorInput;
-  topicComments?: TopicCreateManyWithoutCommentersInput;
-  notifications?: NotificationCreateManyWithoutUserInput;
+export interface PoliticianCreateManyWithoutCoBillsInput {
+  create?:
+    | PoliticianCreateWithoutCoBillsInput[]
+    | PoliticianCreateWithoutCoBillsInput;
+  connect?: PoliticianWhereUniqueInput[] | PoliticianWhereUniqueInput;
 }
 
 export interface CommentUpdateManyWithoutAuthorInput {
@@ -1556,9 +1533,9 @@ export interface CommentUpdateManyWithoutAuthorInput {
     | CommentUpdateManyWithWhereNestedInput;
 }
 
-export interface BillCreateManyWithoutFollowersInput {
-  create?: BillCreateWithoutFollowersInput[] | BillCreateWithoutFollowersInput;
-  connect?: BillWhereUniqueInput[] | BillWhereUniqueInput;
+export interface UserCreateOneWithoutMyPoliticiansInput {
+  create?: UserCreateWithoutMyPoliticiansInput;
+  connect?: UserWhereUniqueInput;
 }
 
 export interface CommentUpdateWithWhereUniqueWithoutAuthorInput {
@@ -1566,8 +1543,8 @@ export interface CommentUpdateWithWhereUniqueWithoutAuthorInput {
   data: CommentUpdateWithoutAuthorDataInput;
 }
 
-export interface BillCreateactionsInput {
-  set?: String[] | String;
+export interface UserCreatepermissionsInput {
+  set?: Permission[] | Permission;
 }
 
 export interface CommentUpdateWithoutAuthorDataInput {
@@ -1578,17 +1555,20 @@ export interface CommentUpdateWithoutAuthorDataInput {
   topic?: TopicUpdateOneWithoutCommentsInput;
 }
 
-export interface UserCreateWithoutUpvotedBillsInput {
-  name: String;
-  email: String;
-  password?: String;
-  permissions?: UserCreatepermissionsInput;
-  myPoliticians?: PoliticianCreateManyWithoutFollowersInput;
-  myBills?: BillCreateManyWithoutFollowersInput;
-  downvotedBills?: BillCreateManyWithoutDownvotesInput;
-  billComments?: CommentCreateManyWithoutAuthorInput;
-  topicComments?: TopicCreateManyWithoutCommentersInput;
-  notifications?: NotificationCreateManyWithoutUserInput;
+export interface BillCreateWithoutFollowersInput {
+  code?: String;
+  title?: String;
+  summary?: String;
+  congressNumber?: String;
+  chamber?: String;
+  committees?: String;
+  link?: String;
+  sponsor?: String;
+  coSponsors?: PoliticianCreateManyWithoutCoBillsInput;
+  actions?: BillCreateactionsInput;
+  upvotes?: UserCreateManyInput;
+  downvotes?: UserCreateManyInput;
+  comments?: CommentCreateManyWithoutBillInput;
 }
 
 export interface BillUpdateOneWithoutCommentsInput {
@@ -1600,23 +1580,9 @@ export interface BillUpdateOneWithoutCommentsInput {
   connect?: BillWhereUniqueInput;
 }
 
-export interface PoliticianCreateWithoutFollowersInput {
-  party?: String;
-  name: String;
-  title?: String;
-  chamber?: String;
-  state?: String;
-  district?: Int;
-  nthCongress?: String;
-  phone?: String;
-  gender?: String;
-  image?: String;
-  largeImage?: String;
-  website?: String;
-  govUrl?: String;
-  bills?: BillCreateManyInput;
-  coBills?: BillCreateManyWithoutCoSponsorsInput;
-  mentions?: CommentCreateManyWithoutPoliticiansMentionedInput;
+export interface UserCreateManyInput {
+  create?: UserCreateInput[] | UserCreateInput;
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
 }
 
 export interface BillUpdateWithoutCommentsDataInput {
@@ -1631,15 +1597,15 @@ export interface BillUpdateWithoutCommentsDataInput {
   coSponsors?: PoliticianUpdateManyWithoutCoBillsInput;
   actions?: BillUpdateactionsInput;
   followers?: UserUpdateManyWithoutMyBillsInput;
-  upvotes?: UserUpdateManyWithoutUpvotedBillsInput;
-  downvotes?: UserUpdateManyWithoutDownvotedBillsInput;
+  upvotes?: UserUpdateManyInput;
+  downvotes?: UserUpdateManyInput;
 }
 
-export interface BillCreateManyWithoutCoSponsorsInput {
+export interface PoliticianCreateManyWithoutFollowersInput {
   create?:
-    | BillCreateWithoutCoSponsorsInput[]
-    | BillCreateWithoutCoSponsorsInput;
-  connect?: BillWhereUniqueInput[] | BillWhereUniqueInput;
+    | PoliticianCreateWithoutFollowersInput[]
+    | PoliticianCreateWithoutFollowersInput;
+  connect?: PoliticianWhereUniqueInput[] | PoliticianWhereUniqueInput;
 }
 
 export interface BillUpsertWithoutCommentsInput {
@@ -1647,9 +1613,9 @@ export interface BillUpsertWithoutCommentsInput {
   create: BillCreateWithoutCommentsInput;
 }
 
-export interface UserCreateManyWithoutMyBillsInput {
-  create?: UserCreateWithoutMyBillsInput[] | UserCreateWithoutMyBillsInput;
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+export interface BillCreateManyInput {
+  create?: BillCreateInput[] | BillCreateInput;
+  connect?: BillWhereUniqueInput[] | BillWhereUniqueInput;
 }
 
 export interface PoliticianUpdateManyWithoutMentionsInput {
@@ -1671,9 +1637,20 @@ export interface PoliticianUpdateManyWithoutMentionsInput {
     | PoliticianUpdateManyWithWhereNestedInput;
 }
 
-export interface BillCreateManyWithoutUpvotesInput {
-  create?: BillCreateWithoutUpvotesInput[] | BillCreateWithoutUpvotesInput;
-  connect?: BillWhereUniqueInput[] | BillWhereUniqueInput;
+export interface BillCreateWithoutCoSponsorsInput {
+  code?: String;
+  title?: String;
+  summary?: String;
+  congressNumber?: String;
+  chamber?: String;
+  committees?: String;
+  link?: String;
+  sponsor?: String;
+  actions?: BillCreateactionsInput;
+  followers?: UserCreateManyWithoutMyBillsInput;
+  upvotes?: UserCreateManyInput;
+  downvotes?: UserCreateManyInput;
+  comments?: CommentCreateManyWithoutBillInput;
 }
 
 export interface PoliticianUpdateWithWhereUniqueWithoutMentionsInput {
@@ -1681,11 +1658,17 @@ export interface PoliticianUpdateWithWhereUniqueWithoutMentionsInput {
   data: PoliticianUpdateWithoutMentionsDataInput;
 }
 
-export interface UserCreateManyWithoutDownvotedBillsInput {
-  create?:
-    | UserCreateWithoutDownvotedBillsInput[]
-    | UserCreateWithoutDownvotedBillsInput;
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+export interface UserCreateWithoutMyBillsInput {
+  name: String;
+  email: String;
+  password?: String;
+  permissions?: UserCreatepermissionsInput;
+  myPoliticians?: PoliticianCreateManyWithoutFollowersInput;
+  upvotedBills?: BillCreateManyInput;
+  downvotedBills?: BillCreateManyInput;
+  billComments?: CommentCreateManyWithoutAuthorInput;
+  topicComments?: TopicCreateManyWithoutCommentersInput;
+  notifications?: NotificationCreateManyWithoutUserInput;
 }
 
 export interface PoliticianUpdateWithoutMentionsDataInput {
@@ -1707,9 +1690,12 @@ export interface PoliticianUpdateWithoutMentionsDataInput {
   coBills?: BillUpdateManyWithoutCoSponsorsInput;
 }
 
-export interface CommentCreateManyWithoutAuthorInput {
-  create?: CommentCreateWithoutAuthorInput[] | CommentCreateWithoutAuthorInput;
-  connect?: CommentWhereUniqueInput[] | CommentWhereUniqueInput;
+export interface CommentCreateWithoutAuthorInput {
+  content?: String;
+  reply?: String;
+  bill?: BillCreateOneWithoutCommentsInput;
+  politiciansMentioned?: PoliticianCreateManyWithoutMentionsInput;
+  topic?: TopicCreateOneWithoutCommentsInput;
 }
 
 export interface BillUpdateManyWithoutCoSponsorsInput {
@@ -1731,9 +1717,20 @@ export interface BillUpdateManyWithoutCoSponsorsInput {
     | BillUpdateManyWithWhereNestedInput;
 }
 
-export interface BillCreateOneWithoutCommentsInput {
-  create?: BillCreateWithoutCommentsInput;
-  connect?: BillWhereUniqueInput;
+export interface BillCreateWithoutCommentsInput {
+  code?: String;
+  title?: String;
+  summary?: String;
+  congressNumber?: String;
+  chamber?: String;
+  committees?: String;
+  link?: String;
+  sponsor?: String;
+  coSponsors?: PoliticianCreateManyWithoutCoBillsInput;
+  actions?: BillCreateactionsInput;
+  followers?: UserCreateManyWithoutMyBillsInput;
+  upvotes?: UserCreateManyInput;
+  downvotes?: UserCreateManyInput;
 }
 
 export interface BillUpdateWithWhereUniqueWithoutCoSponsorsInput {
@@ -1741,11 +1738,23 @@ export interface BillUpdateWithWhereUniqueWithoutCoSponsorsInput {
   data: BillUpdateWithoutCoSponsorsDataInput;
 }
 
-export interface PoliticianCreateManyWithoutMentionsInput {
-  create?:
-    | PoliticianCreateWithoutMentionsInput[]
-    | PoliticianCreateWithoutMentionsInput;
-  connect?: PoliticianWhereUniqueInput[] | PoliticianWhereUniqueInput;
+export interface PoliticianCreateWithoutMentionsInput {
+  party?: String;
+  name: String;
+  title?: String;
+  chamber?: String;
+  state?: String;
+  district?: Int;
+  nthCongress?: String;
+  phone?: String;
+  gender?: String;
+  image?: String;
+  largeImage?: String;
+  website?: String;
+  govUrl?: String;
+  followers?: UserCreateOneWithoutMyPoliticiansInput;
+  bills?: BillCreateManyInput;
+  coBills?: BillCreateManyWithoutCoSponsorsInput;
 }
 
 export interface BillUpdateWithoutCoSponsorsDataInput {
@@ -1759,14 +1768,14 @@ export interface BillUpdateWithoutCoSponsorsDataInput {
   sponsor?: String;
   actions?: BillUpdateactionsInput;
   followers?: UserUpdateManyWithoutMyBillsInput;
-  upvotes?: UserUpdateManyWithoutUpvotedBillsInput;
-  downvotes?: UserUpdateManyWithoutDownvotedBillsInput;
+  upvotes?: UserUpdateManyInput;
+  downvotes?: UserUpdateManyInput;
   comments?: CommentUpdateManyWithoutBillInput;
 }
 
-export interface TopicCreateOneWithoutCommentsInput {
-  create?: TopicCreateWithoutCommentsInput;
-  connect?: TopicWhereUniqueInput;
+export interface TopicCreateWithoutCommentsInput {
+  title?: String;
+  commenters?: UserCreateManyWithoutTopicCommentsInput;
 }
 
 export interface CommentUpdateManyWithoutBillInput {
@@ -1786,11 +1795,17 @@ export interface CommentUpdateManyWithoutBillInput {
     | CommentUpdateManyWithWhereNestedInput;
 }
 
-export interface UserCreateManyWithoutTopicCommentsInput {
-  create?:
-    | UserCreateWithoutTopicCommentsInput[]
-    | UserCreateWithoutTopicCommentsInput;
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+export interface UserCreateWithoutTopicCommentsInput {
+  name: String;
+  email: String;
+  password?: String;
+  permissions?: UserCreatepermissionsInput;
+  myPoliticians?: PoliticianCreateManyWithoutFollowersInput;
+  myBills?: BillCreateManyWithoutFollowersInput;
+  upvotedBills?: BillCreateManyInput;
+  downvotedBills?: BillCreateManyInput;
+  billComments?: CommentCreateManyWithoutAuthorInput;
+  notifications?: NotificationCreateManyWithoutUserInput;
 }
 
 export interface CommentUpdateWithWhereUniqueWithoutBillInput {
@@ -1798,9 +1813,9 @@ export interface CommentUpdateWithWhereUniqueWithoutBillInput {
   data: CommentUpdateWithoutBillDataInput;
 }
 
-export interface BillCreateManyWithoutDownvotesInput {
-  create?: BillCreateWithoutDownvotesInput[] | BillCreateWithoutDownvotesInput;
-  connect?: BillWhereUniqueInput[] | BillWhereUniqueInput;
+export interface NotificationCreateWithoutUserInput {
+  label?: String;
+  type?: String;
 }
 
 export interface CommentUpdateWithoutBillDataInput {
@@ -1811,9 +1826,9 @@ export interface CommentUpdateWithoutBillDataInput {
   topic?: TopicUpdateOneWithoutCommentsInput;
 }
 
-export interface CommentCreateManyWithoutBillInput {
-  create?: CommentCreateWithoutBillInput[] | CommentCreateWithoutBillInput;
-  connect?: CommentWhereUniqueInput[] | CommentWhereUniqueInput;
+export interface TopicCreateWithoutCommentersInput {
+  title?: String;
+  comments?: CommentCreateManyWithoutTopicInput;
 }
 
 export interface UserUpdateOneWithoutBillCommentsInput {
@@ -1825,9 +1840,12 @@ export interface UserUpdateOneWithoutBillCommentsInput {
   connect?: UserWhereUniqueInput;
 }
 
-export interface UserCreateOneWithoutBillCommentsInput {
-  create?: UserCreateWithoutBillCommentsInput;
-  connect?: UserWhereUniqueInput;
+export interface CommentCreateWithoutTopicInput {
+  content?: String;
+  reply?: String;
+  bill?: BillCreateOneWithoutCommentsInput;
+  author?: UserCreateOneWithoutBillCommentsInput;
+  politiciansMentioned?: PoliticianCreateManyWithoutMentionsInput;
 }
 
 export interface UserUpdateWithoutBillCommentsDataInput {
@@ -1837,44 +1855,449 @@ export interface UserUpdateWithoutBillCommentsDataInput {
   permissions?: UserUpdatepermissionsInput;
   myPoliticians?: PoliticianUpdateManyWithoutFollowersInput;
   myBills?: BillUpdateManyWithoutFollowersInput;
-  upvotedBills?: BillUpdateManyWithoutUpvotesInput;
-  downvotedBills?: BillUpdateManyWithoutDownvotesInput;
+  upvotedBills?: BillUpdateManyInput;
+  downvotedBills?: BillUpdateManyInput;
   topicComments?: TopicUpdateManyWithoutCommentersInput;
   notifications?: NotificationUpdateManyWithoutUserInput;
 }
 
-export interface TopicCreateManyWithoutCommentersInput {
+export interface UserCreateWithoutBillCommentsInput {
+  name: String;
+  email: String;
+  password?: String;
+  permissions?: UserCreatepermissionsInput;
+  myPoliticians?: PoliticianCreateManyWithoutFollowersInput;
+  myBills?: BillCreateManyWithoutFollowersInput;
+  upvotedBills?: BillCreateManyInput;
+  downvotedBills?: BillCreateManyInput;
+  topicComments?: TopicCreateManyWithoutCommentersInput;
+  notifications?: NotificationCreateManyWithoutUserInput;
+}
+
+export interface TopicUpdateManyWithoutCommentersInput {
   create?:
     | TopicCreateWithoutCommentersInput[]
     | TopicCreateWithoutCommentersInput;
+  delete?: TopicWhereUniqueInput[] | TopicWhereUniqueInput;
   connect?: TopicWhereUniqueInput[] | TopicWhereUniqueInput;
-}
-
-export interface BillUpdateManyWithoutDownvotesInput {
-  create?: BillCreateWithoutDownvotesInput[] | BillCreateWithoutDownvotesInput;
-  delete?: BillWhereUniqueInput[] | BillWhereUniqueInput;
-  connect?: BillWhereUniqueInput[] | BillWhereUniqueInput;
-  disconnect?: BillWhereUniqueInput[] | BillWhereUniqueInput;
+  disconnect?: TopicWhereUniqueInput[] | TopicWhereUniqueInput;
   update?:
-    | BillUpdateWithWhereUniqueWithoutDownvotesInput[]
-    | BillUpdateWithWhereUniqueWithoutDownvotesInput;
+    | TopicUpdateWithWhereUniqueWithoutCommentersInput[]
+    | TopicUpdateWithWhereUniqueWithoutCommentersInput;
   upsert?:
-    | BillUpsertWithWhereUniqueWithoutDownvotesInput[]
-    | BillUpsertWithWhereUniqueWithoutDownvotesInput;
-  deleteMany?: BillScalarWhereInput[] | BillScalarWhereInput;
+    | TopicUpsertWithWhereUniqueWithoutCommentersInput[]
+    | TopicUpsertWithWhereUniqueWithoutCommentersInput;
+  deleteMany?: TopicScalarWhereInput[] | TopicScalarWhereInput;
   updateMany?:
-    | BillUpdateManyWithWhereNestedInput[]
-    | BillUpdateManyWithWhereNestedInput;
+    | TopicUpdateManyWithWhereNestedInput[]
+    | TopicUpdateManyWithWhereNestedInput;
 }
 
-export interface CommentCreateManyWithoutTopicInput {
+export interface CommentCreateWithoutBillInput {
+  content?: String;
+  reply?: String;
+  author?: UserCreateOneWithoutBillCommentsInput;
+  politiciansMentioned?: PoliticianCreateManyWithoutMentionsInput;
+  topic?: TopicCreateOneWithoutCommentsInput;
+}
+
+export interface TopicUpdateWithWhereUniqueWithoutCommentersInput {
+  where: TopicWhereUniqueInput;
+  data: TopicUpdateWithoutCommentersDataInput;
+}
+
+export interface CommentCreateWithoutPoliticiansMentionedInput {
+  content?: String;
+  reply?: String;
+  bill?: BillCreateOneWithoutCommentsInput;
+  author?: UserCreateOneWithoutBillCommentsInput;
+  topic?: TopicCreateOneWithoutCommentsInput;
+}
+
+export interface TopicUpdateWithoutCommentersDataInput {
+  title?: String;
+  comments?: CommentUpdateManyWithoutTopicInput;
+}
+
+export interface UserUpdateInput {
+  name?: String;
+  email?: String;
+  password?: String;
+  permissions?: UserUpdatepermissionsInput;
+  myPoliticians?: PoliticianUpdateManyWithoutFollowersInput;
+  myBills?: BillUpdateManyWithoutFollowersInput;
+  upvotedBills?: BillUpdateManyInput;
+  downvotedBills?: BillUpdateManyInput;
+  billComments?: CommentUpdateManyWithoutAuthorInput;
+  topicComments?: TopicUpdateManyWithoutCommentersInput;
+  notifications?: NotificationUpdateManyWithoutUserInput;
+}
+
+export interface CommentUpdateManyWithoutTopicInput {
   create?: CommentCreateWithoutTopicInput[] | CommentCreateWithoutTopicInput;
+  delete?: CommentWhereUniqueInput[] | CommentWhereUniqueInput;
   connect?: CommentWhereUniqueInput[] | CommentWhereUniqueInput;
+  disconnect?: CommentWhereUniqueInput[] | CommentWhereUniqueInput;
+  update?:
+    | CommentUpdateWithWhereUniqueWithoutTopicInput[]
+    | CommentUpdateWithWhereUniqueWithoutTopicInput;
+  upsert?:
+    | CommentUpsertWithWhereUniqueWithoutTopicInput[]
+    | CommentUpsertWithWhereUniqueWithoutTopicInput;
+  deleteMany?: CommentScalarWhereInput[] | CommentScalarWhereInput;
+  updateMany?:
+    | CommentUpdateManyWithWhereNestedInput[]
+    | CommentUpdateManyWithWhereNestedInput;
 }
 
-export interface BillUpdateWithWhereUniqueWithoutDownvotesInput {
-  where: BillWhereUniqueInput;
-  data: BillUpdateWithoutDownvotesDataInput;
+export interface TopicCreateInput {
+  title?: String;
+  comments?: CommentCreateManyWithoutTopicInput;
+  commenters?: UserCreateManyWithoutTopicCommentsInput;
+}
+
+export interface CommentUpdateWithWhereUniqueWithoutTopicInput {
+  where: CommentWhereUniqueInput;
+  data: CommentUpdateWithoutTopicDataInput;
+}
+
+export type CommentWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface CommentUpdateWithoutTopicDataInput {
+  content?: String;
+  reply?: String;
+  bill?: BillUpdateOneWithoutCommentsInput;
+  author?: UserUpdateOneWithoutBillCommentsInput;
+  politiciansMentioned?: PoliticianUpdateManyWithoutMentionsInput;
+}
+
+export interface FeedWhereInput {
+  politicians_every?: PoliticianWhereInput;
+  politicians_some?: PoliticianWhereInput;
+  politicians_none?: PoliticianWhereInput;
+  bills_every?: BillWhereInput;
+  bills_some?: BillWhereInput;
+  bills_none?: BillWhereInput;
+  count?: Int;
+  count_not?: Int;
+  count_in?: Int[] | Int;
+  count_not_in?: Int[] | Int;
+  count_lt?: Int;
+  count_lte?: Int;
+  count_gt?: Int;
+  count_gte?: Int;
+  AND?: FeedWhereInput[] | FeedWhereInput;
+  OR?: FeedWhereInput[] | FeedWhereInput;
+  NOT?: FeedWhereInput[] | FeedWhereInput;
+}
+
+export interface CommentUpsertWithWhereUniqueWithoutTopicInput {
+  where: CommentWhereUniqueInput;
+  update: CommentUpdateWithoutTopicDataInput;
+  create: CommentCreateWithoutTopicInput;
+}
+
+export interface NotificationUpdateInput {
+  label?: String;
+  type?: String;
+  user?: UserUpdateOneWithoutNotificationsInput;
+}
+
+export interface CommentScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  content?: String;
+  content_not?: String;
+  content_in?: String[] | String;
+  content_not_in?: String[] | String;
+  content_lt?: String;
+  content_lte?: String;
+  content_gt?: String;
+  content_gte?: String;
+  content_contains?: String;
+  content_not_contains?: String;
+  content_starts_with?: String;
+  content_not_starts_with?: String;
+  content_ends_with?: String;
+  content_not_ends_with?: String;
+  reply?: String;
+  reply_not?: String;
+  reply_in?: String[] | String;
+  reply_not_in?: String[] | String;
+  reply_lt?: String;
+  reply_lte?: String;
+  reply_gt?: String;
+  reply_gte?: String;
+  reply_contains?: String;
+  reply_not_contains?: String;
+  reply_starts_with?: String;
+  reply_not_starts_with?: String;
+  reply_ends_with?: String;
+  reply_not_ends_with?: String;
+  AND?: CommentScalarWhereInput[] | CommentScalarWhereInput;
+  OR?: CommentScalarWhereInput[] | CommentScalarWhereInput;
+  NOT?: CommentScalarWhereInput[] | CommentScalarWhereInput;
+}
+
+export interface NotificationCreateInput {
+  label?: String;
+  type?: String;
+  user?: UserCreateOneWithoutNotificationsInput;
+}
+
+export interface CommentUpdateManyWithWhereNestedInput {
+  where: CommentScalarWhereInput;
+  data: CommentUpdateManyDataInput;
+}
+
+export interface PoliticianCreateManyInput {
+  create?: PoliticianCreateInput[] | PoliticianCreateInput;
+  connect?: PoliticianWhereUniqueInput[] | PoliticianWhereUniqueInput;
+}
+
+export interface CommentUpdateManyDataInput {
+  content?: String;
+  reply?: String;
+}
+
+export interface CommentUpdateInput {
+  content?: String;
+  reply?: String;
+  bill?: BillUpdateOneWithoutCommentsInput;
+  author?: UserUpdateOneWithoutBillCommentsInput;
+  politiciansMentioned?: PoliticianUpdateManyWithoutMentionsInput;
+  topic?: TopicUpdateOneWithoutCommentsInput;
+}
+
+export interface TopicUpsertWithWhereUniqueWithoutCommentersInput {
+  where: TopicWhereUniqueInput;
+  update: TopicUpdateWithoutCommentersDataInput;
+  create: TopicCreateWithoutCommentersInput;
+}
+
+export interface PoliticianUpsertWithWhereUniqueWithoutCoBillsInput {
+  where: PoliticianWhereUniqueInput;
+  update: PoliticianUpdateWithoutCoBillsDataInput;
+  create: PoliticianCreateWithoutCoBillsInput;
+}
+
+export interface TopicScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  title?: String;
+  title_not?: String;
+  title_in?: String[] | String;
+  title_not_in?: String[] | String;
+  title_lt?: String;
+  title_lte?: String;
+  title_gt?: String;
+  title_gte?: String;
+  title_contains?: String;
+  title_not_contains?: String;
+  title_starts_with?: String;
+  title_not_starts_with?: String;
+  title_ends_with?: String;
+  title_not_ends_with?: String;
+  AND?: TopicScalarWhereInput[] | TopicScalarWhereInput;
+  OR?: TopicScalarWhereInput[] | TopicScalarWhereInput;
+  NOT?: TopicScalarWhereInput[] | TopicScalarWhereInput;
+}
+
+export interface UserUpsertWithWhereUniqueNestedInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateDataInput;
+  create: UserCreateInput;
+}
+
+export interface TopicUpdateManyWithWhereNestedInput {
+  where: TopicScalarWhereInput;
+  data: TopicUpdateManyDataInput;
+}
+
+export interface BillCreateInput {
+  code?: String;
+  title?: String;
+  summary?: String;
+  congressNumber?: String;
+  chamber?: String;
+  committees?: String;
+  link?: String;
+  sponsor?: String;
+  coSponsors?: PoliticianCreateManyWithoutCoBillsInput;
+  actions?: BillCreateactionsInput;
+  followers?: UserCreateManyWithoutMyBillsInput;
+  upvotes?: UserCreateManyInput;
+  downvotes?: UserCreateManyInput;
+  comments?: CommentCreateManyWithoutBillInput;
+}
+
+export interface TopicUpdateManyDataInput {
+  title?: String;
+}
+
+export interface UserCreateWithoutMyPoliticiansInput {
+  name: String;
+  email: String;
+  password?: String;
+  permissions?: UserCreatepermissionsInput;
+  myBills?: BillCreateManyWithoutFollowersInput;
+  upvotedBills?: BillCreateManyInput;
+  downvotedBills?: BillCreateManyInput;
+  billComments?: CommentCreateManyWithoutAuthorInput;
+  topicComments?: TopicCreateManyWithoutCommentersInput;
+  notifications?: NotificationCreateManyWithoutUserInput;
+}
+
+export interface NotificationUpdateManyWithoutUserInput {
+  create?:
+    | NotificationCreateWithoutUserInput[]
+    | NotificationCreateWithoutUserInput;
+  delete?: NotificationWhereUniqueInput[] | NotificationWhereUniqueInput;
+  connect?: NotificationWhereUniqueInput[] | NotificationWhereUniqueInput;
+  disconnect?: NotificationWhereUniqueInput[] | NotificationWhereUniqueInput;
+  update?:
+    | NotificationUpdateWithWhereUniqueWithoutUserInput[]
+    | NotificationUpdateWithWhereUniqueWithoutUserInput;
+  upsert?:
+    | NotificationUpsertWithWhereUniqueWithoutUserInput[]
+    | NotificationUpsertWithWhereUniqueWithoutUserInput;
+  deleteMany?: NotificationScalarWhereInput[] | NotificationScalarWhereInput;
+  updateMany?:
+    | NotificationUpdateManyWithWhereNestedInput[]
+    | NotificationUpdateManyWithWhereNestedInput;
+}
+
+export interface BillCreateactionsInput {
+  set?: String[] | String;
+}
+
+export interface NotificationUpdateWithWhereUniqueWithoutUserInput {
+  where: NotificationWhereUniqueInput;
+  data: NotificationUpdateWithoutUserDataInput;
+}
+
+export interface PoliticianCreateWithoutFollowersInput {
+  party?: String;
+  name: String;
+  title?: String;
+  chamber?: String;
+  state?: String;
+  district?: Int;
+  nthCongress?: String;
+  phone?: String;
+  gender?: String;
+  image?: String;
+  largeImage?: String;
+  website?: String;
+  govUrl?: String;
+  bills?: BillCreateManyInput;
+  coBills?: BillCreateManyWithoutCoSponsorsInput;
+  mentions?: CommentCreateManyWithoutPoliticiansMentionedInput;
+}
+
+export interface NotificationUpdateWithoutUserDataInput {
+  label?: String;
+  type?: String;
+}
+
+export interface UserCreateManyWithoutMyBillsInput {
+  create?: UserCreateWithoutMyBillsInput[] | UserCreateWithoutMyBillsInput;
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+}
+
+export interface NotificationUpsertWithWhereUniqueWithoutUserInput {
+  where: NotificationWhereUniqueInput;
+  update: NotificationUpdateWithoutUserDataInput;
+  create: NotificationCreateWithoutUserInput;
+}
+
+export interface BillCreateOneWithoutCommentsInput {
+  create?: BillCreateWithoutCommentsInput;
+  connect?: BillWhereUniqueInput;
+}
+
+export interface NotificationScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  label?: String;
+  label_not?: String;
+  label_in?: String[] | String;
+  label_not_in?: String[] | String;
+  label_lt?: String;
+  label_lte?: String;
+  label_gt?: String;
+  label_gte?: String;
+  label_contains?: String;
+  label_not_contains?: String;
+  label_starts_with?: String;
+  label_not_starts_with?: String;
+  label_ends_with?: String;
+  label_not_ends_with?: String;
+  type?: String;
+  type_not?: String;
+  type_in?: String[] | String;
+  type_not_in?: String[] | String;
+  type_lt?: String;
+  type_lte?: String;
+  type_gt?: String;
+  type_gte?: String;
+  type_contains?: String;
+  type_not_contains?: String;
+  type_starts_with?: String;
+  type_not_starts_with?: String;
+  type_ends_with?: String;
+  type_not_ends_with?: String;
+  AND?: NotificationScalarWhereInput[] | NotificationScalarWhereInput;
+  OR?: NotificationScalarWhereInput[] | NotificationScalarWhereInput;
+  NOT?: NotificationScalarWhereInput[] | NotificationScalarWhereInput;
+}
+
+export interface TopicCreateOneWithoutCommentsInput {
+  create?: TopicCreateWithoutCommentsInput;
+  connect?: TopicWhereUniqueInput;
+}
+
+export interface NotificationUpdateManyWithWhereNestedInput {
+  where: NotificationScalarWhereInput;
+  data: NotificationUpdateManyDataInput;
 }
 
 export interface NotificationCreateManyWithoutUserInput {
@@ -1884,33 +2307,33 @@ export interface NotificationCreateManyWithoutUserInput {
   connect?: NotificationWhereUniqueInput[] | NotificationWhereUniqueInput;
 }
 
-export interface BillUpdateWithoutDownvotesDataInput {
-  code?: String;
-  title?: String;
-  summary?: String;
-  congressNumber?: String;
-  chamber?: String;
-  committees?: String;
-  link?: String;
-  sponsor?: String;
-  coSponsors?: PoliticianUpdateManyWithoutCoBillsInput;
-  actions?: BillUpdateactionsInput;
-  followers?: UserUpdateManyWithoutMyBillsInput;
-  upvotes?: UserUpdateManyWithoutUpvotedBillsInput;
-  comments?: CommentUpdateManyWithoutBillInput;
+export interface NotificationUpdateManyDataInput {
+  label?: String;
+  type?: String;
 }
 
-export interface CommentCreateManyWithoutPoliticiansMentionedInput {
-  create?:
-    | CommentCreateWithoutPoliticiansMentionedInput[]
-    | CommentCreateWithoutPoliticiansMentionedInput;
+export interface CommentCreateManyWithoutTopicInput {
+  create?: CommentCreateWithoutTopicInput[] | CommentCreateWithoutTopicInput;
   connect?: CommentWhereUniqueInput[] | CommentWhereUniqueInput;
 }
 
-export interface BillUpsertWithWhereUniqueWithoutDownvotesInput {
-  where: BillWhereUniqueInput;
-  update: BillUpdateWithoutDownvotesDataInput;
-  create: BillCreateWithoutDownvotesInput;
+export interface UserUpsertWithoutBillCommentsInput {
+  update: UserUpdateWithoutBillCommentsDataInput;
+  create: UserCreateWithoutBillCommentsInput;
+}
+
+export interface CommentCreateManyWithoutBillInput {
+  create?: CommentCreateWithoutBillInput[] | CommentCreateWithoutBillInput;
+  connect?: CommentWhereUniqueInput[] | CommentWhereUniqueInput;
+}
+
+export interface TopicUpdateOneWithoutCommentsInput {
+  create?: TopicCreateWithoutCommentsInput;
+  update?: TopicUpdateWithoutCommentsDataInput;
+  upsert?: TopicUpsertWithoutCommentsInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
+  connect?: TopicWhereUniqueInput;
 }
 
 export interface BillUpdateInput {
@@ -1925,9 +2348,242 @@ export interface BillUpdateInput {
   coSponsors?: PoliticianUpdateManyWithoutCoBillsInput;
   actions?: BillUpdateactionsInput;
   followers?: UserUpdateManyWithoutMyBillsInput;
-  upvotes?: UserUpdateManyWithoutUpvotedBillsInput;
-  downvotes?: UserUpdateManyWithoutDownvotedBillsInput;
+  upvotes?: UserUpdateManyInput;
+  downvotes?: UserUpdateManyInput;
   comments?: CommentUpdateManyWithoutBillInput;
+}
+
+export interface TopicUpdateWithoutCommentsDataInput {
+  title?: String;
+  commenters?: UserUpdateManyWithoutTopicCommentsInput;
+}
+
+export interface CommentCreateOneInput {
+  create?: CommentCreateInput;
+  connect?: CommentWhereUniqueInput;
+}
+
+export interface UserUpdateManyWithoutTopicCommentsInput {
+  create?:
+    | UserCreateWithoutTopicCommentsInput[]
+    | UserCreateWithoutTopicCommentsInput;
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  update?:
+    | UserUpdateWithWhereUniqueWithoutTopicCommentsInput[]
+    | UserUpdateWithWhereUniqueWithoutTopicCommentsInput;
+  upsert?:
+    | UserUpsertWithWhereUniqueWithoutTopicCommentsInput[]
+    | UserUpsertWithWhereUniqueWithoutTopicCommentsInput;
+  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput;
+  updateMany?:
+    | UserUpdateManyWithWhereNestedInput[]
+    | UserUpdateManyWithWhereNestedInput;
+}
+
+export interface UserUpdateWithoutNotificationsDataInput {
+  name?: String;
+  email?: String;
+  password?: String;
+  permissions?: UserUpdatepermissionsInput;
+  myPoliticians?: PoliticianUpdateManyWithoutFollowersInput;
+  myBills?: BillUpdateManyWithoutFollowersInput;
+  upvotedBills?: BillUpdateManyInput;
+  downvotedBills?: BillUpdateManyInput;
+  billComments?: CommentUpdateManyWithoutAuthorInput;
+  topicComments?: TopicUpdateManyWithoutCommentersInput;
+}
+
+export interface UserUpdateWithWhereUniqueWithoutTopicCommentsInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateWithoutTopicCommentsDataInput;
+}
+
+export type PoliticianWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+  name?: String;
+}>;
+
+export interface UserUpdateWithoutTopicCommentsDataInput {
+  name?: String;
+  email?: String;
+  password?: String;
+  permissions?: UserUpdatepermissionsInput;
+  myPoliticians?: PoliticianUpdateManyWithoutFollowersInput;
+  myBills?: BillUpdateManyWithoutFollowersInput;
+  upvotedBills?: BillUpdateManyInput;
+  downvotedBills?: BillUpdateManyInput;
+  billComments?: CommentUpdateManyWithoutAuthorInput;
+  notifications?: NotificationUpdateManyWithoutUserInput;
+}
+
+export interface BillUpdateManyMutationInput {
+  code?: String;
+  title?: String;
+  summary?: String;
+  congressNumber?: String;
+  chamber?: String;
+  committees?: String;
+  link?: String;
+  sponsor?: String;
+  actions?: BillUpdateactionsInput;
+}
+
+export interface UserUpsertWithWhereUniqueWithoutTopicCommentsInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutTopicCommentsDataInput;
+  create: UserCreateWithoutTopicCommentsInput;
+}
+
+export interface CommentUpsertWithWhereUniqueWithoutPoliticiansMentionedInput {
+  where: CommentWhereUniqueInput;
+  update: CommentUpdateWithoutPoliticiansMentionedDataInput;
+  create: CommentCreateWithoutPoliticiansMentionedInput;
+}
+
+export interface UserScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  email?: String;
+  email_not?: String;
+  email_in?: String[] | String;
+  email_not_in?: String[] | String;
+  email_lt?: String;
+  email_lte?: String;
+  email_gt?: String;
+  email_gte?: String;
+  email_contains?: String;
+  email_not_contains?: String;
+  email_starts_with?: String;
+  email_not_starts_with?: String;
+  email_ends_with?: String;
+  email_not_ends_with?: String;
+  password?: String;
+  password_not?: String;
+  password_in?: String[] | String;
+  password_not_in?: String[] | String;
+  password_lt?: String;
+  password_lte?: String;
+  password_gt?: String;
+  password_gte?: String;
+  password_contains?: String;
+  password_not_contains?: String;
+  password_starts_with?: String;
+  password_not_starts_with?: String;
+  password_ends_with?: String;
+  password_not_ends_with?: String;
+  AND?: UserScalarWhereInput[] | UserScalarWhereInput;
+  OR?: UserScalarWhereInput[] | UserScalarWhereInput;
+  NOT?: UserScalarWhereInput[] | UserScalarWhereInput;
+}
+
+export interface BillCreateManyWithoutFollowersInput {
+  create?: BillCreateWithoutFollowersInput[] | BillCreateWithoutFollowersInput;
+  connect?: BillWhereUniqueInput[] | BillWhereUniqueInput;
+}
+
+export interface UserUpdateManyWithWhereNestedInput {
+  where: UserScalarWhereInput;
+  data: UserUpdateManyDataInput;
+}
+
+export interface BillCreateManyWithoutCoSponsorsInput {
+  create?:
+    | BillCreateWithoutCoSponsorsInput[]
+    | BillCreateWithoutCoSponsorsInput;
+  connect?: BillWhereUniqueInput[] | BillWhereUniqueInput;
+}
+
+export interface UserUpdateManyDataInput {
+  name?: String;
+  email?: String;
+  password?: String;
+  permissions?: UserUpdatepermissionsInput;
+}
+
+export interface PoliticianCreateManyWithoutMentionsInput {
+  create?:
+    | PoliticianCreateWithoutMentionsInput[]
+    | PoliticianCreateWithoutMentionsInput;
+  connect?: PoliticianWhereUniqueInput[] | PoliticianWhereUniqueInput;
+}
+
+export interface TopicUpsertWithoutCommentsInput {
+  update: TopicUpdateWithoutCommentsDataInput;
+  create: TopicCreateWithoutCommentsInput;
+}
+
+export interface TopicCreateManyWithoutCommentersInput {
+  create?:
+    | TopicCreateWithoutCommentersInput[]
+    | TopicCreateWithoutCommentersInput;
+  connect?: TopicWhereUniqueInput[] | TopicWhereUniqueInput;
+}
+
+export interface CommentUpsertWithWhereUniqueWithoutBillInput {
+  where: CommentWhereUniqueInput;
+  update: CommentUpdateWithoutBillDataInput;
+  create: CommentCreateWithoutBillInput;
+}
+
+export interface CommentCreateManyWithoutPoliticiansMentionedInput {
+  create?:
+    | CommentCreateWithoutPoliticiansMentionedInput[]
+    | CommentCreateWithoutPoliticiansMentionedInput;
+  connect?: CommentWhereUniqueInput[] | CommentWhereUniqueInput;
+}
+
+export interface BillUpsertWithWhereUniqueWithoutCoSponsorsInput {
+  where: BillWhereUniqueInput;
+  update: BillUpdateWithoutCoSponsorsDataInput;
+  create: BillCreateWithoutCoSponsorsInput;
+}
+
+export interface PoliticianUpdateInput {
+  party?: String;
+  name?: String;
+  title?: String;
+  chamber?: String;
+  state?: String;
+  district?: Int;
+  nthCongress?: String;
+  phone?: String;
+  gender?: String;
+  image?: String;
+  largeImage?: String;
+  website?: String;
+  govUrl?: String;
+  followers?: UserUpdateOneWithoutMyPoliticiansInput;
+  bills?: BillUpdateManyInput;
+  coBills?: BillUpdateManyWithoutCoSponsorsInput;
+  mentions?: CommentUpdateManyWithoutPoliticiansMentionedInput;
 }
 
 export interface BillScalarWhereInput {
@@ -2062,9 +2718,12 @@ export interface BillScalarWhereInput {
   NOT?: BillScalarWhereInput[] | BillScalarWhereInput;
 }
 
-export interface PoliticianUpdateWithWhereUniqueWithoutCoBillsInput {
-  where: PoliticianWhereUniqueInput;
-  data: PoliticianUpdateWithoutCoBillsDataInput;
+export interface SubscriptionWhereInput {
+  newBillComment?: CommentWhereInput;
+  newBill?: BillWhereInput;
+  AND?: SubscriptionWhereInput[] | SubscriptionWhereInput;
+  OR?: SubscriptionWhereInput[] | SubscriptionWhereInput;
+  NOT?: SubscriptionWhereInput[] | SubscriptionWhereInput;
 }
 
 export interface BillUpdateManyWithWhereNestedInput {
@@ -2072,13 +2731,23 @@ export interface BillUpdateManyWithWhereNestedInput {
   data: BillUpdateManyDataInput;
 }
 
-export interface UserUpdateOneWithoutMyPoliticiansInput {
-  create?: UserCreateWithoutMyPoliticiansInput;
-  update?: UserUpdateWithoutMyPoliticiansDataInput;
-  upsert?: UserUpsertWithoutMyPoliticiansInput;
-  delete?: Boolean;
-  disconnect?: Boolean;
-  connect?: UserWhereUniqueInput;
+export interface PoliticianCreateWithoutCoBillsInput {
+  party?: String;
+  name: String;
+  title?: String;
+  chamber?: String;
+  state?: String;
+  district?: Int;
+  nthCongress?: String;
+  phone?: String;
+  gender?: String;
+  image?: String;
+  largeImage?: String;
+  website?: String;
+  govUrl?: String;
+  followers?: UserCreateOneWithoutMyPoliticiansInput;
+  bills?: BillCreateManyInput;
+  mentions?: CommentCreateManyWithoutPoliticiansMentionedInput;
 }
 
 export interface BillUpdateManyDataInput {
@@ -2093,786 +2762,9 @@ export interface BillUpdateManyDataInput {
   actions?: BillUpdateactionsInput;
 }
 
-export interface UserUpdatepermissionsInput {
-  set?: Permission[] | Permission;
-}
-
-export interface TopicUpdateManyWithoutCommentersInput {
-  create?:
-    | TopicCreateWithoutCommentersInput[]
-    | TopicCreateWithoutCommentersInput;
-  delete?: TopicWhereUniqueInput[] | TopicWhereUniqueInput;
-  connect?: TopicWhereUniqueInput[] | TopicWhereUniqueInput;
-  disconnect?: TopicWhereUniqueInput[] | TopicWhereUniqueInput;
-  update?:
-    | TopicUpdateWithWhereUniqueWithoutCommentersInput[]
-    | TopicUpdateWithWhereUniqueWithoutCommentersInput;
-  upsert?:
-    | TopicUpsertWithWhereUniqueWithoutCommentersInput[]
-    | TopicUpsertWithWhereUniqueWithoutCommentersInput;
-  deleteMany?: TopicScalarWhereInput[] | TopicScalarWhereInput;
-  updateMany?:
-    | TopicUpdateManyWithWhereNestedInput[]
-    | TopicUpdateManyWithWhereNestedInput;
-}
-
-export interface UserCreateInput {
-  name: String;
-  email: String;
-  password?: String;
-  permissions?: UserCreatepermissionsInput;
-  myPoliticians?: PoliticianCreateManyWithoutFollowersInput;
-  myBills?: BillCreateManyWithoutFollowersInput;
-  upvotedBills?: BillCreateManyWithoutUpvotesInput;
-  downvotedBills?: BillCreateManyWithoutDownvotesInput;
-  billComments?: CommentCreateManyWithoutAuthorInput;
-  topicComments?: TopicCreateManyWithoutCommentersInput;
-  notifications?: NotificationCreateManyWithoutUserInput;
-}
-
-export interface TopicUpdateWithWhereUniqueWithoutCommentersInput {
-  where: TopicWhereUniqueInput;
-  data: TopicUpdateWithoutCommentersDataInput;
-}
-
-export interface BillCreateOneInput {
-  create?: BillCreateInput;
-  connect?: BillWhereUniqueInput;
-}
-
-export interface TopicUpdateWithoutCommentersDataInput {
-  title?: String;
-  comments?: CommentUpdateManyWithoutTopicInput;
-}
-
-export interface PoliticianUpdateManyMutationInput {
-  party?: String;
-  name?: String;
-  title?: String;
-  chamber?: String;
-  state?: String;
-  district?: Int;
-  nthCongress?: String;
-  phone?: String;
-  gender?: String;
-  image?: String;
-  largeImage?: String;
-  website?: String;
-  govUrl?: String;
-}
-
-export interface CommentUpdateManyWithoutTopicInput {
-  create?: CommentCreateWithoutTopicInput[] | CommentCreateWithoutTopicInput;
-  delete?: CommentWhereUniqueInput[] | CommentWhereUniqueInput;
+export interface CommentCreateManyWithoutAuthorInput {
+  create?: CommentCreateWithoutAuthorInput[] | CommentCreateWithoutAuthorInput;
   connect?: CommentWhereUniqueInput[] | CommentWhereUniqueInput;
-  disconnect?: CommentWhereUniqueInput[] | CommentWhereUniqueInput;
-  update?:
-    | CommentUpdateWithWhereUniqueWithoutTopicInput[]
-    | CommentUpdateWithWhereUniqueWithoutTopicInput;
-  upsert?:
-    | CommentUpsertWithWhereUniqueWithoutTopicInput[]
-    | CommentUpsertWithWhereUniqueWithoutTopicInput;
-  deleteMany?: CommentScalarWhereInput[] | CommentScalarWhereInput;
-  updateMany?:
-    | CommentUpdateManyWithWhereNestedInput[]
-    | CommentUpdateManyWithWhereNestedInput;
-}
-
-export interface NotificationUpdateManyMutationInput {
-  label?: String;
-  type?: String;
-}
-
-export interface CommentUpdateWithWhereUniqueWithoutTopicInput {
-  where: CommentWhereUniqueInput;
-  data: CommentUpdateWithoutTopicDataInput;
-}
-
-export interface UserUpdateOneWithoutNotificationsInput {
-  create?: UserCreateWithoutNotificationsInput;
-  update?: UserUpdateWithoutNotificationsDataInput;
-  upsert?: UserUpsertWithoutNotificationsInput;
-  delete?: Boolean;
-  disconnect?: Boolean;
-  connect?: UserWhereUniqueInput;
-}
-
-export interface CommentUpdateWithoutTopicDataInput {
-  content?: String;
-  reply?: String;
-  bill?: BillUpdateOneWithoutCommentsInput;
-  author?: UserUpdateOneWithoutBillCommentsInput;
-  politiciansMentioned?: PoliticianUpdateManyWithoutMentionsInput;
-}
-
-export interface UserCreateOneWithoutNotificationsInput {
-  create?: UserCreateWithoutNotificationsInput;
-  connect?: UserWhereUniqueInput;
-}
-
-export interface CommentUpsertWithWhereUniqueWithoutTopicInput {
-  where: CommentWhereUniqueInput;
-  update: CommentUpdateWithoutTopicDataInput;
-  create: CommentCreateWithoutTopicInput;
-}
-
-export type TopicWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
-
-export interface CommentScalarWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  content?: String;
-  content_not?: String;
-  content_in?: String[] | String;
-  content_not_in?: String[] | String;
-  content_lt?: String;
-  content_lte?: String;
-  content_gt?: String;
-  content_gte?: String;
-  content_contains?: String;
-  content_not_contains?: String;
-  content_starts_with?: String;
-  content_not_starts_with?: String;
-  content_ends_with?: String;
-  content_not_ends_with?: String;
-  reply?: String;
-  reply_not?: String;
-  reply_in?: String[] | String;
-  reply_not_in?: String[] | String;
-  reply_lt?: String;
-  reply_lte?: String;
-  reply_gt?: String;
-  reply_gte?: String;
-  reply_contains?: String;
-  reply_not_contains?: String;
-  reply_starts_with?: String;
-  reply_not_starts_with?: String;
-  reply_ends_with?: String;
-  reply_not_ends_with?: String;
-  AND?: CommentScalarWhereInput[] | CommentScalarWhereInput;
-  OR?: CommentScalarWhereInput[] | CommentScalarWhereInput;
-  NOT?: CommentScalarWhereInput[] | CommentScalarWhereInput;
-}
-
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-  email?: String;
-}>;
-
-export interface CommentUpdateManyWithWhereNestedInput {
-  where: CommentScalarWhereInput;
-  data: CommentUpdateManyDataInput;
-}
-
-export interface UserCreateOneWithoutMyPoliticiansInput {
-  create?: UserCreateWithoutMyPoliticiansInput;
-  connect?: UserWhereUniqueInput;
-}
-
-export interface CommentUpdateManyDataInput {
-  content?: String;
-  reply?: String;
-}
-
-export interface BillCreateWithoutFollowersInput {
-  code?: String;
-  title?: String;
-  summary?: String;
-  congressNumber?: String;
-  chamber?: String;
-  committees?: String;
-  link?: String;
-  sponsor?: String;
-  coSponsors?: PoliticianCreateManyWithoutCoBillsInput;
-  actions?: BillCreateactionsInput;
-  upvotes?: UserCreateManyWithoutUpvotedBillsInput;
-  downvotes?: UserCreateManyWithoutDownvotedBillsInput;
-  comments?: CommentCreateManyWithoutBillInput;
-}
-
-export interface TopicUpsertWithWhereUniqueWithoutCommentersInput {
-  where: TopicWhereUniqueInput;
-  update: TopicUpdateWithoutCommentersDataInput;
-  create: TopicCreateWithoutCommentersInput;
-}
-
-export interface PoliticianCreateManyWithoutFollowersInput {
-  create?:
-    | PoliticianCreateWithoutFollowersInput[]
-    | PoliticianCreateWithoutFollowersInput;
-  connect?: PoliticianWhereUniqueInput[] | PoliticianWhereUniqueInput;
-}
-
-export interface TopicScalarWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  title?: String;
-  title_not?: String;
-  title_in?: String[] | String;
-  title_not_in?: String[] | String;
-  title_lt?: String;
-  title_lte?: String;
-  title_gt?: String;
-  title_gte?: String;
-  title_contains?: String;
-  title_not_contains?: String;
-  title_starts_with?: String;
-  title_not_starts_with?: String;
-  title_ends_with?: String;
-  title_not_ends_with?: String;
-  AND?: TopicScalarWhereInput[] | TopicScalarWhereInput;
-  OR?: TopicScalarWhereInput[] | TopicScalarWhereInput;
-  NOT?: TopicScalarWhereInput[] | TopicScalarWhereInput;
-}
-
-export interface BillCreateWithoutCoSponsorsInput {
-  code?: String;
-  title?: String;
-  summary?: String;
-  congressNumber?: String;
-  chamber?: String;
-  committees?: String;
-  link?: String;
-  sponsor?: String;
-  actions?: BillCreateactionsInput;
-  followers?: UserCreateManyWithoutMyBillsInput;
-  upvotes?: UserCreateManyWithoutUpvotedBillsInput;
-  downvotes?: UserCreateManyWithoutDownvotedBillsInput;
-  comments?: CommentCreateManyWithoutBillInput;
-}
-
-export interface TopicUpdateManyWithWhereNestedInput {
-  where: TopicScalarWhereInput;
-  data: TopicUpdateManyDataInput;
-}
-
-export interface BillCreateWithoutUpvotesInput {
-  code?: String;
-  title?: String;
-  summary?: String;
-  congressNumber?: String;
-  chamber?: String;
-  committees?: String;
-  link?: String;
-  sponsor?: String;
-  coSponsors?: PoliticianCreateManyWithoutCoBillsInput;
-  actions?: BillCreateactionsInput;
-  followers?: UserCreateManyWithoutMyBillsInput;
-  downvotes?: UserCreateManyWithoutDownvotedBillsInput;
-  comments?: CommentCreateManyWithoutBillInput;
-}
-
-export interface TopicUpdateManyDataInput {
-  title?: String;
-}
-
-export interface CommentCreateWithoutAuthorInput {
-  content?: String;
-  reply?: String;
-  bill?: BillCreateOneWithoutCommentsInput;
-  politiciansMentioned?: PoliticianCreateManyWithoutMentionsInput;
-  topic?: TopicCreateOneWithoutCommentsInput;
-}
-
-export interface NotificationUpdateManyWithoutUserInput {
-  create?:
-    | NotificationCreateWithoutUserInput[]
-    | NotificationCreateWithoutUserInput;
-  delete?: NotificationWhereUniqueInput[] | NotificationWhereUniqueInput;
-  connect?: NotificationWhereUniqueInput[] | NotificationWhereUniqueInput;
-  disconnect?: NotificationWhereUniqueInput[] | NotificationWhereUniqueInput;
-  update?:
-    | NotificationUpdateWithWhereUniqueWithoutUserInput[]
-    | NotificationUpdateWithWhereUniqueWithoutUserInput;
-  upsert?:
-    | NotificationUpsertWithWhereUniqueWithoutUserInput[]
-    | NotificationUpsertWithWhereUniqueWithoutUserInput;
-  deleteMany?: NotificationScalarWhereInput[] | NotificationScalarWhereInput;
-  updateMany?:
-    | NotificationUpdateManyWithWhereNestedInput[]
-    | NotificationUpdateManyWithWhereNestedInput;
-}
-
-export interface PoliticianCreateWithoutMentionsInput {
-  party?: String;
-  name: String;
-  title?: String;
-  chamber?: String;
-  state?: String;
-  district?: Int;
-  nthCongress?: String;
-  phone?: String;
-  gender?: String;
-  image?: String;
-  largeImage?: String;
-  website?: String;
-  govUrl?: String;
-  followers?: UserCreateOneWithoutMyPoliticiansInput;
-  bills?: BillCreateManyInput;
-  coBills?: BillCreateManyWithoutCoSponsorsInput;
-}
-
-export interface NotificationUpdateWithWhereUniqueWithoutUserInput {
-  where: NotificationWhereUniqueInput;
-  data: NotificationUpdateWithoutUserDataInput;
-}
-
-export interface UserCreateWithoutTopicCommentsInput {
-  name: String;
-  email: String;
-  password?: String;
-  permissions?: UserCreatepermissionsInput;
-  myPoliticians?: PoliticianCreateManyWithoutFollowersInput;
-  myBills?: BillCreateManyWithoutFollowersInput;
-  upvotedBills?: BillCreateManyWithoutUpvotesInput;
-  downvotedBills?: BillCreateManyWithoutDownvotesInput;
-  billComments?: CommentCreateManyWithoutAuthorInput;
-  notifications?: NotificationCreateManyWithoutUserInput;
-}
-
-export interface NotificationUpdateWithoutUserDataInput {
-  label?: String;
-  type?: String;
-}
-
-export interface CommentCreateWithoutBillInput {
-  content?: String;
-  reply?: String;
-  author?: UserCreateOneWithoutBillCommentsInput;
-  politiciansMentioned?: PoliticianCreateManyWithoutMentionsInput;
-  topic?: TopicCreateOneWithoutCommentsInput;
-}
-
-export interface NotificationUpsertWithWhereUniqueWithoutUserInput {
-  where: NotificationWhereUniqueInput;
-  update: NotificationUpdateWithoutUserDataInput;
-  create: NotificationCreateWithoutUserInput;
-}
-
-export interface TopicCreateWithoutCommentersInput {
-  title?: String;
-  comments?: CommentCreateManyWithoutTopicInput;
-}
-
-export interface NotificationScalarWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  label?: String;
-  label_not?: String;
-  label_in?: String[] | String;
-  label_not_in?: String[] | String;
-  label_lt?: String;
-  label_lte?: String;
-  label_gt?: String;
-  label_gte?: String;
-  label_contains?: String;
-  label_not_contains?: String;
-  label_starts_with?: String;
-  label_not_starts_with?: String;
-  label_ends_with?: String;
-  label_not_ends_with?: String;
-  type?: String;
-  type_not?: String;
-  type_in?: String[] | String;
-  type_not_in?: String[] | String;
-  type_lt?: String;
-  type_lte?: String;
-  type_gt?: String;
-  type_gte?: String;
-  type_contains?: String;
-  type_not_contains?: String;
-  type_starts_with?: String;
-  type_not_starts_with?: String;
-  type_ends_with?: String;
-  type_not_ends_with?: String;
-  AND?: NotificationScalarWhereInput[] | NotificationScalarWhereInput;
-  OR?: NotificationScalarWhereInput[] | NotificationScalarWhereInput;
-  NOT?: NotificationScalarWhereInput[] | NotificationScalarWhereInput;
-}
-
-export interface NotificationCreateWithoutUserInput {
-  label?: String;
-  type?: String;
-}
-
-export interface NotificationUpdateManyWithWhereNestedInput {
-  where: NotificationScalarWhereInput;
-  data: NotificationUpdateManyDataInput;
-}
-
-export interface PoliticianUpdateManyWithoutCoBillsInput {
-  create?:
-    | PoliticianCreateWithoutCoBillsInput[]
-    | PoliticianCreateWithoutCoBillsInput;
-  delete?: PoliticianWhereUniqueInput[] | PoliticianWhereUniqueInput;
-  connect?: PoliticianWhereUniqueInput[] | PoliticianWhereUniqueInput;
-  disconnect?: PoliticianWhereUniqueInput[] | PoliticianWhereUniqueInput;
-  update?:
-    | PoliticianUpdateWithWhereUniqueWithoutCoBillsInput[]
-    | PoliticianUpdateWithWhereUniqueWithoutCoBillsInput;
-  upsert?:
-    | PoliticianUpsertWithWhereUniqueWithoutCoBillsInput[]
-    | PoliticianUpsertWithWhereUniqueWithoutCoBillsInput;
-  deleteMany?: PoliticianScalarWhereInput[] | PoliticianScalarWhereInput;
-  updateMany?:
-    | PoliticianUpdateManyWithWhereNestedInput[]
-    | PoliticianUpdateManyWithWhereNestedInput;
-}
-
-export interface NotificationUpdateManyDataInput {
-  label?: String;
-  type?: String;
-}
-
-export interface UserUpdateWithoutMyPoliticiansDataInput {
-  name?: String;
-  email?: String;
-  password?: String;
-  permissions?: UserUpdatepermissionsInput;
-  myBills?: BillUpdateManyWithoutFollowersInput;
-  upvotedBills?: BillUpdateManyWithoutUpvotesInput;
-  downvotedBills?: BillUpdateManyWithoutDownvotesInput;
-  billComments?: CommentUpdateManyWithoutAuthorInput;
-  topicComments?: TopicUpdateManyWithoutCommentersInput;
-  notifications?: NotificationUpdateManyWithoutUserInput;
-}
-
-export interface UserUpsertWithoutBillCommentsInput {
-  update: UserUpdateWithoutBillCommentsDataInput;
-  create: UserCreateWithoutBillCommentsInput;
-}
-
-export interface TopicUpdateInput {
-  title?: String;
-  comments?: CommentUpdateManyWithoutTopicInput;
-  commenters?: UserUpdateManyWithoutTopicCommentsInput;
-}
-
-export interface TopicUpdateOneWithoutCommentsInput {
-  create?: TopicCreateWithoutCommentsInput;
-  update?: TopicUpdateWithoutCommentsDataInput;
-  upsert?: TopicUpsertWithoutCommentsInput;
-  delete?: Boolean;
-  disconnect?: Boolean;
-  connect?: TopicWhereUniqueInput;
-}
-
-export interface PoliticianCreateInput {
-  party?: String;
-  name: String;
-  title?: String;
-  chamber?: String;
-  state?: String;
-  district?: Int;
-  nthCongress?: String;
-  phone?: String;
-  gender?: String;
-  image?: String;
-  largeImage?: String;
-  website?: String;
-  govUrl?: String;
-  followers?: UserCreateOneWithoutMyPoliticiansInput;
-  bills?: BillCreateManyInput;
-  coBills?: BillCreateManyWithoutCoSponsorsInput;
-  mentions?: CommentCreateManyWithoutPoliticiansMentionedInput;
-}
-
-export interface TopicUpdateWithoutCommentsDataInput {
-  title?: String;
-  commenters?: UserUpdateManyWithoutTopicCommentsInput;
-}
-
-export interface UserCreateWithoutNotificationsInput {
-  name: String;
-  email: String;
-  password?: String;
-  permissions?: UserCreatepermissionsInput;
-  myPoliticians?: PoliticianCreateManyWithoutFollowersInput;
-  myBills?: BillCreateManyWithoutFollowersInput;
-  upvotedBills?: BillCreateManyWithoutUpvotesInput;
-  downvotedBills?: BillCreateManyWithoutDownvotesInput;
-  billComments?: CommentCreateManyWithoutAuthorInput;
-  topicComments?: TopicCreateManyWithoutCommentersInput;
-}
-
-export interface UserUpdateManyWithoutTopicCommentsInput {
-  create?:
-    | UserCreateWithoutTopicCommentsInput[]
-    | UserCreateWithoutTopicCommentsInput;
-  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-  update?:
-    | UserUpdateWithWhereUniqueWithoutTopicCommentsInput[]
-    | UserUpdateWithWhereUniqueWithoutTopicCommentsInput;
-  upsert?:
-    | UserUpsertWithWhereUniqueWithoutTopicCommentsInput[]
-    | UserUpsertWithWhereUniqueWithoutTopicCommentsInput;
-  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput;
-  updateMany?:
-    | UserUpdateManyWithWhereNestedInput[]
-    | UserUpdateManyWithWhereNestedInput;
-}
-
-export interface BillUpdateManyMutationInput {
-  code?: String;
-  title?: String;
-  summary?: String;
-  congressNumber?: String;
-  chamber?: String;
-  committees?: String;
-  link?: String;
-  sponsor?: String;
-  actions?: BillUpdateactionsInput;
-}
-
-export interface UserUpdateWithWhereUniqueWithoutTopicCommentsInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateWithoutTopicCommentsDataInput;
-}
-
-export interface PoliticianCreateManyWithoutCoBillsInput {
-  create?:
-    | PoliticianCreateWithoutCoBillsInput[]
-    | PoliticianCreateWithoutCoBillsInput;
-  connect?: PoliticianWhereUniqueInput[] | PoliticianWhereUniqueInput;
-}
-
-export interface UserUpdateWithoutTopicCommentsDataInput {
-  name?: String;
-  email?: String;
-  password?: String;
-  permissions?: UserUpdatepermissionsInput;
-  myPoliticians?: PoliticianUpdateManyWithoutFollowersInput;
-  myBills?: BillUpdateManyWithoutFollowersInput;
-  upvotedBills?: BillUpdateManyWithoutUpvotesInput;
-  downvotedBills?: BillUpdateManyWithoutDownvotesInput;
-  billComments?: CommentUpdateManyWithoutAuthorInput;
-  notifications?: NotificationUpdateManyWithoutUserInput;
-}
-
-export interface UserCreateManyWithoutUpvotedBillsInput {
-  create?:
-    | UserCreateWithoutUpvotedBillsInput[]
-    | UserCreateWithoutUpvotedBillsInput;
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-}
-
-export interface UserUpsertWithWhereUniqueWithoutTopicCommentsInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateWithoutTopicCommentsDataInput;
-  create: UserCreateWithoutTopicCommentsInput;
-}
-
-export interface UserCreateWithoutMyBillsInput {
-  name: String;
-  email: String;
-  password?: String;
-  permissions?: UserCreatepermissionsInput;
-  myPoliticians?: PoliticianCreateManyWithoutFollowersInput;
-  upvotedBills?: BillCreateManyWithoutUpvotesInput;
-  downvotedBills?: BillCreateManyWithoutDownvotesInput;
-  billComments?: CommentCreateManyWithoutAuthorInput;
-  topicComments?: TopicCreateManyWithoutCommentersInput;
-  notifications?: NotificationCreateManyWithoutUserInput;
-}
-
-export interface UserScalarWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  name?: String;
-  name_not?: String;
-  name_in?: String[] | String;
-  name_not_in?: String[] | String;
-  name_lt?: String;
-  name_lte?: String;
-  name_gt?: String;
-  name_gte?: String;
-  name_contains?: String;
-  name_not_contains?: String;
-  name_starts_with?: String;
-  name_not_starts_with?: String;
-  name_ends_with?: String;
-  name_not_ends_with?: String;
-  email?: String;
-  email_not?: String;
-  email_in?: String[] | String;
-  email_not_in?: String[] | String;
-  email_lt?: String;
-  email_lte?: String;
-  email_gt?: String;
-  email_gte?: String;
-  email_contains?: String;
-  email_not_contains?: String;
-  email_starts_with?: String;
-  email_not_starts_with?: String;
-  email_ends_with?: String;
-  email_not_ends_with?: String;
-  password?: String;
-  password_not?: String;
-  password_in?: String[] | String;
-  password_not_in?: String[] | String;
-  password_lt?: String;
-  password_lte?: String;
-  password_gt?: String;
-  password_gte?: String;
-  password_contains?: String;
-  password_not_contains?: String;
-  password_starts_with?: String;
-  password_not_starts_with?: String;
-  password_ends_with?: String;
-  password_not_ends_with?: String;
-  AND?: UserScalarWhereInput[] | UserScalarWhereInput;
-  OR?: UserScalarWhereInput[] | UserScalarWhereInput;
-  NOT?: UserScalarWhereInput[] | UserScalarWhereInput;
-}
-
-export interface BillCreateWithoutCommentsInput {
-  code?: String;
-  title?: String;
-  summary?: String;
-  congressNumber?: String;
-  chamber?: String;
-  committees?: String;
-  link?: String;
-  sponsor?: String;
-  coSponsors?: PoliticianCreateManyWithoutCoBillsInput;
-  actions?: BillCreateactionsInput;
-  followers?: UserCreateManyWithoutMyBillsInput;
-  upvotes?: UserCreateManyWithoutUpvotedBillsInput;
-  downvotes?: UserCreateManyWithoutDownvotedBillsInput;
-}
-
-export interface UserUpdateManyWithWhereNestedInput {
-  where: UserScalarWhereInput;
-  data: UserUpdateManyDataInput;
-}
-
-export interface BillCreateWithoutDownvotesInput {
-  code?: String;
-  title?: String;
-  summary?: String;
-  congressNumber?: String;
-  chamber?: String;
-  committees?: String;
-  link?: String;
-  sponsor?: String;
-  coSponsors?: PoliticianCreateManyWithoutCoBillsInput;
-  actions?: BillCreateactionsInput;
-  followers?: UserCreateManyWithoutMyBillsInput;
-  upvotes?: UserCreateManyWithoutUpvotedBillsInput;
-  comments?: CommentCreateManyWithoutBillInput;
-}
-
-export interface UserUpdateManyDataInput {
-  name?: String;
-  email?: String;
-  password?: String;
-  permissions?: UserUpdatepermissionsInput;
-}
-
-export interface CommentCreateWithoutTopicInput {
-  content?: String;
-  reply?: String;
-  bill?: BillCreateOneWithoutCommentsInput;
-  author?: UserCreateOneWithoutBillCommentsInput;
-  politiciansMentioned?: PoliticianCreateManyWithoutMentionsInput;
-}
-
-export interface TopicUpsertWithoutCommentsInput {
-  update: TopicUpdateWithoutCommentsDataInput;
-  create: TopicCreateWithoutCommentsInput;
-}
-
-export interface PoliticianUpdateWithoutCoBillsDataInput {
-  party?: String;
-  name?: String;
-  title?: String;
-  chamber?: String;
-  state?: String;
-  district?: Int;
-  nthCongress?: String;
-  phone?: String;
-  gender?: String;
-  image?: String;
-  largeImage?: String;
-  website?: String;
-  govUrl?: String;
-  followers?: UserUpdateOneWithoutMyPoliticiansInput;
-  bills?: BillUpdateManyInput;
-  mentions?: CommentUpdateManyWithoutPoliticiansMentionedInput;
-}
-
-export interface CommentUpsertWithWhereUniqueWithoutBillInput {
-  where: CommentWhereUniqueInput;
-  update: CommentUpdateWithoutBillDataInput;
-  create: CommentCreateWithoutBillInput;
-}
-
-export interface SubscriptionCreateInput {
-  newBillComment?: CommentCreateOneInput;
-  newBill?: BillCreateOneInput;
-}
-
-export interface BillUpsertWithWhereUniqueWithoutCoSponsorsInput {
-  where: BillWhereUniqueInput;
-  update: BillUpdateWithoutCoSponsorsDataInput;
-  create: BillCreateWithoutCoSponsorsInput;
-}
-
-export interface CommentUpdateManyMutationInput {
-  content?: String;
-  reply?: String;
 }
 
 export interface PoliticianUpsertWithWhereUniqueWithoutMentionsInput {
@@ -2881,8 +2773,36 @@ export interface PoliticianUpsertWithWhereUniqueWithoutMentionsInput {
   create: PoliticianCreateWithoutMentionsInput;
 }
 
-export interface UserCreatepermissionsInput {
-  set?: Permission[] | Permission;
+export interface UserCreateOneWithoutBillCommentsInput {
+  create?: UserCreateWithoutBillCommentsInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface CommentUpsertWithWhereUniqueWithoutAuthorInput {
+  where: CommentWhereUniqueInput;
+  update: CommentUpdateWithoutAuthorDataInput;
+  create: CommentCreateWithoutAuthorInput;
+}
+
+export interface PoliticianUpdateManyDataInput {
+  party?: String;
+  name?: String;
+  title?: String;
+  chamber?: String;
+  state?: String;
+  district?: Int;
+  nthCongress?: String;
+  phone?: String;
+  gender?: String;
+  image?: String;
+  largeImage?: String;
+  website?: String;
+  govUrl?: String;
+}
+
+export interface PoliticianUpdateManyWithWhereNestedInput {
+  where: PoliticianScalarWhereInput;
+  data: PoliticianUpdateManyDataInput;
 }
 
 export interface PoliticianScalarWhereInput {
@@ -3097,71 +3017,29 @@ export interface PoliticianScalarWhereInput {
   NOT?: PoliticianScalarWhereInput[] | PoliticianScalarWhereInput;
 }
 
-export interface UserCreateWithoutDownvotedBillsInput {
+export interface TopicUpdateManyMutationInput {
+  title?: String;
+}
+
+export interface UserCreateManyWithoutTopicCommentsInput {
+  create?:
+    | UserCreateWithoutTopicCommentsInput[]
+    | UserCreateWithoutTopicCommentsInput;
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+}
+
+export interface UserCreateInput {
   name: String;
   email: String;
   password?: String;
   permissions?: UserCreatepermissionsInput;
   myPoliticians?: PoliticianCreateManyWithoutFollowersInput;
   myBills?: BillCreateManyWithoutFollowersInput;
-  upvotedBills?: BillCreateManyWithoutUpvotesInput;
+  upvotedBills?: BillCreateManyInput;
+  downvotedBills?: BillCreateManyInput;
   billComments?: CommentCreateManyWithoutAuthorInput;
   topicComments?: TopicCreateManyWithoutCommentersInput;
   notifications?: NotificationCreateManyWithoutUserInput;
-}
-
-export interface PoliticianUpdateManyWithWhereNestedInput {
-  where: PoliticianScalarWhereInput;
-  data: PoliticianUpdateManyDataInput;
-}
-
-export interface UserCreateWithoutBillCommentsInput {
-  name: String;
-  email: String;
-  password?: String;
-  permissions?: UserCreatepermissionsInput;
-  myPoliticians?: PoliticianCreateManyWithoutFollowersInput;
-  myBills?: BillCreateManyWithoutFollowersInput;
-  upvotedBills?: BillCreateManyWithoutUpvotesInput;
-  downvotedBills?: BillCreateManyWithoutDownvotesInput;
-  topicComments?: TopicCreateManyWithoutCommentersInput;
-  notifications?: NotificationCreateManyWithoutUserInput;
-}
-
-export interface PoliticianUpdateManyDataInput {
-  party?: String;
-  name?: String;
-  title?: String;
-  chamber?: String;
-  state?: String;
-  district?: Int;
-  nthCongress?: String;
-  phone?: String;
-  gender?: String;
-  image?: String;
-  largeImage?: String;
-  website?: String;
-  govUrl?: String;
-}
-
-export interface UserUpdateInput {
-  name?: String;
-  email?: String;
-  password?: String;
-  permissions?: UserUpdatepermissionsInput;
-  myPoliticians?: PoliticianUpdateManyWithoutFollowersInput;
-  myBills?: BillUpdateManyWithoutFollowersInput;
-  upvotedBills?: BillUpdateManyWithoutUpvotesInput;
-  downvotedBills?: BillUpdateManyWithoutDownvotesInput;
-  billComments?: CommentUpdateManyWithoutAuthorInput;
-  topicComments?: TopicUpdateManyWithoutCommentersInput;
-  notifications?: NotificationUpdateManyWithoutUserInput;
-}
-
-export interface CommentUpsertWithWhereUniqueWithoutAuthorInput {
-  where: CommentWhereUniqueInput;
-  update: CommentUpdateWithoutAuthorDataInput;
-  create: CommentCreateWithoutAuthorInput;
 }
 
 export interface BillUpsertWithWhereUniqueWithoutFollowersInput {
@@ -3170,408 +3048,12 @@ export interface BillUpsertWithWhereUniqueWithoutFollowersInput {
   create: BillCreateWithoutFollowersInput;
 }
 
-export interface BillUpsertWithWhereUniqueNestedInput {
-  where: BillWhereUniqueInput;
-  update: BillUpdateDataInput;
-  create: BillCreateInput;
-}
-
-export interface UserUpsertWithWhereUniqueWithoutMyBillsInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateWithoutMyBillsDataInput;
-  create: UserCreateWithoutMyBillsInput;
-}
-
-export interface BillUpsertWithWhereUniqueWithoutUpvotesInput {
-  where: BillWhereUniqueInput;
-  update: BillUpdateWithoutUpvotesDataInput;
-  create: BillCreateWithoutUpvotesInput;
-}
-
-export interface UserUpsertWithWhereUniqueWithoutDownvotedBillsInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateWithoutDownvotedBillsDataInput;
-  create: UserCreateWithoutDownvotedBillsInput;
-}
-
-export interface BillCreateManyInput {
-  create?: BillCreateInput[] | BillCreateInput;
-  connect?: BillWhereUniqueInput[] | BillWhereUniqueInput;
-}
-
-export interface UserUpdateWithoutNotificationsDataInput {
-  name?: String;
-  email?: String;
-  password?: String;
-  permissions?: UserUpdatepermissionsInput;
-  myPoliticians?: PoliticianUpdateManyWithoutFollowersInput;
-  myBills?: BillUpdateManyWithoutFollowersInput;
-  upvotedBills?: BillUpdateManyWithoutUpvotesInput;
-  downvotedBills?: BillUpdateManyWithoutDownvotesInput;
-  billComments?: CommentUpdateManyWithoutAuthorInput;
-  topicComments?: TopicUpdateManyWithoutCommentersInput;
-}
-
-export interface CommentCreateWithoutPoliticiansMentionedInput {
-  content?: String;
-  reply?: String;
-  bill?: BillCreateOneWithoutCommentsInput;
-  author?: UserCreateOneWithoutBillCommentsInput;
-  topic?: TopicCreateOneWithoutCommentsInput;
-}
-
-export interface TopicCreateWithoutCommentsInput {
-  title?: String;
-  commenters?: UserCreateManyWithoutTopicCommentsInput;
-}
+export type NotificationWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
 
 export interface NodeNode {
   id: ID_Output;
-}
-
-export interface User {
-  id: ID_Output;
-  name: String;
-  email: String;
-  password?: String;
-  permissions: Permission[];
-}
-
-export interface UserPromise extends Promise<User>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  email: () => Promise<String>;
-  password: () => Promise<String>;
-  permissions: () => Promise<Permission[]>;
-  myPoliticians: <T = FragmentableArray<Politician>>(
-    args?: {
-      where?: PoliticianWhereInput;
-      orderBy?: PoliticianOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  myBills: <T = FragmentableArray<Bill>>(
-    args?: {
-      where?: BillWhereInput;
-      orderBy?: BillOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  upvotedBills: <T = FragmentableArray<Bill>>(
-    args?: {
-      where?: BillWhereInput;
-      orderBy?: BillOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  downvotedBills: <T = FragmentableArray<Bill>>(
-    args?: {
-      where?: BillWhereInput;
-      orderBy?: BillOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  billComments: <T = FragmentableArray<Comment>>(
-    args?: {
-      where?: CommentWhereInput;
-      orderBy?: CommentOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  topicComments: <T = FragmentableArray<Topic>>(
-    args?: {
-      where?: TopicWhereInput;
-      orderBy?: TopicOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  notifications: <T = FragmentableArray<Notification>>(
-    args?: {
-      where?: NotificationWhereInput;
-      orderBy?: NotificationOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-}
-
-export interface UserSubscription
-  extends Promise<AsyncIterator<User>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  email: () => Promise<AsyncIterator<String>>;
-  password: () => Promise<AsyncIterator<String>>;
-  permissions: () => Promise<AsyncIterator<Permission[]>>;
-  myPoliticians: <T = Promise<AsyncIterator<PoliticianSubscription>>>(
-    args?: {
-      where?: PoliticianWhereInput;
-      orderBy?: PoliticianOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  myBills: <T = Promise<AsyncIterator<BillSubscription>>>(
-    args?: {
-      where?: BillWhereInput;
-      orderBy?: BillOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  upvotedBills: <T = Promise<AsyncIterator<BillSubscription>>>(
-    args?: {
-      where?: BillWhereInput;
-      orderBy?: BillOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  downvotedBills: <T = Promise<AsyncIterator<BillSubscription>>>(
-    args?: {
-      where?: BillWhereInput;
-      orderBy?: BillOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  billComments: <T = Promise<AsyncIterator<CommentSubscription>>>(
-    args?: {
-      where?: CommentWhereInput;
-      orderBy?: CommentOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  topicComments: <T = Promise<AsyncIterator<TopicSubscription>>>(
-    args?: {
-      where?: TopicWhereInput;
-      orderBy?: TopicOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  notifications: <T = Promise<AsyncIterator<NotificationSubscription>>>(
-    args?: {
-      where?: NotificationWhereInput;
-      orderBy?: NotificationOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-}
-
-export interface PoliticianEdge {
-  node: Politician;
-  cursor: String;
-}
-
-export interface PoliticianEdgePromise
-  extends Promise<PoliticianEdge>,
-    Fragmentable {
-  node: <T = PoliticianPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface PoliticianEdgeSubscription
-  extends Promise<AsyncIterator<PoliticianEdge>>,
-    Fragmentable {
-  node: <T = PoliticianSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface Comment {
-  id: ID_Output;
-  content?: String;
-  reply?: String;
-}
-
-export interface CommentPromise extends Promise<Comment>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  content: () => Promise<String>;
-  reply: () => Promise<String>;
-  bill: <T = BillPromise>() => T;
-  author: <T = UserPromise>() => T;
-  politiciansMentioned: <T = FragmentableArray<Politician>>(
-    args?: {
-      where?: PoliticianWhereInput;
-      orderBy?: PoliticianOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  topic: <T = TopicPromise>() => T;
-}
-
-export interface CommentSubscription
-  extends Promise<AsyncIterator<Comment>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  content: () => Promise<AsyncIterator<String>>;
-  reply: () => Promise<AsyncIterator<String>>;
-  bill: <T = BillSubscription>() => T;
-  author: <T = UserSubscription>() => T;
-  politiciansMentioned: <T = Promise<AsyncIterator<PoliticianSubscription>>>(
-    args?: {
-      where?: PoliticianWhereInput;
-      orderBy?: PoliticianOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  topic: <T = TopicSubscription>() => T;
-}
-
-export interface PoliticianConnection {
-  pageInfo: PageInfo;
-  edges: PoliticianEdge[];
-}
-
-export interface PoliticianConnectionPromise
-  extends Promise<PoliticianConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<PoliticianEdge>>() => T;
-  aggregate: <T = AggregatePoliticianPromise>() => T;
-}
-
-export interface PoliticianConnectionSubscription
-  extends Promise<AsyncIterator<PoliticianConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<PoliticianEdgeSubscription>>>() => T;
-  aggregate: <T = AggregatePoliticianSubscription>() => T;
-}
-
-export interface Topic {
-  id: ID_Output;
-  title?: String;
-}
-
-export interface TopicPromise extends Promise<Topic>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  title: () => Promise<String>;
-  comments: <T = FragmentableArray<Comment>>(
-    args?: {
-      where?: CommentWhereInput;
-      orderBy?: CommentOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  commenters: <T = FragmentableArray<User>>(
-    args?: {
-      where?: UserWhereInput;
-      orderBy?: UserOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-}
-
-export interface TopicSubscription
-  extends Promise<AsyncIterator<Topic>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  title: () => Promise<AsyncIterator<String>>;
-  comments: <T = Promise<AsyncIterator<CommentSubscription>>>(
-    args?: {
-      where?: CommentWhereInput;
-      orderBy?: CommentOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  commenters: <T = Promise<AsyncIterator<UserSubscription>>>(
-    args?: {
-      where?: UserWhereInput;
-      orderBy?: UserOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-}
-
-export interface AggregateNotification {
-  count: Int;
-}
-
-export interface AggregateNotificationPromise
-  extends Promise<AggregateNotification>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateNotificationSubscription
-  extends Promise<AsyncIterator<AggregateNotification>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface Politician {
@@ -3611,39 +3093,33 @@ export interface PoliticianPromise extends Promise<Politician>, Fragmentable {
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
   followers: <T = UserPromise>() => T;
-  bills: <T = FragmentableArray<Bill>>(
-    args?: {
-      where?: BillWhereInput;
-      orderBy?: BillOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  coBills: <T = FragmentableArray<Bill>>(
-    args?: {
-      where?: BillWhereInput;
-      orderBy?: BillOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  mentions: <T = FragmentableArray<Comment>>(
-    args?: {
-      where?: CommentWhereInput;
-      orderBy?: CommentOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
+  bills: <T = FragmentableArray<Bill>>(args?: {
+    where?: BillWhereInput;
+    orderBy?: BillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  coBills: <T = FragmentableArray<Bill>>(args?: {
+    where?: BillWhereInput;
+    orderBy?: BillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  mentions: <T = FragmentableArray<Comment>>(args?: {
+    where?: CommentWhereInput;
+    orderBy?: CommentOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface PoliticianSubscription
@@ -3666,39 +3142,102 @@ export interface PoliticianSubscription
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   followers: <T = UserSubscription>() => T;
-  bills: <T = Promise<AsyncIterator<BillSubscription>>>(
-    args?: {
-      where?: BillWhereInput;
-      orderBy?: BillOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  coBills: <T = Promise<AsyncIterator<BillSubscription>>>(
-    args?: {
-      where?: BillWhereInput;
-      orderBy?: BillOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  mentions: <T = Promise<AsyncIterator<CommentSubscription>>>(
-    args?: {
-      where?: CommentWhereInput;
-      orderBy?: CommentOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
+  bills: <T = Promise<AsyncIterator<BillSubscription>>>(args?: {
+    where?: BillWhereInput;
+    orderBy?: BillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  coBills: <T = Promise<AsyncIterator<BillSubscription>>>(args?: {
+    where?: BillWhereInput;
+    orderBy?: BillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  mentions: <T = Promise<AsyncIterator<CommentSubscription>>>(args?: {
+    where?: CommentWhereInput;
+    orderBy?: CommentOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface AggregateNotification {
+  count: Int;
+}
+
+export interface AggregateNotificationPromise
+  extends Promise<AggregateNotification>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateNotificationSubscription
+  extends Promise<AsyncIterator<AggregateNotification>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface Topic {
+  id: ID_Output;
+  title?: String;
+}
+
+export interface TopicPromise extends Promise<Topic>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+  comments: <T = FragmentableArray<Comment>>(args?: {
+    where?: CommentWhereInput;
+    orderBy?: CommentOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  commenters: <T = FragmentableArray<User>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface TopicSubscription
+  extends Promise<AsyncIterator<Topic>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
+  comments: <T = Promise<AsyncIterator<CommentSubscription>>>(args?: {
+    where?: CommentWhereInput;
+    orderBy?: CommentOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  commenters: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface NotificationEdge {
@@ -3720,20 +3259,156 @@ export interface NotificationEdgeSubscription
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateUser {
-  count: Int;
+export interface User {
+  id: ID_Output;
+  name: String;
+  email: String;
+  password?: String;
+  permissions: Permission[];
 }
 
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
-    Fragmentable {
-  count: () => Promise<Int>;
+export interface UserPromise extends Promise<User>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  email: () => Promise<String>;
+  password: () => Promise<String>;
+  permissions: () => Promise<Permission[]>;
+  myPoliticians: <T = FragmentableArray<Politician>>(args?: {
+    where?: PoliticianWhereInput;
+    orderBy?: PoliticianOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  myBills: <T = FragmentableArray<Bill>>(args?: {
+    where?: BillWhereInput;
+    orderBy?: BillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  upvotedBills: <T = FragmentableArray<Bill>>(args?: {
+    where?: BillWhereInput;
+    orderBy?: BillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  downvotedBills: <T = FragmentableArray<Bill>>(args?: {
+    where?: BillWhereInput;
+    orderBy?: BillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  billComments: <T = FragmentableArray<Comment>>(args?: {
+    where?: CommentWhereInput;
+    orderBy?: CommentOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  topicComments: <T = FragmentableArray<Topic>>(args?: {
+    where?: TopicWhereInput;
+    orderBy?: TopicOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  notifications: <T = FragmentableArray<Notification>>(args?: {
+    where?: NotificationWhereInput;
+    orderBy?: NotificationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
+export interface UserSubscription
+  extends Promise<AsyncIterator<User>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
+  permissions: () => Promise<AsyncIterator<Permission[]>>;
+  myPoliticians: <T = Promise<AsyncIterator<PoliticianSubscription>>>(args?: {
+    where?: PoliticianWhereInput;
+    orderBy?: PoliticianOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  myBills: <T = Promise<AsyncIterator<BillSubscription>>>(args?: {
+    where?: BillWhereInput;
+    orderBy?: BillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  upvotedBills: <T = Promise<AsyncIterator<BillSubscription>>>(args?: {
+    where?: BillWhereInput;
+    orderBy?: BillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  downvotedBills: <T = Promise<AsyncIterator<BillSubscription>>>(args?: {
+    where?: BillWhereInput;
+    orderBy?: BillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  billComments: <T = Promise<AsyncIterator<CommentSubscription>>>(args?: {
+    where?: CommentWhereInput;
+    orderBy?: CommentOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  topicComments: <T = Promise<AsyncIterator<TopicSubscription>>>(args?: {
+    where?: TopicWhereInput;
+    orderBy?: TopicOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  notifications: <T = Promise<AsyncIterator<NotificationSubscription>>>(args?: {
+    where?: NotificationWhereInput;
+    orderBy?: NotificationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface NotificationConnection {
@@ -3757,6 +3432,38 @@ export interface NotificationConnectionSubscription
   aggregate: <T = AggregateNotificationSubscription>() => T;
 }
 
+export interface AggregateUser {
+  count: Int;
+}
+
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface AggregateFeed {
+  count: Int;
+}
+
+export interface AggregateFeedPromise
+  extends Promise<AggregateFeed>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateFeedSubscription
+  extends Promise<AsyncIterator<AggregateFeed>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
 export interface UserConnection {
   pageInfo: PageInfo;
   edges: UserEdge[];
@@ -3778,20 +3485,21 @@ export interface UserConnectionSubscription
   aggregate: <T = AggregateUserSubscription>() => T;
 }
 
-export interface AggregateComment {
-  count: Int;
+export interface FeedEdge {
+  node: Feed;
+  cursor: String;
 }
 
-export interface AggregateCommentPromise
-  extends Promise<AggregateComment>,
-    Fragmentable {
-  count: () => Promise<Int>;
+export interface FeedEdgePromise extends Promise<FeedEdge>, Fragmentable {
+  node: <T = FeedPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface AggregateCommentSubscription
-  extends Promise<AsyncIterator<AggregateComment>>,
+export interface FeedEdgeSubscription
+  extends Promise<AsyncIterator<FeedEdge>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  node: <T = FeedSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface TopicEdge {
@@ -3811,21 +3519,25 @@ export interface TopicEdgeSubscription
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface CommentEdge {
-  node: Comment;
-  cursor: String;
+export interface FeedConnection {
+  pageInfo: PageInfo;
+  edges: FeedEdge[];
 }
 
-export interface CommentEdgePromise extends Promise<CommentEdge>, Fragmentable {
-  node: <T = CommentPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface CommentEdgeSubscription
-  extends Promise<AsyncIterator<CommentEdge>>,
+export interface FeedConnectionPromise
+  extends Promise<FeedConnection>,
     Fragmentable {
-  node: <T = CommentSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<FeedEdge>>() => T;
+  aggregate: <T = AggregateFeedPromise>() => T;
+}
+
+export interface FeedConnectionSubscription
+  extends Promise<AsyncIterator<FeedConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<FeedEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateFeedSubscription>() => T;
 }
 
 export interface AggregateSubscription {
@@ -3844,78 +3556,25 @@ export interface AggregateSubscriptionSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface CommentConnection {
+export interface TopicConnection {
   pageInfo: PageInfo;
-  edges: CommentEdge[];
+  edges: TopicEdge[];
 }
 
-export interface CommentConnectionPromise
-  extends Promise<CommentConnection>,
+export interface TopicConnectionPromise
+  extends Promise<TopicConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<CommentEdge>>() => T;
-  aggregate: <T = AggregateCommentPromise>() => T;
+  edges: <T = FragmentableArray<TopicEdge>>() => T;
+  aggregate: <T = AggregateTopicPromise>() => T;
 }
 
-export interface CommentConnectionSubscription
-  extends Promise<AsyncIterator<CommentConnection>>,
+export interface TopicConnectionSubscription
+  extends Promise<AsyncIterator<TopicConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<CommentEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateCommentSubscription>() => T;
-}
-
-export interface SubscriptionConnection {
-  pageInfo: PageInfo;
-  edges: SubscriptionEdge[];
-}
-
-export interface SubscriptionConnectionPromise
-  extends Promise<SubscriptionConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<SubscriptionEdge>>() => T;
-  aggregate: <T = AggregateSubscriptionPromise>() => T;
-}
-
-export interface SubscriptionConnectionSubscription
-  extends Promise<AsyncIterator<SubscriptionConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<SubscriptionEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateSubscriptionSubscription>() => T;
-}
-
-export interface AggregateBill {
-  count: Int;
-}
-
-export interface AggregateBillPromise
-  extends Promise<AggregateBill>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateBillSubscription
-  extends Promise<AsyncIterator<AggregateBill>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface AggregatePolitician {
-  count: Int;
-}
-
-export interface AggregatePoliticianPromise
-  extends Promise<AggregatePolitician>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregatePoliticianSubscription
-  extends Promise<AsyncIterator<AggregatePolitician>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  edges: <T = Promise<AsyncIterator<TopicEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateTopicSubscription>() => T;
 }
 
 export interface PageInfo {
@@ -3941,6 +3600,222 @@ export interface PageInfoSubscription
   endCursor: () => Promise<AsyncIterator<String>>;
 }
 
+export interface BatchPayload {
+  count: Long;
+}
+
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
+    Fragmentable {
+  count: () => Promise<Long>;
+}
+
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface Feed {
+  count: Int;
+}
+
+export interface FeedPromise extends Promise<Feed>, Fragmentable {
+  politicians: <T = FragmentableArray<Politician>>(args?: {
+    where?: PoliticianWhereInput;
+    orderBy?: PoliticianOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  bills: <T = FragmentableArray<Bill>>(args?: {
+    where?: BillWhereInput;
+    orderBy?: BillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  count: () => Promise<Int>;
+}
+
+export interface FeedSubscription
+  extends Promise<AsyncIterator<Feed>>,
+    Fragmentable {
+  politicians: <T = Promise<AsyncIterator<PoliticianSubscription>>>(args?: {
+    where?: PoliticianWhereInput;
+    orderBy?: PoliticianOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  bills: <T = Promise<AsyncIterator<BillSubscription>>>(args?: {
+    where?: BillWhereInput;
+    orderBy?: BillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface SubscriptionEdge {
+  node: Subscription;
+  cursor: String;
+}
+
+export interface SubscriptionEdgePromise
+  extends Promise<SubscriptionEdge>,
+    Fragmentable {
+  node: <T = SubscriptionPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface SubscriptionEdgeSubscription
+  extends Promise<AsyncIterator<SubscriptionEdge>>,
+    Fragmentable {
+  node: <T = SubscriptionSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface Bill {
+  id: ID_Output;
+  code?: String;
+  title?: String;
+  summary?: String;
+  congressNumber?: String;
+  chamber?: String;
+  committees?: String;
+  link?: String;
+  sponsor?: String;
+  actions: String[];
+}
+
+export interface BillPromise extends Promise<Bill>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  code: () => Promise<String>;
+  title: () => Promise<String>;
+  summary: () => Promise<String>;
+  congressNumber: () => Promise<String>;
+  chamber: () => Promise<String>;
+  committees: () => Promise<String>;
+  link: () => Promise<String>;
+  sponsor: () => Promise<String>;
+  coSponsors: <T = FragmentableArray<Politician>>(args?: {
+    where?: PoliticianWhereInput;
+    orderBy?: PoliticianOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  actions: () => Promise<String[]>;
+  followers: <T = FragmentableArray<User>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  upvotes: <T = FragmentableArray<User>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  downvotes: <T = FragmentableArray<User>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  comments: <T = FragmentableArray<Comment>>(args?: {
+    where?: CommentWhereInput;
+    orderBy?: CommentOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface BillSubscription
+  extends Promise<AsyncIterator<Bill>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  code: () => Promise<AsyncIterator<String>>;
+  title: () => Promise<AsyncIterator<String>>;
+  summary: () => Promise<AsyncIterator<String>>;
+  congressNumber: () => Promise<AsyncIterator<String>>;
+  chamber: () => Promise<AsyncIterator<String>>;
+  committees: () => Promise<AsyncIterator<String>>;
+  link: () => Promise<AsyncIterator<String>>;
+  sponsor: () => Promise<AsyncIterator<String>>;
+  coSponsors: <T = Promise<AsyncIterator<PoliticianSubscription>>>(args?: {
+    where?: PoliticianWhereInput;
+    orderBy?: PoliticianOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  actions: () => Promise<AsyncIterator<String[]>>;
+  followers: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  upvotes: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  downvotes: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  comments: <T = Promise<AsyncIterator<CommentSubscription>>>(args?: {
+    where?: CommentWhereInput;
+    orderBy?: CommentOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
 export interface BillConnection {
   pageInfo: PageInfo;
   edges: BillEdge[];
@@ -3962,6 +3837,87 @@ export interface BillConnectionSubscription
   aggregate: <T = AggregateBillSubscription>() => T;
 }
 
+export interface PoliticianEdge {
+  node: Politician;
+  cursor: String;
+}
+
+export interface PoliticianEdgePromise
+  extends Promise<PoliticianEdge>,
+    Fragmentable {
+  node: <T = PoliticianPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface PoliticianEdgeSubscription
+  extends Promise<AsyncIterator<PoliticianEdge>>,
+    Fragmentable {
+  node: <T = PoliticianSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateComment {
+  count: Int;
+}
+
+export interface AggregateCommentPromise
+  extends Promise<AggregateComment>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateCommentSubscription
+  extends Promise<AsyncIterator<AggregateComment>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface Comment {
+  id: ID_Output;
+  content?: String;
+  reply?: String;
+}
+
+export interface CommentPromise extends Promise<Comment>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  content: () => Promise<String>;
+  reply: () => Promise<String>;
+  bill: <T = BillPromise>() => T;
+  author: <T = UserPromise>() => T;
+  politiciansMentioned: <T = FragmentableArray<Politician>>(args?: {
+    where?: PoliticianWhereInput;
+    orderBy?: PoliticianOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  topic: <T = TopicPromise>() => T;
+}
+
+export interface CommentSubscription
+  extends Promise<AsyncIterator<Comment>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  content: () => Promise<AsyncIterator<String>>;
+  reply: () => Promise<AsyncIterator<String>>;
+  bill: <T = BillSubscription>() => T;
+  author: <T = UserSubscription>() => T;
+  politiciansMentioned: <
+    T = Promise<AsyncIterator<PoliticianSubscription>>
+  >(args?: {
+    where?: PoliticianWhereInput;
+    orderBy?: PoliticianOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  topic: <T = TopicSubscription>() => T;
+}
+
 export interface UserEdge {
   node: User;
   cursor: String;
@@ -3977,6 +3933,93 @@ export interface UserEdgeSubscription
     Fragmentable {
   node: <T = UserSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface BillEdge {
+  node: Bill;
+  cursor: String;
+}
+
+export interface BillEdgePromise extends Promise<BillEdge>, Fragmentable {
+  node: <T = BillPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface BillEdgeSubscription
+  extends Promise<AsyncIterator<BillEdge>>,
+    Fragmentable {
+  node: <T = BillSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateBill {
+  count: Int;
+}
+
+export interface AggregateBillPromise
+  extends Promise<AggregateBill>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateBillSubscription
+  extends Promise<AsyncIterator<AggregateBill>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface CommentConnection {
+  pageInfo: PageInfo;
+  edges: CommentEdge[];
+}
+
+export interface CommentConnectionPromise
+  extends Promise<CommentConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<CommentEdge>>() => T;
+  aggregate: <T = AggregateCommentPromise>() => T;
+}
+
+export interface CommentConnectionSubscription
+  extends Promise<AsyncIterator<CommentConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<CommentEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateCommentSubscription>() => T;
+}
+
+export interface CommentEdge {
+  node: Comment;
+  cursor: String;
+}
+
+export interface CommentEdgePromise extends Promise<CommentEdge>, Fragmentable {
+  node: <T = CommentPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface CommentEdgeSubscription
+  extends Promise<AsyncIterator<CommentEdge>>,
+    Fragmentable {
+  node: <T = CommentSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateTopic {
+  count: Int;
+}
+
+export interface AggregateTopicPromise
+  extends Promise<AggregateTopic>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateTopicSubscription
+  extends Promise<AsyncIterator<AggregateTopic>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface Notification {
@@ -4003,263 +4046,63 @@ export interface NotificationSubscription
   user: <T = UserSubscription>() => T;
 }
 
-export interface Bill {
-  id: ID_Output;
-  code?: String;
-  title?: String;
-  summary?: String;
-  congressNumber?: String;
-  chamber?: String;
-  committees?: String;
-  link?: String;
-  sponsor?: String;
-  actions: String[];
-}
-
-export interface BillPromise extends Promise<Bill>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  code: () => Promise<String>;
-  title: () => Promise<String>;
-  summary: () => Promise<String>;
-  congressNumber: () => Promise<String>;
-  chamber: () => Promise<String>;
-  committees: () => Promise<String>;
-  link: () => Promise<String>;
-  sponsor: () => Promise<String>;
-  coSponsors: <T = FragmentableArray<Politician>>(
-    args?: {
-      where?: PoliticianWhereInput;
-      orderBy?: PoliticianOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  actions: () => Promise<String[]>;
-  followers: <T = FragmentableArray<User>>(
-    args?: {
-      where?: UserWhereInput;
-      orderBy?: UserOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  upvotes: <T = FragmentableArray<User>>(
-    args?: {
-      where?: UserWhereInput;
-      orderBy?: UserOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  downvotes: <T = FragmentableArray<User>>(
-    args?: {
-      where?: UserWhereInput;
-      orderBy?: UserOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  comments: <T = FragmentableArray<Comment>>(
-    args?: {
-      where?: CommentWhereInput;
-      orderBy?: CommentOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-}
-
-export interface BillSubscription
-  extends Promise<AsyncIterator<Bill>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  code: () => Promise<AsyncIterator<String>>;
-  title: () => Promise<AsyncIterator<String>>;
-  summary: () => Promise<AsyncIterator<String>>;
-  congressNumber: () => Promise<AsyncIterator<String>>;
-  chamber: () => Promise<AsyncIterator<String>>;
-  committees: () => Promise<AsyncIterator<String>>;
-  link: () => Promise<AsyncIterator<String>>;
-  sponsor: () => Promise<AsyncIterator<String>>;
-  coSponsors: <T = Promise<AsyncIterator<PoliticianSubscription>>>(
-    args?: {
-      where?: PoliticianWhereInput;
-      orderBy?: PoliticianOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  actions: () => Promise<AsyncIterator<String[]>>;
-  followers: <T = Promise<AsyncIterator<UserSubscription>>>(
-    args?: {
-      where?: UserWhereInput;
-      orderBy?: UserOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  upvotes: <T = Promise<AsyncIterator<UserSubscription>>>(
-    args?: {
-      where?: UserWhereInput;
-      orderBy?: UserOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  downvotes: <T = Promise<AsyncIterator<UserSubscription>>>(
-    args?: {
-      where?: UserWhereInput;
-      orderBy?: UserOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  comments: <T = Promise<AsyncIterator<CommentSubscription>>>(
-    args?: {
-      where?: CommentWhereInput;
-      orderBy?: CommentOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-}
-
-export interface SubscriptionEdge {
-  node: Subscription;
-  cursor: String;
-}
-
-export interface SubscriptionEdgePromise
-  extends Promise<SubscriptionEdge>,
-    Fragmentable {
-  node: <T = SubscriptionPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface SubscriptionEdgeSubscription
-  extends Promise<AsyncIterator<SubscriptionEdge>>,
-    Fragmentable {
-  node: <T = SubscriptionSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface TopicConnection {
+export interface PoliticianConnection {
   pageInfo: PageInfo;
-  edges: TopicEdge[];
+  edges: PoliticianEdge[];
 }
 
-export interface TopicConnectionPromise
-  extends Promise<TopicConnection>,
+export interface PoliticianConnectionPromise
+  extends Promise<PoliticianConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<TopicEdge>>() => T;
-  aggregate: <T = AggregateTopicPromise>() => T;
+  edges: <T = FragmentableArray<PoliticianEdge>>() => T;
+  aggregate: <T = AggregatePoliticianPromise>() => T;
 }
 
-export interface TopicConnectionSubscription
-  extends Promise<AsyncIterator<TopicConnection>>,
+export interface PoliticianConnectionSubscription
+  extends Promise<AsyncIterator<PoliticianConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<TopicEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateTopicSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PoliticianEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePoliticianSubscription>() => T;
 }
 
-export interface BatchPayload {
-  count: Long;
-}
-
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
-}
-
-export interface AggregateTopic {
+export interface AggregatePolitician {
   count: Int;
 }
 
-export interface AggregateTopicPromise
-  extends Promise<AggregateTopic>,
+export interface AggregatePoliticianPromise
+  extends Promise<AggregatePolitician>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateTopicSubscription
-  extends Promise<AsyncIterator<AggregateTopic>>,
+export interface AggregatePoliticianSubscription
+  extends Promise<AsyncIterator<AggregatePolitician>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface BillEdge {
-  node: Bill;
-  cursor: String;
+export interface SubscriptionConnection {
+  pageInfo: PageInfo;
+  edges: SubscriptionEdge[];
 }
 
-export interface BillEdgePromise extends Promise<BillEdge>, Fragmentable {
-  node: <T = BillPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface BillEdgeSubscription
-  extends Promise<AsyncIterator<BillEdge>>,
+export interface SubscriptionConnectionPromise
+  extends Promise<SubscriptionConnection>,
     Fragmentable {
-  node: <T = BillSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<SubscriptionEdge>>() => T;
+  aggregate: <T = AggregateSubscriptionPromise>() => T;
 }
 
-export type Long = string;
-
-/*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
-*/
-export type ID_Input = string | number;
-export type ID_Output = string;
-
-/*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
-*/
-export type Int = number;
-
-/*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
+export interface SubscriptionConnectionSubscription
+  extends Promise<AsyncIterator<SubscriptionConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<SubscriptionEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateSubscriptionSubscription>() => T;
+}
 
 /*
 DateTime scalar input type, allowing Date
@@ -4270,6 +4113,24 @@ export type DateTimeInput = Date | string;
 DateTime scalar output type, which is always a string
 */
 export type DateTimeOutput = string;
+
+export type Long = string;
+
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+*/
+export type Int = number;
+
+/*
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+*/
+export type ID_Input = string | number;
+export type ID_Output = string;
+
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
 
 /*
 The `Boolean` scalar type represents `true` or `false`.
@@ -4287,6 +4148,10 @@ export const models: Model[] = [
   },
   {
     name: "Comment",
+    embedded: false
+  },
+  {
+    name: "Feed",
     embedded: false
   },
   {

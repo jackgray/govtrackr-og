@@ -4,7 +4,7 @@ const { randomBytes } = require('crypto');
 const { promisify } = require('util');
 const { hasPermission } = require('../utils');
 
-const Mutations = {
+const Mutation = {
 	async createPolitician(parent, args, ctx, info) {
 		// TODO: check if user is logged in
 		const { userId } = ctx.request;
@@ -36,10 +36,7 @@ const Mutations = {
 	async deletePolitician(parent, args, ctx, info) {
 		const where = { id: args.id };
 		//1. find the item
-		const politician = await ctx.db.query.politician(
-			{ where },
-			`{id name}`
-		);
+		const politician = await ctx.db.query.politician({ where }, `{id name}`);
 		// check for permissions
 		// delete listing
 		return ctx.db.mutation.deletePolitician({ where }, info);
@@ -48,9 +45,7 @@ const Mutations = {
 		// 1. Check permissions
 		const { userId } = ctx.request;
 		if (!userId) {
-			throw new Error(
-				'Sign in or create an account to follow politicians.'
-			);
+			throw new Error('Sign in or create an account to follow politicians.');
 		}
 
 		connect = await ctx.db.mutation.updatePolitician({
@@ -72,9 +67,7 @@ const Mutations = {
 		// 1. Check permissions
 		const { userId } = ctx.request;
 		if (!userId) {
-			throw new Error(
-				'Sign in or create an account to save myPoliticians.'
-			);
+			throw new Error('Sign in or create an account to save myPoliticians.');
 		}
 
 		disconnect = await ctx.db.mutation.updatePolitician({
@@ -166,10 +159,7 @@ const Mutations = {
 	async deleteBill(parent, args, ctx, info) {
 		const where = { id: args.id };
 		//1. find the item
-		const politician = await ctx.db.query.politician(
-			{ where },
-			`{id name}`
-		);
+		const politician = await ctx.db.query.politician({ where }, `{id name}`);
 		// check for permissions
 		// delete listing
 		return ctx.db.mutation.deleteBill({ where }, info);
@@ -178,12 +168,10 @@ const Mutations = {
 		// 1. Check permissions
 		const { userId } = ctx.request;
 		if (!userId) {
-			throw new Error(
-				'Sign in or create an account to follow politicians.'
-			);
+			throw new Error('Sign in or create an account to follow politicians.');
 		}
 
-		connect = await ctx.db.mutation.updateBill({
+		return await ctx.db.mutation.updateBill({
 			data: {
 				followers: {
 					connect: {
@@ -195,8 +183,6 @@ const Mutations = {
 				id: args.id
 			}
 		});
-
-		return connect;
 	},
 	async unfollowBill(parent, args, ctx, info) {
 		// 1. Check permissions
@@ -205,7 +191,7 @@ const Mutations = {
 			throw new Error('Sign in or create an account to save myBills.');
 		}
 
-		disconnect = await ctx.db.mutation.updateBill({
+		return await ctx.db.mutation.updateBill({
 			data: {
 				followers: {
 					disconnect: {
@@ -217,71 +203,144 @@ const Mutations = {
 				id: args.id
 			}
 		});
-
-		return disconnect;
 	},
 
 	async upvoteBill(parent, args, ctx, info) {
 		const { userId } = ctx.request;
-		console.log(userId);
-		const exists = await ctx.db.query.bills({
-			data: {
-				upvotes: {
-					where: { id: userId }
-				}
+		if (!userId) {
+			throw new Error('You must be logged in');
+		}
+		const alreadyUpvoted = ctx.prisma.$exists.bill({
+			id: args.id,
+			upvotes: {
+				id: userId
+			}
+		});
+		const downvoted = ctx.prisma.$exists.bill({
+			id: args.id,
+			downvotes: {
+				id: userId
 			}
 		});
 
-		console.log(exists);
-		if (!userId) {
-			throw new Error('You must be signed in');
-		}
-
-		upvote = await ctx.db.mutation.updateBill({
-			data: {
-				upvotes: {
-					connect: {
-						id: userId
+		if (alreadyUpvoted) {
+			console.log('already upvoted');
+			downvote = await ctx.db.mutation.updateBill({
+				data: {
+					downvotes: {
+						disconnect: {
+							id: userId
+						}
 					}
 				},
-				downvotes: {
-					disconnect: {
-						id: userId
+				where: {
+					id: args.id
+				}
+			});
+		}
+
+		if (downvoted) {
+			console.log('downvoted');
+			upvote = await ctx.db.mutation.updateBill({
+				data: {
+					downvotes: {
+						disconect: {
+							id: userId
+						}
+					},
+					upvotes: {
+						connect: {
+							id: userId
+						}
+					}
+				},
+				where: {
+					id: args.id
+				}
+			});
+		} else {
+			console.log('default');
+			upvote = await ctx.db.mutation.updateBill({
+				data: {
+					upvotes: {
+						connect: {
+							id: userId
+						}
+					},
+					where: {
+						id: args.id
 					}
 				}
-			},
-			where: {
-				id: args.id
-			}
-		});
-
+			});
+		}
 		return upvote;
 	},
 
 	async downvoteBill(parent, args, ctx, info) {
 		const { userId } = ctx.request;
 		if (!userId) {
-			throw new Error('You must be signed in');
+			throw new Error('You must be logged in');
 		}
 
-		downvote = await ctx.db.mutation.updateBill({
-			data: {
-				upvotes: {
-					disconnect: {
-						id: userId
-					}
-				},
-				downvotes: {
-					connect: {
-						id: userId
-					}
-				}
-			},
-			where: {
-				id: args.id
+		const upvoted = ctx.prisma.$exists.bill({
+			id: args.id,
+			upvotes: {
+				id: userId
 			}
 		});
 
+		const alreadyDownvoted = ctx.prisma.$exists.bill({
+			id: args.id,
+			downvotes: {
+				id: userId
+			}
+		});
+
+		let downvote;
+		if (alreadyDownvoted) {
+			downvote = await ctx.db.mutation.updateBill({
+				data: {
+					downvotes: {
+						disconnect: {
+							id: userId
+						}
+					}
+				}
+			});
+		}
+
+		if (upvoted) {
+			downvote = await ctx.db.mutation.updateBill({
+				data: {
+					upvotes: {
+						disconect: {
+							id: userId
+						}
+					},
+					downvotes: {
+						connect: {
+							id: userId
+						}
+					}
+				},
+				where: {
+					id: args.id
+				}
+			});
+		} else {
+			downvote = await ctx.db.mutation.updateBill({
+				data: {
+					downvotes: {
+						connect: {
+							id: userId
+						}
+					},
+					where: {
+						id: args.id
+					}
+				}
+			});
+		}
 		return downvote;
 	},
 
@@ -310,9 +369,7 @@ const Mutations = {
 	async scrapeBill(parent, { number, title }, ctx, info) {
 		const exists = await ctx.db.query.bill({ where: { number } });
 		if (exists) {
-			throw new Error(
-				`There is already a bill ${number} in the database. It is titled ''${exists.title}''`
-			);
+			throw new Error(`There is already a bill ${number} in the database. It is titled ''${exists.title}''`);
 		}
 
 		const $ = cheerio.load(data);
@@ -383,9 +440,7 @@ const Mutations = {
 		// 1. Try to match user to email given
 		const user = await ctx.db.query.user({ where: { email } });
 		if (!user) {
-			throw new Error(
-				`The email address ${email} does not have an account`
-			);
+			throw new Error(`The email address ${email} does not have an account`);
 		}
 		// 2. Authenticate password
 		const valid = await bcrypt.compare(password, user.password);
@@ -403,4 +458,4 @@ const Mutations = {
 	}
 };
 
-module.exports = Mutations;
+module.exports = { Mutation };

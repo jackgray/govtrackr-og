@@ -75,13 +75,10 @@ class CreatePolitician extends Component {
 		data.append('file', files[0]);
 		data.append('upload_preset', 'default');
 
-		const res = await fetch(
-			'https://api.cloudinary.com/v1_1/govtrackr/image/upload',
-			{
-				method: 'POST',
-				body: data
-			}
-		);
+		const res = await fetch('https://api.cloudinary.com/v1_1/govtrackr/image/upload', {
+			method: 'POST',
+			body: data
+		});
 		const file = await res.json();
 		console.log(file);
 		this.setState({
@@ -102,10 +99,7 @@ class CreatePolitician extends Component {
 
 	render() {
 		return (
-			<Mutation
-				mutation={CREATE_POLITICIAN_MUTATION}
-				variables={this.state}
-			>
+			<Mutation mutation={CREATE_POLITICIAN_MUTATION} variables={this.state}>
 				{(createPolitician, { loading, error }) => (
 					<Form
 						onSubmit={async (e) => {
@@ -129,13 +123,7 @@ class CreatePolitician extends Component {
 									placeholder="Upload an image"
 									onChange={this.uploadFile}
 								/>
-								{this.state.image && (
-									<img
-										width="200"
-										src={this.state.image}
-										alt="Upload Preview"
-									/>
-								)}
+								{this.state.image && <img width="200" src={this.state.image} alt="Upload Preview" />}
 							</label>
 
 							<label htmlFor="name">

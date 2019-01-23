@@ -10,10 +10,10 @@ const ALL_BILLS_QUERY = gql`
 			summary
 			committees
 			upvotes {
-				name
+				id
 			}
 			downvotes {
-				name
+				id
 			}
 			followers {
 				name
