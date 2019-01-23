@@ -266,10 +266,10 @@ const Mutation = {
 						connect: {
 							id: userId
 						}
-					},
-					where: {
-						id: args.id
 					}
+				},
+				where: {
+					id: args.id
 				}
 			});
 		}
@@ -297,50 +297,52 @@ const Mutation = {
 		});
 
 		let downvote;
-		if (alreadyDownvoted) {
-			downvote = await ctx.db.mutation.updateBill({
-				data: {
-					downvotes: {
-						disconnect: {
-							id: userId
-						}
-					}
-				}
-			});
-		}
 
-		if (upvoted) {
-			downvote = await ctx.db.mutation.updateBill({
-				data: {
-					upvotes: {
-						disconect: {
-							id: userId
-						}
-					},
-					downvotes: {
-						connect: {
-							id: userId
-						}
-					}
-				},
-				where: {
-					id: args.id
-				}
-			});
-		} else {
-			downvote = await ctx.db.mutation.updateBill({
-				data: {
-					downvotes: {
-						connect: {
-							id: userId
-						}
-					},
-					where: {
-						id: args.id
+		downvote = await ctx.db.mutation.updateBill({
+			data: {
+				downvotes: {
+					connect: {
+						id: userId
 					}
 				}
-			});
-		}
+			},
+			where: {
+				id: args.id
+			}
+		});
+
+		// if (alreadyDownvoted) {
+		// 	downvote = await ctx.db.mutation.updateBill({
+		// 		data: {
+		// 			downvotes: {
+		// 				disconnect: {
+		// 					id: userId
+		// 				}
+		// 			}
+		// 		},
+		// 		where: { id: args.id }
+		// 	});
+		// }
+
+		// if (upvoted) {
+		// 	downvote = await ctx.db.mutation.updateBill({
+		// 		data: {
+		// 			upvotes: {
+		// 				disconect: {
+		// 					id: userId
+		// 				}
+		// 			},
+		// 			downvotes: {
+		// 				connect: {
+		// 					id: userId
+		// 				}
+		// 			}
+		// 		},
+		// 		where: {
+		// 			id: args.id
+		// 		}
+		// 	});
+		// }
 		return downvote;
 	},
 
@@ -349,20 +351,16 @@ const Mutation = {
 		if (!userId) {
 			throw new Error('You must sign in to leave a comment');
 		}
-		const comment = await ctx.db.mutation.updateBill(
-			{
-				data: {
-					comments: {
-						create: {
-							content: args.content,
-							author: { connect: { id: userId } }
-						}
-					}
-				},
-				where: { id: args.id }
+		const comment = await ctx.prisma.updateBill({
+			comments: {
+				create: {
+					content: args.content,
+					author: { connect: { id: userId } }
+				}
 			},
-			info
-		);
+
+			where: { id: args.id }
+		});
 		return comment;
 	},
 

@@ -5,8 +5,6 @@ import gql from 'graphql-tag';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
 import { perPage } from '../config';
-import { ALL_COMMENTS_QUERY } from './Comment';
-import SINGLE_BILL_QUERY from './gql-tags/SINGLE_BILL_QUERY';
 
 const COMMENT_BILL_MUTATION = gql`
 	mutation COMMENT_BILL_MUTATION($id: ID, $content: String) {
