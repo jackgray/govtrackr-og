@@ -27,28 +27,6 @@ const Query = {
 	},
 	// politician related queries
 	politicians: forwardTo('db'),
-	// async politicians(parent, args, ctx) {
-	// 	const count = await ctx.prisma
-	// 		.politiciansConnection({
-	// 			where: {
-	// 				OR: [ { name_contains: args.filter }, { bills_contains: args.filter } ]
-	// 			}
-	// 		})
-	// 		.aggregate()
-	// 		.count();
-	// 	const politicians = await ctx.prisma.politicians({
-	// 		where: {
-	// 			OR: [ { name_contains: args.filter }, { bills_contains: args.filter } ]
-	// 		},
-	// 		skip: args.skip,
-	// 		first: args.first,
-	// 		orderBy: args.orderBy
-	// 	});
-	// 	return {
-	// 		count,
-	// 		politicians
-	// 	};
-	// },
 	politician: forwardTo('db'),
 	politiciansConnection: forwardTo('db'),
 	async myPolitician(parents, args, ctx, info) {
@@ -72,20 +50,19 @@ const Query = {
 		return myPolitician;
 	},
 
-	myPoliticians: (parent, args, ctx, info) => {
+	myPoliticians: (parent, args, ctx) => {
 		const { userId } = ctx.request;
 
 		if (!userId) {
 			throw new Error('You must log in to view myPoliticians');
 		}
 
-		const myPoliticians = ctx.db.query.politicians({
+		const myPoliticians = ctx.prisma.politicians({
 			where: {
 				user: {
 					id: userId
 				}
-			},
-			info
+			}
 		});
 		return myPoliticians;
 	},

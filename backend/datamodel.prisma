@@ -15,8 +15,8 @@ type User {
 	permissions: [Permission]
 	myPoliticians: [Politician] @relation(name: "UserFollowPolitician")
 	myBills: [Bill] @relation(name: "UserFollowBill")
-	upvotedBills: [Bill] @relation(name: "UpvoteBill")
-	downvotedBills: [Bill] @relation(name: "DownvoteBill")
+	upvotedBills: [Bill] @relation(name: "BillUpvote")
+	downvotedBills: [Bill] @relation(name: "BillDownvote")
 	billComments: [Comment] @relation(name: "UserCommentBill")
 	topicComments: [Topic] @relation(name: "UserCommentOnTopic")
 	notifications: [Notification] @relation(name: "UserNotification")

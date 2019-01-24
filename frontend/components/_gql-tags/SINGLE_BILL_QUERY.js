@@ -11,14 +11,9 @@ const SINGLE_BILL_QUERY = gql`
 			sponsor
 			upvotes {
 				id
-				user {
-					id
-				}
 			}
 			downvotes {
-				user {
-					id
-				}
+				id
 			}
 			comments {
 				id

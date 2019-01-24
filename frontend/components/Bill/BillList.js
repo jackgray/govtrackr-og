@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Bill from './Bill';
 import Pagination from '../Main/Pagination';
 import { perPage } from '../../config';
-import ALL_BILLS_QUERY from '../_gql-tags/ALL_BILLS_QUERY';
+import BILL_LIST_QUERY from '../_gql-tags/BILL_LIST_QUERY';
 
 const Center = styled.div`text-align: center;`;
 const BillsList = styled.div`
@@ -16,18 +16,18 @@ const BillsList = styled.div`
 	margin: 0 auto;
 `;
 
-class Bills extends Component {
+class BillList extends Component {
 	_updateCacheAfterUpvote = (cache, upvoteBill, id) => {
-		const data = cache.readQuery({ query: ALL_BILLS_QUERY });
+		const data = cache.readQuery({ query: BILL_LIST_QUERY });
 
-		cache.writeQuery({ query: ALL_BILLS_QUERY, data });
+		cache.writeQuery({ query: BILL_LIST_QUERY, data });
 	};
 
 	render() {
 		return (
 			<Center>
 				<Query
-					query={ALL_BILLS_QUERY}
+					query={BILL_LIST_QUERY}
 					variables={
 						({
 							skip: this.props.page * perPage - perPage
@@ -57,5 +57,4 @@ class Bills extends Component {
 	}
 }
 
-export default Bills;
-export { ALL_BILLS_QUERY };
+export default BillList;

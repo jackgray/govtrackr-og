@@ -102,8 +102,6 @@ const Mutation = {
 			}
 		});
 
-		const exists = userId;
-
 		connect = await ctx.db.mutation.updatePolitician({
 			where: {
 				id: args.id
@@ -125,21 +123,16 @@ const Mutation = {
 		return null;
 	},
 
-	async createBill(parent, args, ctx, info) {
+	async createBill(parent, args, ctx) {
 		// TODO: check if user is logged in
 		const { userId } = ctx.request;
-		const bill = await ctx.db.mutation.createBill(
-			{
-				data: {
-					code: args.code,
-					title: args.title,
-					summary: args.summary,
-					committees: args.summary,
-					sponsor: args.sponsor
-				}
-			},
-			info
-		);
+		const bill = await ctx.prisma.createBill({
+			code: args.code,
+			title: args.title,
+			summary: args.summary,
+			committees: args.summary,
+			sponsor: args.sponsor
+		});
 		return bill;
 	},
 	updateBill(parent, args, ctx, info) {
@@ -210,7 +203,7 @@ const Mutation = {
 		if (!userId) {
 			throw new Error('You must be logged in');
 		}
-		const alreadyUpvoted = ctx.prisma.$exists.bill({
+		const upvoted = ctx.prisma.$exists.bill({
 			id: args.id,
 			upvotes: {
 				id: userId
@@ -222,56 +215,71 @@ const Mutation = {
 				id: userId
 			}
 		});
-
-		if (alreadyUpvoted) {
-			console.log('already upvoted');
-			downvote = await ctx.db.mutation.updateBill({
-				data: {
-					downvotes: {
+		if (upvoted && downvoted) {
+			console.log('found upvote and downvote. disconnecting one.');
+			upvote = await ctx.db.mutation.updateBill(
+				{
+					data: {
+						downvotes: {
+							disconnect: {
+								id: userId
+							}
+						}
+					},
+					where: {
+						id: args.id
+					}
+				},
+				info
+			);
+		} else if (upvoted) {
+			console.log('undoing previous upvote');
+			upvote = await ctx.db.mutation.updateBill(
+				{
+					upvotes: {
 						disconnect: {
 							id: userId
 						}
+					},
+					where: {
+						id: args.id
 					}
 				},
-				where: {
-					id: args.id
-				}
-			});
-		}
-
-		if (downvoted) {
-			console.log('downvoted');
-			upvote = await ctx.db.mutation.updateBill({
-				data: {
-					downvotes: {
-						disconect: {
-							id: userId
+				info
+			);
+		} else if (downvoted) {
+			console.log('previously downvoted. changing your mind...');
+			upvote = await ctx.db.mutation.updateBill(
+				{
+					data: {
+						downvotes: {
+							disconnect: {
+								id: userId
+							}
+						},
+						upvotes: {
+							connect: {
+								id: userId
+							}
 						}
 					},
-					upvotes: {
-						connect: {
-							id: userId
-						}
-					}
+					where: { id: args.id }
 				},
-				where: {
-					id: args.id
-				}
-			});
+				info
+			);
 		} else {
 			console.log('default');
-			upvote = await ctx.db.mutation.updateBill({
-				data: {
-					upvotes: {
-						connect: {
-							id: userId
+			upvote = await ctx.db.mutation.updateBill(
+				{
+					data: {
+						upvotes: {
+							connect: { id: userId }
 						}
-					}
+					},
+					where: { id: args.id }
 				},
-				where: {
-					id: args.id
-				}
-			});
+				info
+			);
 		}
 		return upvote;
 	},
@@ -289,7 +297,7 @@ const Mutation = {
 			}
 		});
 
-		const alreadyDownvoted = ctx.prisma.$exists.bill({
+		const downvoted = ctx.prisma.$exists.bill({
 			id: args.id,
 			downvotes: {
 				id: userId
@@ -297,70 +305,83 @@ const Mutation = {
 		});
 
 		let downvote;
-
-		downvote = await ctx.db.mutation.updateBill({
-			data: {
-				downvotes: {
-					connect: {
-						id: userId
+		if (upvoted && downvoted) {
+			downvote = await ctx.db.mutation.updateBill({
+				data: {
+					upvotes: {
+						disconnect: {
+							id: userId
+						}
 					}
+				},
+				where: {
+					id: args.id
 				}
-			},
-			where: {
-				id: args.id
-			}
-		});
-
-		// if (alreadyDownvoted) {
-		// 	downvote = await ctx.db.mutation.updateBill({
-		// 		data: {
-		// 			downvotes: {
-		// 				disconnect: {
-		// 					id: userId
-		// 				}
-		// 			}
-		// 		},
-		// 		where: { id: args.id }
-		// 	});
-		// }
-
-		// if (upvoted) {
-		// 	downvote = await ctx.db.mutation.updateBill({
-		// 		data: {
-		// 			upvotes: {
-		// 				disconect: {
-		// 					id: userId
-		// 				}
-		// 			},
-		// 			downvotes: {
-		// 				connect: {
-		// 					id: userId
-		// 				}
-		// 			}
-		// 		},
-		// 		where: {
-		// 			id: args.id
-		// 		}
-		// 	});
-		// }
+			});
+		} else if (downvoted) {
+			downvote = await ctx.db.mutation.updateBill({
+				data: {
+					downvotes: {
+						disconnect: {
+							id: userId
+						}
+					}
+				},
+				where: {
+					id: args.id
+				}
+			});
+		}
+		if (upvoted) {
+			downvote = await ctx.db.mutation.updateBill({
+				data: {
+					upvotes: {
+						disconnect: {
+							id: userId
+						}
+					},
+					downvotes: {
+						connect: {
+							id: userId
+						}
+					}
+				},
+				where: {
+					id: args.id
+				}
+			});
+		} else {
+			downvote = await ctx.db.mutation.updateBill({
+				data: {
+					downvotes: {
+						connect: {
+							id: userId
+						}
+					}
+				},
+				where: { id: args.id }
+			});
+		}
 		return downvote;
 	},
 
-	async commentBill(parent, args, ctx, info) {
+	async commentBill(parent, args, ctx) {
 		const { userId } = ctx.request;
 		if (!userId) {
 			throw new Error('You must sign in to leave a comment');
 		}
 		const comment = await ctx.prisma.updateBill({
-			comments: {
-				create: {
-					content: args.content,
-					author: { connect: { id: userId } }
+			data: {
+				comments: {
+					create: {
+						content: args.content,
+						author: { connect: { id: userId } }
+					}
 				}
 			},
-
 			where: { id: args.id }
 		});
+
 		return comment;
 	},
 

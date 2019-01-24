@@ -16,6 +16,9 @@ const COMMENT_BILL_MUTATION = gql`
 		}
 		comment {
 			content
+			author {
+				name
+			}
 		}
 	}
 `;

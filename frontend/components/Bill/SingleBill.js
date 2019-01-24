@@ -33,7 +33,7 @@ class SingleBill extends Component {
 					const bill = data.bill;
 					const comments = data.comment;
 					console.log('comments:', comments);
-					console.log(bill.comments.author);
+					console.log('author:', bill.comments.author);
 					const score = bill.upvotes.length - bill.downvotes.length;
 
 					return (
@@ -49,20 +49,20 @@ class SingleBill extends Component {
 								<p>Summary: {bill.summary}</p>
 								<p>Chamber of Congress: {bill.chamber}</p>
 								<p>{bill.committees}</p>
-								<p>
+								<div>
 									<span>
 										<UpvoteBill id={bill.id}>👍</UpvoteBill>
 									</span>
 									<span>{score}</span>
 									<DownvoteBill>👎</DownvoteBill>
-								</p>
-								<p>
+								</div>
+								<div>
 									<Comments
 										bill={data.bill}
 										key={data.bill.id}
 										updateStoreAfterComment={this._updateCacheAfterComment}
 									/>
-								</p>
+								</div>
 							</div>
 						</SingleBillStyles>
 					);
