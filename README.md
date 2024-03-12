@@ -2,7 +2,7 @@ This is the original GovTrackr repo which is being stripped for parts to run on 
 
 
 # GovTrackr - your political world in one place
-#### Choose what to track: districts, public officials, bills, topics, elections, and more, and receive recommendations based on activity. If facebook was a one way street, and the product isn't your data. 
+#### Choose what to track: districts, public officials, bills, topics, elections, and more, and receive recommendations based on activity. If facebook was a one way street, and the product wasn't your data. 
 
 
 # How to run this app
