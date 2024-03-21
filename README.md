@@ -1,12 +1,15 @@
 # GovTrackr - your political world in one place
 
-#### Choose what to track: districts, public officials, bills, topics, elections, and more, and receive recommendations based on activity. If facebook was a one way street, and the product wasn't your data. 
+#### Choose what to track: 
+districts, public officials, bills, topics, elections, and more, and receive recommendations based on activity. If facebook was a one way street, and the product wasn't your data. 
 
 ### District-based activity aggregation feed
 
+Show events happening in your local district and get recommendations of things to track
+
 ### Follow any person, bill, election event
 
-### See business dealings between public figures through associated activity on bills, press releases, endorsements, and keyword similarity algorithms
+See business dealings between public figures through associated activity on bills, press releases, endorsements, and keyword similarity algorithms
 
 ### I need UI help! If you have UI/UX experience- wireframing, CSS/JSX, React UI libraries, etc.- and would like to contribute please drop me a line!
 
