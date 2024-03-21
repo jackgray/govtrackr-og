@@ -7,7 +7,7 @@ districts, public officials, bills, topics, elections, and more, and receive rec
 
 Show events happening in your local district and get recommendations of things to track
 
-### Follow any person, bill, election event
+### Follow any person, bill, election event, rally, press release, and more
 
 See business dealings between public figures through associated activity on bills, press releases, endorsements, and keyword similarity algorithms
 
