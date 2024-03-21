@@ -1,38 +1,20 @@
-This is the original GovTrackr repo which is being stripped for parts to run on a new stack. That endeavor is currently on hold. If anyone is interested in working on this project let me know!
-
-
 # GovTrackr - your political world in one place
+
 #### Choose what to track: districts, public officials, bills, topics, elections, and more, and receive recommendations based on activity. If facebook was a one way street, and the product wasn't your data. 
 
+### District-based activity aggregation feed
 
-# How to run this app
+### Follow any person, bill, election event
 
+### See business dealings between public figures through associated activity on bills, press releases, endorsements, and keyword similarity algorithms
 
-1. cd frontend
-2. npm i --save
-3. npm run build
-4. npm run dev
-5. In new terminal tab: cd backend
-6. npm i --save
-7. npm run deploy
-8. npm run dev
-
-To use my database:
-create variables.env file in root of backend directory
-paste the following:
-
-FRONTEND_URL="http://localhost:7777"
-PRISMA_ENDPOINT="https://eu1.prisma.sh/jack-gray/politicious/dev"
-PRISMA_SECRET="prismasecret"
-APP_SECRET="jwtsecret"
-STRIPE_SECRET="stripesecret"
-PORT=4444
+### I need UI help! If you have UI/UX experience- wireframing, CSS/JSX, React UI libraries, etc.- and would like to contribute please drop me a line!
 
 TODO:
-    switch from prisma-bindings to prisma-client and $fragments
-    finish Notifications feature
-    refresh cache on upvote/downvote
-    create Topics page
-    move all gql tags to centralized tags folder
-
-    populate database of politicians and bills from public database if one exists
+    - switch from prisma-bindings to prisma-client and $fragments
+    - finish Notifications feature
+    - refresh cache on upvote/downvote
+    - create Topics page
+    - move all gql tags to centralized tags folder
+    - add feature to populate database of politicians and bills from public database if one exists
+    - add web scraping and external API sources to aggregate government activity
