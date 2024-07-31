@@ -1,4 +1,9 @@
-# GovTrackr - your political world in one place
+# Spotlight
+## Bespoke activity tracking platform with social network dynamics
+### Intended to increase transparency and facilitate tracking of the activities of entities in positions of extreme power and influence
+#### Put a spotlight on the shadow government, aka those that undermine democracy and the common good of the common folk
+
+# Previously GovTrackr - your political world in one place
 
 #### Choose what to track: 
 districts, public officials, bills, topics, elections, and more, and receive recommendations based on activity. If facebook was a one way street, and the product wasn't your data. 
