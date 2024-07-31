@@ -1,6 +1,6 @@
 # Spotlight
 ## Bespoke activity tracking platform with social network dynamics
-### Intended to increase transparency and facilitate tracking of the activities of entities in positions of extreme power and influence
+### Intended to increase transparency and facilitate tracking of activities by entities in positions of extreme power and influence
 #### Put a spotlight on the shadow government, aka those that undermine democracy and the common good of the common folk
 
 # Previously GovTrackr - your political world in one place
